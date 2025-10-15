@@ -20,21 +20,18 @@
                         bronze: '#CD7F32',
                         mysticBlue: '#1E3A5F',
                         deepRed: '#8B0000',
-                        forestGreen: '#228B22'
+                        forestGreen: '#228B22',
+                        lightBrown: '#A0522D'
                     },
                     fontFamily: {
                         'cinzel': ['Cinzel', 'serif'],
                         'medieval': ['MedievalSharp', 'cursive'],
                         'maguntia': ['UnifrakturMaguntia', 'cursive']
                     },
-                    fontSize: {
-                        'xs': '0.75rem',
-                        'sm': '0.875rem',
-                        'base': '1rem',
-                        'lg': '1.125rem',
-                        'xl': '1.25rem',
-                        '2xl': '1.5rem',
-                        '3xl': '1.875rem',
+                    spacing: {
+                        '18': '4.5rem',
+                        '88': '22rem',
+                        '128': '32rem'
                     }
                 }
             }
@@ -43,138 +40,120 @@
     <style>
         body {
             background: linear-gradient(135deg, #2C1810 0%, #1A0F0A 50%, #0F0805 100%);
+            min-height: 100vh;
         }
         
         .parchment-bg {
             background: linear-gradient(135deg, #F5E6CA 0%, #E8D9B5 50%, #DBC9A0 100%);
-            border: 4px double #8B4513;
+            border: 3px double #8B4513;
             box-shadow: 
-                0 0 20px rgba(139, 69, 19, 0.3),
-                inset 0 0 30px rgba(139, 69, 19, 0.1);
+                0 4px 20px rgba(139, 69, 19, 0.15),
+                inset 0 0 30px rgba(139, 69, 19, 0.08);
         }
         
         .ancient-border {
-            border: 6px solid transparent;
-            border-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,0 L100,0 L100,100 L0,100 Z' fill='none' stroke='%238B4513' stroke-width='6' stroke-dasharray='15,8'/%3E%3C/svg%3E") 25 round;
+            border: 2px solid transparent;
+            border-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,0 L100,0 L100,100 L0,100 Z' fill='none' stroke='%238B4513' stroke-width='4' stroke-dasharray='12,6'/%3E%3C/svg%3E") 20 round;
         }
         
         .stats-card {
             transition: all 0.3s ease;
             border: 2px solid #8B4513;
+            backdrop-filter: blur(10px);
         }
         
         .stats-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(139, 69, 19, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(139, 69, 19, 0.2);
         }
         
         .student-row {
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(139, 69, 19, 0.2);
         }
         
         .student-row:hover {
-            background: linear-gradient(90deg, rgba(212, 175, 55, 0.1), rgba(139, 69, 19, 0.1));
+            background: linear-gradient(90deg, rgba(212, 175, 55, 0.08), rgba(139, 69, 19, 0.05));
+            transform: translateX(4px);
         }
         
         .rank-progress {
             background: linear-gradient(90deg, #D4AF37, #8B4513);
+            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
         }
 
-        /* Mobile Optimizations */
-        @media (max-width: 768px) {
-            .mobile-padding {
-                padding-left: 1rem;
-                padding-right: 1rem;
-            }
-            
-            .mobile-text-sm {
-                font-size: 0.8rem;
-            }
-            
-            .mobile-text-base {
-                font-size: 0.9rem;
-            }
-            
-            .mobile-text-lg {
-                font-size: 1rem;
-            }
-            
-            .mobile-text-xl {
-                font-size: 1.1rem;
-            }
-            
-            .mobile-text-2xl {
-                font-size: 1.25rem;
-            }
-            
-            .mobile-py-2 {
-                padding-top: 0.5rem;
-                padding-bottom: 0.5rem;
-            }
-            
-            .mobile-py-3 {
-                padding-top: 0.75rem;
-                padding-bottom: 0.75rem;
-            }
-            
-            .mobile-px-3 {
-                padding-left: 0.75rem;
-                padding-right: 0.75rem;
-            }
-            
-            .mobile-px-4 {
-                padding-left: 1rem;
-                padding-right: 1rem;
+        /* Mobile First Design */
+        .mobile-container {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+        
+        @media (min-width: 768px) {
+            .mobile-container {
+                padding-left: 2rem;
+                padding-right: 2rem;
             }
         }
 
-        /* Custom scrollbar untuk mobile */
-        .mobile-scroll {
-            -webkit-overflow-scrolling: touch;
+        /* Custom scrollbar */
+        .custom-scrollbar {
             scrollbar-width: thin;
             scrollbar-color: #8B4513 #F5E6CA;
         }
 
-        .mobile-scroll::-webkit-scrollbar {
-            height: 6px;
-            width: 6px;
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
         }
 
-        .mobile-scroll::-webkit-scrollbar-track {
+        .custom-scrollbar::-webkit-scrollbar-track {
             background: #F5E6CA;
             border-radius: 10px;
         }
 
-        .mobile-scroll::-webkit-scrollbar-thumb {
+        .custom-scrollbar::-webkit-scrollbar-thumb {
             background: #8B4513;
             border-radius: 10px;
         }
 
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #A0522D;
+        }
+
         /* Search highlight */
         .search-highlight {
-            background-color: rgba(212, 175, 55, 0.3);
-            border-radius: 2px;
-            padding: 0 2px;
+            background-color: rgba(212, 175, 55, 0.4);
+            border-radius: 3px;
+            padding: 0 3px;
+            font-weight: 600;
         }
 
         /* Filter buttons */
         .filter-btn {
             transition: all 0.3s ease;
+            border: 2px solid #8B4513;
+        }
+
+        .filter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(139, 69, 19, 0.2);
         }
 
         .filter-btn.active {
             background: linear-gradient(135deg, #D4AF37, #8B4513);
             color: white;
             border-color: #8B4513;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
         }
 
         /* Online/Offline Status */
         .online-status {
             display: inline-block;
-            width: 8px;
-            height: 8px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-            margin-right: 4px;
+            margin-right: 6px;
+            box-shadow: 0 0 5px currentColor;
         }
         
         .status-online {
@@ -185,31 +164,101 @@
             background-color: #ef4444;
         }
 
-        .status-idle {
-            background-color: #f59e0b;
+        /* Action buttons */
+        .action-btn {
+            transition: all 0.2s ease;
+            border: 1.5px solid;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Loading animation */
+        @keyframes pulse-glow {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            }
+            50% { 
+                box-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
+            }
+        }
+
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        /* Table responsive improvements */
+        @media (max-width: 1024px) {
+            .table-responsive {
+                font-size: 0.875rem;
+            }
+            
+            .table-responsive th,
+            .table-responsive td {
+                padding: 0.75rem 0.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-stack {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .mobile-text-center {
+                text-align: center;
+            }
+            
+            .mobile-full-width {
+                width: 100%;
+            }
+        }
+
+        /* Card hover effects */
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(139, 69, 19, 0.15);
+        }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #D4AF37 0%, #8B4513 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
     </style>
 </head>
 <body class="font-cinzel text-oldPaper min-h-screen">
     <!-- Navigation -->
-    <nav class="bg-darkBrown/90 shadow-2xl border-b-2 border-gold sticky top-0 z-40">
-        <div class="container mx-auto mobile-padding py-3">
-            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-3 sm:space-y-0">
-                <div class="flex items-center space-x-3 justify-center sm:justify-start">
-                    <div class="w-10 h-10 bg-gradient-to-r from-gold to-bronze rounded-full flex items-center justify-center ancient-border">
-                        <i class="fas fa-user-shield text-darkBrown mobile-text-lg"></i>
+    <nav class="bg-darkBrown/95 backdrop-blur-md shadow-2xl border-b-2 border-gold sticky top-0 z-50">
+        <div class="mobile-container">
+            <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center space-y-4 lg:space-y-0 py-4">
+                <!-- Logo & Title -->
+                <div class="flex items-center space-x-4 justify-center lg:justify-start">
+                    <div class="w-12 h-12 bg-gradient-to-r from-gold to-bronze rounded-2xl flex items-center justify-center ancient-border pulse-glow">
+                        <i class="fas fa-user-shield text-darkBrown text-xl"></i>
                     </div>
-                    <div class="text-center sm:text-left">
-                        <h1 class="mobile-text-2xl font-bold text-gold font-maguntia">Perpustakaan Abadi</h1>
-                        <p class="text-silver mobile-text-sm font-medieval">Panel Administrator</p>
+                    <div class="text-center lg:text-left">
+                        <h1 class="text-2xl lg:text-3xl font-bold text-gold font-maguntia">Perpustakaan Abadi</h1>
+                        <p class="text-silver text-sm lg:text-base font-medieval mt-1">Panel Administrator</p>
                     </div>
                 </div>
-                <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3 sm:items-center">
-                    <button onclick="refreshData()" class="bg-gold hover:bg-yellow-600 text-darkBrown mobile-px-4 mobile-py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 border-2 border-darkBrown font-medieval mobile-text-sm flex items-center justify-center">
-                        <i class="fas fa-sync-alt mr-2"></i>Perbarui
+                
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-end">
+                    <button onclick="refreshData()" class="bg-gold hover:bg-yellow-600 text-darkBrown px-6 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 border-2 border-darkBrown font-medieval text-sm lg:text-base flex items-center justify-center shadow-lg">
+                        <i class="fas fa-sync-alt mr-3"></i>Perbarui Data
                     </button>
-                    <a href="siswa.html" class="bg-forestGreen hover:bg-green-800 text-parchment mobile-px-4 mobile-py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 border-2 border-gold font-medieval mobile-text-sm flex items-center justify-center">
-                        <i class="fas fa-eye mr-2"></i>Lihat Siswa
+                    <a href="siswa.html" class="bg-forestGreen hover:bg-green-800 text-parchment px-6 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 border-2 border-gold font-medieval text-sm lg:text-base flex items-center justify-center shadow-lg">
+                        <i class="fas fa-eye mr-3"></i>Lihat Siswa
                     </a>
                 </div>
             </div>
@@ -217,202 +266,266 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="py-4 mobile-padding">
-        <div class="container mx-auto">
+    <main class="py-6 lg:py-8">
+        <div class="mobile-container max-w-7xl mx-auto">
             <!-- Statistics Overview -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
-                <div class="stats-card parchment-bg rounded-xl p-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
+                <div class="stats-card parchment-bg rounded-2xl p-6 card-hover">
                     <div class="flex items-center justify-between">
-                        <div>
-                            <div class="mobile-text-xl font-bold text-darkBrown" id="total-students">0</div>
-                            <div class="text-darkBrown font-medieval mobile-text-sm">Total Petualang</div>
+                        <div class="space-y-2">
+                            <div class="text-3xl lg:text-4xl font-bold text-darkBrown" id="total-students">0</div>
+                            <div class="text-darkBrown font-medieval text-lg">Total Petualang</div>
                         </div>
-                        <div class="w-8 h-8 bg-gold/20 rounded-full flex items-center justify-center ancient-border">
-                            <i class="fas fa-users text-gold"></i>
+                        <div class="w-14 h-14 bg-gold/20 rounded-2xl flex items-center justify-center ancient-border">
+                            <i class="fas fa-users text-gold text-2xl"></i>
                         </div>
+                    </div>
+                    <div class="mt-4 w-full bg-oldPaper rounded-full h-2">
+                        <div class="bg-gradient-to-r from-gold to-bronze h-2 rounded-full transition-all duration-1000" style="width: 100%"></div>
                     </div>
                 </div>
 
-                <div class="stats-card parchment-bg rounded-xl p-4">
+                <div class="stats-card parchment-bg rounded-2xl p-6 card-hover">
                     <div class="flex items-center justify-between">
-                        <div>
-                            <div class="mobile-text-xl font-bold text-darkBrown" id="online-students">0</div>
-                            <div class="text-darkBrown font-medieval mobile-text-sm">Online</div>
+                        <div class="space-y-2">
+                            <div class="text-3xl lg:text-4xl font-bold text-darkBrown" id="online-students">0</div>
+                            <div class="text-darkBrown font-medieval text-lg">Sedang Online</div>
                         </div>
-                        <div class="w-8 h-8 bg-forestGreen/20 rounded-full flex items-center justify-center ancient-border">
-                            <i class="fas fa-wifi text-forestGreen"></i>
+                        <div class="w-14 h-14 bg-forestGreen/20 rounded-2xl flex items-center justify-center ancient-border">
+                            <i class="fas fa-wifi text-forestGreen text-2xl"></i>
                         </div>
+                    </div>
+                    <div class="mt-4 w-full bg-oldPaper rounded-full h-2">
+                        <div class="bg-gradient-to-r from-forestGreen to-green-600 h-2 rounded-full transition-all duration-1000" id="online-progress" style="width: 0%"></div>
                     </div>
                 </div>
 
-                <div class="stats-card parchment-bg rounded-xl p-4">
+                <div class="stats-card parchment-bg rounded-2xl p-6 card-hover">
                     <div class="flex items-center justify-between">
-                        <div>
-                            <div class="mobile-text-xl font-bold text-darkBrown" id="total-points">0</div>
-                            <div class="text-darkBrown font-medieval mobile-text-sm">Total XP</div>
+                        <div class="space-y-2">
+                            <div class="text-3xl lg:text-4xl font-bold text-darkBrown" id="total-points">0</div>
+                            <div class="text-darkBrown font-medieval text-lg">Total XP</div>
                         </div>
-                        <div class="w-8 h-8 bg-gold/20 rounded-full flex items-center justify-center ancient-border">
-                            <i class="fas fa-star text-gold"></i>
+                        <div class="w-14 h-14 bg-gold/20 rounded-2xl flex items-center justify-center ancient-border">
+                            <i class="fas fa-star text-gold text-2xl"></i>
                         </div>
+                    </div>
+                    <div class="mt-4 text-sm text-darkBrown font-medieval">
+                        ⭐ Rata-rata: <span id="avg-points-display">0</span> XP
                     </div>
                 </div>
 
-                <div class="stats-card parchment-bg rounded-xl p-4">
+                <div class="stats-card parchment-bg rounded-2xl p-6 card-hover">
                     <div class="flex items-center justify-between">
-                        <div>
-                            <div class="mobile-text-xl font-bold text-darkBrown" id="avg-points">0</div>
-                            <div class="text-darkBrown font-medieval mobile-text-sm">Rata-rata XP</div>
+                        <div class="space-y-2">
+                            <div class="text-3xl lg:text-4xl font-bold text-darkBrown" id="avg-points">0</div>
+                            <div class="text-darkBrown font-medieval text-lg">Rata-rata XP</div>
                         </div>
-                        <div class="w-8 h-8 bg-bronze/20 rounded-full flex items-center justify-center ancient-border">
-                            <i class="fas fa-chart-line text-bronze"></i>
+                        <div class="w-14 h-14 bg-bronze/20 rounded-2xl flex items-center justify-center ancient-border">
+                            <i class="fas fa-chart-line text-bronze text-2xl"></i>
                         </div>
+                    </div>
+                    <div class="mt-4 text-sm text-darkBrown font-medieval">
+                        📈 Progress sistem
                     </div>
                 </div>
             </div>
 
             <!-- Search and Filter Section -->
-            <div class="parchment-bg rounded-xl p-4 ancient-border mb-4">
-                <div class="flex flex-col md:flex-row md:items-center md:justify-between space-y-3 md:space-y-0">
+            <div class="parchment-bg rounded-2xl p-6 lg:p-8 ancient-border mb-8">
+                <!-- Search Bar -->
+                <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0 mb-6">
                     <div class="flex-1">
                         <div class="relative">
                             <input 
                                 type="text" 
                                 id="search-input"
-                                placeholder="Cari nama petualang..."
-                                class="w-full mobile-px-4 mobile-py-2 bg-oldPaper border-2 border-darkBrown rounded-lg focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all duration-300 outline-none font-medieval mobile-text-sm pr-10"
+                                placeholder="Cari nama petualang atau kelas..."
+                                class="w-full px-6 py-4 bg-oldPaper border-3 border-darkBrown rounded-2xl focus:border-gold focus:ring-4 focus:ring-gold/20 transition-all duration-300 outline-none font-medieval text-lg placeholder-darkBrown/60 shadow-inner"
                             >
-                            <div class="absolute right-3 top-1/2 transform -translate-y-1/2 text-darkBrown">
+                            <div class="absolute right-4 top-1/2 transform -translate-y-1/2 text-darkBrown text-xl">
                                 <i class="fas fa-search"></i>
                             </div>
                         </div>
                     </div>
-                    <div class="flex space-x-2">
-                        <button onclick="adminSystem.clearSearch()" class="bg-silver hover:bg-gray-500 text-darkBrown mobile-px-3 mobile-py-2 rounded-lg font-semibold transition-all duration-300 border-2 border-darkBrown font-medieval mobile-text-sm">
-                            <i class="fas fa-times mr-1"></i>Clear
+                    <div class="flex space-x-3">
+                        <button onclick="adminSystem.clearSearch()" class="bg-silver hover:bg-gray-500 text-darkBrown px-6 py-4 rounded-2xl font-semibold transition-all duration-300 border-3 border-darkBrown font-medieval text-base flex items-center justify-center action-btn">
+                            <i class="fas fa-times mr-2"></i>Clear
                         </button>
-                        <button onclick="adminSystem.toggleSort()" class="bg-mysticBlue hover:bg-blue-800 text-parchment mobile-px-3 mobile-py-2 rounded-lg font-semibold transition-all duration-300 border-2 border-gold font-medieval mobile-text-sm">
-                            <i class="fas fa-sort-amount-down mr-1" id="sort-icon"></i>
+                        <button onclick="adminSystem.toggleSort()" class="bg-mysticBlue hover:bg-blue-800 text-parchment px-6 py-4 rounded-2xl font-semibold transition-all duration-300 border-3 border-gold font-medieval text-base flex items-center justify-center action-btn">
+                            <i class="fas fa-sort-amount-down mr-2" id="sort-icon"></i>
                             <span id="sort-text">XP Tertinggi</span>
                         </button>
                     </div>
                 </div>
 
                 <!-- Filter by Class -->
-                <div class="mt-3">
-                    <div class="flex flex-wrap gap-2">
-                        <button onclick="adminSystem.filterByClass('')" class="filter-btn active bg-gold/20 text-darkBrown mobile-px-3 mobile-py-1 rounded-full text-xs font-semibold border border-darkBrown font-medieval">
-                            Semua Kelas
+                <div class="mb-6">
+                    <h3 class="text-darkBrown font-semibold font-medieval text-lg mb-4">Filter Kelas:</h3>
+                    <div class="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-10 gap-3">
+                        <button onclick="adminSystem.filterByClass('')" class="filter-btn active bg-gold/20 text-darkBrown py-3 rounded-xl text-sm font-semibold font-medieval">
+                            Semua
                         </button>
-                        <button onclick="adminSystem.filterByClass('7A')" class="filter-btn bg-gold/20 text-darkBrown mobile-px-3 mobile-py-1 rounded-full text-xs font-semibold border border-darkBrown font-medieval">
-                            Kelas 7A
+                        <button onclick="adminSystem.filterByClass('7A')" class="filter-btn bg-gold/20 text-darkBrown py-3 rounded-xl text-sm font-semibold font-medieval">
+                            7A
                         </button>
-                        <button onclick="adminSystem.filterByClass('7B')" class="filter-btn bg-gold/20 text-darkBrown mobile-px-3 mobile-py-1 rounded-full text-xs font-semibold border border-darkBrown font-medieval">
-                            Kelas 7B
+                        <button onclick="adminSystem.filterByClass('7B')" class="filter-btn bg-gold/20 text-darkBrown py-3 rounded-xl text-sm font-semibold font-medieval">
+                            7B
                         </button>
-                        <button onclick="adminSystem.filterByClass('7C')" class="filter-btn bg-gold/20 text-darkBrown mobile-px-3 mobile-py-1 rounded-full text-xs font-semibold border border-darkBrown font-medieval">
-                            Kelas 7C
+                        <button onclick="adminSystem.filterByClass('7C')" class="filter-btn bg-gold/20 text-darkBrown py-3 rounded-xl text-sm font-semibold font-medieval">
+                            7C
                         </button>
-                        <button onclick="adminSystem.filterByClass('8A')" class="filter-btn bg-gold/20 text-darkBrown mobile-px-3 mobile-py-1 rounded-full text-xs font-semibold border border-darkBrown font-medieval">
-                            Kelas 8A
+                        <button onclick="adminSystem.filterByClass('8A')" class="filter-btn bg-gold/20 text-darkBrown py-3 rounded-xl text-sm font-semibold font-medieval">
+                            8A
                         </button>
-                        <button onclick="adminSystem.filterByClass('8B')" class="filter-btn bg-gold/20 text-darkBrown mobile-px-3 mobile-py-1 rounded-full text-xs font-semibold border border-darkBrown font-medieval">
-                            Kelas 8B
+                        <button onclick="adminSystem.filterByClass('8B')" class="filter-btn bg-gold/20 text-darkBrown py-3 rounded-xl text-sm font-semibold font-medieval">
+                            8B
                         </button>
-                        <button onclick="adminSystem.filterByClass('8C')" class="filter-btn bg-gold/20 text-darkBrown mobile-px-3 mobile-py-1 rounded-full text-xs font-semibold border border-darkBrown font-medieval">
-                            Kelas 8C
+                        <button onclick="adminSystem.filterByClass('8C')" class="filter-btn bg-gold/20 text-darkBrown py-3 rounded-xl text-sm font-semibold font-medieval">
+                            8C
                         </button>
-                        <button onclick="adminSystem.filterByClass('9A')" class="filter-btn bg-gold/20 text-darkBrown mobile-px-3 mobile-py-1 rounded-full text-xs font-semibold border border-darkBrown font-medieval">
-                            Kelas 9A
+                        <button onclick="adminSystem.filterByClass('9A')" class="filter-btn bg-gold/20 text-darkBrown py-3 rounded-xl text-sm font-semibold font-medieval">
+                            9A
                         </button>
-                        <button onclick="adminSystem.filterByClass('9B')" class="filter-btn bg-gold/20 text-darkBrown mobile-px-3 mobile-py-1 rounded-full text-xs font-semibold border border-darkBrown font-medieval">
-                            Kelas 9B
+                        <button onclick="adminSystem.filterByClass('9B')" class="filter-btn bg-gold/20 text-darkBrown py-3 rounded-xl text-sm font-semibold font-medieval">
+                            9B
                         </button>
-                        <button onclick="adminSystem.filterByClass('9C')" class="filter-btn bg-gold/20 text-darkBrown mobile-px-3 mobile-py-1 rounded-full text-xs font-semibold border border-darkBrown font-medieval">
-                            Kelas 9C
+                        <button onclick="adminSystem.filterByClass('9C')" class="filter-btn bg-gold/20 text-darkBrown py-3 rounded-xl text-sm font-semibold font-medieval">
+                            9C
                         </button>
                     </div>
                 </div>
 
                 <!-- Status Filter -->
-                <div class="mt-3">
-                    <div class="flex flex-wrap gap-2">
-                        <button onclick="adminSystem.filterByStatus('all')" class="filter-btn active bg-gold/20 text-darkBrown mobile-px-3 mobile-py-1 rounded-full text-xs font-semibold border border-darkBrown font-medieval">
+                <div class="mb-4">
+                    <h3 class="text-darkBrown font-semibold font-medieval text-lg mb-4">Filter Status:</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <button onclick="adminSystem.filterByStatus('all')" class="filter-btn active bg-gold/20 text-darkBrown px-6 py-3 rounded-xl text-base font-semibold font-medieval">
                             Semua Status
                         </button>
-                        <button onclick="adminSystem.filterByStatus('online')" class="filter-btn bg-gold/20 text-darkBrown mobile-px-3 mobile-py-1 rounded-full text-xs font-semibold border border-darkBrown font-medieval">
+                        <button onclick="adminSystem.filterByStatus('online')" class="filter-btn bg-gold/20 text-darkBrown px-6 py-3 rounded-xl text-base font-semibold font-medieval">
                             <span class="online-status status-online"></span>Online
                         </button>
-                        <button onclick="adminSystem.filterByStatus('offline')" class="filter-btn bg-gold/20 text-darkBrown mobile-px-3 mobile-py-1 rounded-full text-xs font-semibold border border-darkBrown font-medieval">
+                        <button onclick="adminSystem.filterByStatus('offline')" class="filter-btn bg-gold/20 text-darkBrown px-6 py-3 rounded-xl text-base font-semibold font-medieval">
                             <span class="online-status status-offline"></span>Offline
                         </button>
                     </div>
                 </div>
 
                 <!-- Search Results Info -->
-                <div id="search-info" class="mt-2 text-darkBrown font-medieval mobile-text-sm hidden">
-                    Menampilkan <span id="result-count">0</span> dari <span id="total-count">0</span> petualang
-                    <span id="search-term-display" class="font-semibold"></span>
+                <div id="search-info" class="mt-4 p-4 bg-oldPaper rounded-xl border-2 border-darkBrown text-darkBrown font-medieval text-base hidden">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-info-circle text-gold"></i>
+                        <span>Menampilkan <span class="font-bold text-darkBrown" id="result-count">0</span> dari <span class="font-bold text-darkBrown" id="total-count">0</span> petualang</span>
+                        <span id="search-term-display" class="font-semibold text-gold"></span>
+                    </div>
                 </div>
             </div>
 
-            <!-- Students List -->
-            <div class="parchment-bg rounded-xl overflow-hidden ancient-border mb-6">
-                <div class="mobile-px-4 mobile-py-3 border-b-2 border-darkBrown flex justify-between items-center">
-                    <div>
-                        <h3 class="mobile-text-xl font-bold text-darkBrown font-maguntia">Daftar Petualang</h3>
-                        <p class="text-darkBrown font-medieval mobile-text-sm">Kelola XP dan pantau progress</p>
-                    </div>
-                    <div id="student-count" class="bg-gold/20 text-darkBrown mobile-px-3 mobile-py-1 rounded-full text-xs font-semibold border border-darkBrown">
-                        0 petualang
+            <!-- Students List Section -->
+            <div class="parchment-bg rounded-2xl overflow-hidden ancient-border mb-8">
+                <!-- Header -->
+                <div class="px-6 lg:px-8 py-6 border-b-2 border-darkBrown bg-gradient-to-r from-oldPaper to-parchment">
+                    <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center space-y-4 lg:space-y-0">
+                        <div>
+                            <h3 class="text-2xl lg:text-3xl font-bold text-darkBrown font-maguntia mb-2">Daftar Petualang</h3>
+                            <p class="text-darkBrown font-medieval text-lg">Kelola XP dan pantau progress literasi</p>
+                        </div>
+                        <div id="student-count" class="bg-gold/30 text-darkBrown px-6 py-3 rounded-xl text-base font-semibold border-2 border-darkBrown font-medieval">
+                            <i class="fas fa-users mr-2"></i>
+                            <span>0 petualang</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="overflow-x-auto mobile-scroll">
-                    <table class="w-full min-w-[600px]">
+                <!-- Table Container -->
+                <div class="overflow-x-auto custom-scrollbar">
+                    <table class="w-full min-w-[800px] lg:min-w-full">
                         <thead>
-                            <tr class="bg-oldPaper">
-                                <th class="mobile-px-3 mobile-py-3 text-left font-semibold text-darkBrown font-medieval mobile-text-sm">Nama</th>
-                                <th class="mobile-px-3 mobile-py-3 text-left font-semibold text-darkBrown font-medieval mobile-text-sm">Kelas</th>
-                                <th class="mobile-px-3 mobile-py-3 text-left font-semibold text-darkBrown font-medieval mobile-text-sm">XP</th>
-                                <th class="mobile-px-3 mobile-py-3 text-left font-semibold text-darkBrown font-medieval mobile-text-sm">Rank</th>
-                                <th class="mobile-px-3 mobile-py-3 text-left font-semibold text-darkBrown font-medieval mobile-text-sm">Status</th>
-                                <th class="mobile-px-3 mobile-py-3 text-left font-semibold text-darkBrown font-medieval mobile-text-sm">Aksi</th>
+                            <tr class="bg-gradient-to-r from-oldPaper to-parchment">
+                                <th class="px-6 py-5 text-left font-bold text-darkBrown font-medieval text-lg border-b-2 border-darkBrown">
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fas fa-user text-gold"></i>
+                                        <span>Nama Petualang</span>
+                                    </div>
+                                </th>
+                                <th class="px-6 py-5 text-left font-bold text-darkBrown font-medieval text-lg border-b-2 border-darkBrown">
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fas fa-graduation-cap text-gold"></i>
+                                        <span>Kelas</span>
+                                    </div>
+                                </th>
+                                <th class="px-6 py-5 text-left font-bold text-darkBrown font-medieval text-lg border-b-2 border-darkBrown">
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fas fa-star text-gold"></i>
+                                        <span>XP</span>
+                                    </div>
+                                </th>
+                                <th class="px-6 py-5 text-left font-bold text-darkBrown font-medieval text-lg border-b-2 border-darkBrown">
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fas fa-trophy text-gold"></i>
+                                        <span>Rank</span>
+                                    </div>
+                                </th>
+                                <th class="px-6 py-5 text-left font-bold text-darkBrown font-medieval text-lg border-b-2 border-darkBrown">
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fas fa-signal text-gold"></i>
+                                        <span>Status</span>
+                                    </div>
+                                </th>
+                                <th class="px-6 py-5 text-left font-bold text-darkBrown font-medieval text-lg border-b-2 border-darkBrown">
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fas fa-cogs text-gold"></i>
+                                        <span>Aksi</span>
+                                    </div>
+                                </th>
                             </tr>
                         </thead>
-                        <tbody id="students-table-body">
+                        <tbody id="students-table-body" class="table-responsive">
                             <!-- Data siswa akan diisi di sini -->
                         </tbody>
                     </table>
                 </div>
 
-                <div class="mobile-px-4 mobile-py-6 border-t-2 border-darkBrown text-center text-darkBrown font-medieval" id="empty-state">
-                    <i class="fas fa-scroll text-4xl mb-3 opacity-50"></i>
-                    <p class="mobile-text-lg">Belum ada petualang</p>
-                    <p class="mobile-text-sm mt-1">Arahkan siswa untuk login</p>
-                </div>
+                <!-- Empty States -->
+                <div class="mobile-text-center mobile-full-width">
+                    <div class="mobile-px-4 mobile-py-16 border-t-2 border-darkBrown text-center text-darkBrown font-medieval" id="empty-state">
+                        <i class="fas fa-scroll text-6xl mb-6 opacity-40"></i>
+                        <p class="text-2xl mb-3">Belum ada petualang</p>
+                        <p class="text-lg opacity-80">Arahkan siswa untuk login ke sistem</p>
+                    </div>
 
-                <div class="mobile-px-4 mobile-py-6 border-t-2 border-darkBrown text-center text-darkBrown font-medieval hidden" id="no-results-state">
-                    <i class="fas fa-search text-4xl mb-3 opacity-50"></i>
-                    <p class="mobile-text-lg">Tidak ditemukan</p>
-                    <p class="mobile-text-sm mt-1">Coba dengan kata kunci lain</p>
+                    <div class="mobile-px-4 mobile-py-16 border-t-2 border-darkBrown text-center text-darkBrown font-medieval hidden" id="no-results-state">
+                        <i class="fas fa-search text-6xl mb-6 opacity-40"></i>
+                        <p class="text-2xl mb-3">Tidak ditemukan</p>
+                        <p class="text-lg opacity-80">Coba dengan kata kunci atau filter lain</p>
+                    </div>
                 </div>
             </div>
 
-            <!-- Quick Actions -->
-            <div class="parchment-bg rounded-xl p-4 ancient-border">
-                <h3 class="mobile-text-xl font-bold text-darkBrown font-maguntia mb-3">Tambah XP Cepat</h3>
-                <div class="grid grid-cols-2 gap-3">
-                    <button onclick="showBulkAddModal(5)" class="parchment-bg hover:bg-gold/20 text-darkBrown mobile-py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 border-2 border-darkBrown font-medieval mobile-text-sm flex items-center justify-center">
-                        <i class="fas fa-plus mr-2"></i>+5 XP
+            <!-- Quick Actions Section -->
+            <div class="parchment-bg rounded-2xl p-6 lg:p-8 ancient-border">
+                <h3 class="text-2xl lg:text-3xl font-bold text-darkBrown font-maguntia mb-6">Aksi Cepat Tambah XP</h3>
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+                    <button onclick="showBulkAddModal(5)" class="parchment-bg hover:bg-gold/30 text-darkBrown py-6 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 border-3 border-darkBrown font-medieval text-lg flex flex-col items-center justify-center action-btn shadow-lg">
+                        <i class="fas fa-plus-circle text-3xl mb-3 text-gold"></i>
+                        <span>+5 XP</span>
+                        <span class="text-sm opacity-70 mt-1">Tambah Sedikit</span>
                     </button>
-                    <button onclick="showBulkAddModal(15)" class="parchment-bg hover:bg-gold/20 text-darkBrown mobile-py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 border-2 border-darkBrown font-medieval mobile-text-sm flex items-center justify-center">
-                        <i class="fas fa-plus mr-2"></i>+15 XP
+                    <button onclick="showBulkAddModal(15)" class="parchment-bg hover:bg-gold/30 text-darkBrown py-6 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 border-3 border-darkBrown font-medieval text-lg flex flex-col items-center justify-center action-btn shadow-lg">
+                        <i class="fas fa-plus-circle text-3xl mb-3 text-bronze"></i>
+                        <span>+15 XP</span>
+                        <span class="text-sm opacity-70 mt-1">Tambah Medium</span>
                     </button>
-                    <button onclick="showBulkAddModal(20)" class="parchment-bg hover:bg-gold/20 text-darkBrown mobile-py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 border-2 border-darkBrown font-medieval mobile-text-sm flex items-center justify-center">
-                        <i class="fas fa-plus mr-2"></i>+20 XP
+                    <button onclick="showBulkAddModal(20)" class="parchment-bg hover:bg-gold/30 text-darkBrown py-6 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 border-3 border-darkBrown font-medieval text-lg flex flex-col items-center justify-center action-btn shadow-lg">
+                        <i class="fas fa-plus-circle text-3xl mb-3 text-gold"></i>
+                        <span>+20 XP</span>
+                        <span class="text-sm opacity-70 mt-1">Tambah Banyak</span>
                     </button>
-                    <button onclick="showBulkAddModal(30)" class="parchment-bg hover:bg-gold/20 text-darkBrown mobile-py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 border-2 border-darkBrown font-medieval mobile-text-sm flex items-center justify-center">
-                        <i class="fas fa-plus mr-2"></i>+30 XP
+                    <button onclick="showBulkAddModal(30)" class="parchment-bg hover:bg-gold/30 text-darkBrown py-6 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 border-3 border-darkBrown font-medieval text-lg flex flex-col items-center justify-center action-btn shadow-lg">
+                        <i class="fas fa-plus-circle text-3xl mb-3 text-bronze"></i>
+                        <span>+30 XP</span>
+                        <span class="text-sm opacity-70 mt-1">Tambah Maximum</span>
                     </button>
                 </div>
             </div>
@@ -420,22 +533,27 @@
     </main>
 
     <!-- Add Points Modal -->
-    <div id="add-points-modal" class="fixed inset-0 bg-black/80 z-50 hidden items-center justify-center mobile-padding backdrop-blur-sm">
-        <div class="parchment-bg rounded-xl p-5 w-full max-w-sm ancient-border">
-            <h4 class="mobile-text-xl font-bold text-darkBrown font-maguntia mb-3">Tambah XP</h4>
-            <div class="space-y-4">
+    <div id="add-points-modal" class="fixed inset-0 bg-black/80 z-50 hidden items-center justify-center mobile-container backdrop-blur-sm">
+        <div class="parchment-bg rounded-2xl p-8 w-full max-w-md ancient-border transform animate-grow">
+            <div class="text-center mb-6">
+                <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-r from-gold to-bronze rounded-2xl flex items-center justify-center ancient-border">
+                    <i class="fas fa-plus text-darkBrown text-3xl"></i>
+                </div>
+                <h4 class="text-2xl font-bold text-darkBrown font-maguntia">Tambah XP</h4>
+            </div>
+            <div class="space-y-6">
                 <div>
-                    <label class="block text-darkBrown font-semibold mb-2 font-medieval mobile-text-sm">Jumlah XP</label>
+                    <label class="block text-darkBrown font-semibold mb-3 font-medieval text-lg">Jumlah XP</label>
                     <input type="number" id="points-amount" 
-                           class="w-full mobile-px-3 mobile-py-2 bg-oldPaper border-2 border-darkBrown rounded-lg focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all duration-300 outline-none font-medieval mobile-text-sm"
+                           class="w-full px-6 py-4 bg-oldPaper border-3 border-darkBrown rounded-2xl focus:border-gold focus:ring-4 focus:ring-gold/20 transition-all duration-300 outline-none font-medieval text-lg text-center"
                            min="1" max="100" value="5">
                 </div>
-                <div class="flex space-x-2">
-                    <button onclick="addPointsToStudent()" class="flex-1 bg-gold hover:bg-yellow-600 text-darkBrown mobile-py-2 rounded-lg font-semibold transition-all duration-300 border-2 border-darkBrown font-medieval mobile-text-sm">
-                        Tambah XP
+                <div class="flex space-x-4">
+                    <button onclick="addPointsToStudent()" class="flex-1 bg-gold hover:bg-yellow-600 text-darkBrown py-4 rounded-2xl font-semibold transition-all duration-300 border-3 border-darkBrown font-medieval text-lg shadow-lg hover:scale-105">
+                        <i class="fas fa-check mr-2"></i>Tambah XP
                     </button>
-                    <button onclick="closeAddPointsModal()" class="flex-1 bg-deepRed hover:bg-red-800 text-parchment mobile-py-2 rounded-lg font-semibold transition-all duration-300 border-2 border-gold font-medieval mobile-text-sm">
-                        Batal
+                    <button onclick="closeAddPointsModal()" class="flex-1 bg-deepRed hover:bg-red-800 text-parchment py-4 rounded-2xl font-semibold transition-all duration-300 border-3 border-gold font-medieval text-lg shadow-lg hover:scale-105">
+                        <i class="fas fa-times mr-2"></i>Batal
                     </button>
                 </div>
             </div>
@@ -443,23 +561,29 @@
     </div>
 
     <!-- Bulk Add Modal -->
-    <div id="bulk-add-modal" class="fixed inset-0 bg-black/80 z-50 hidden items-center justify-center mobile-padding backdrop-blur-sm">
-        <div class="parchment-bg rounded-xl p-5 w-full max-w-sm ancient-border">
-            <h4 class="mobile-text-xl font-bold text-darkBrown font-maguntia mb-3">Tambah XP ke Semua</h4>
-            <div class="space-y-4">
-                <div>
-                    <label class="block text-darkBrown font-semibold mb-2 font-medieval mobile-text-sm">Jumlah XP</label>
-                    <div class="mobile-text-2xl font-bold text-gold text-center" id="bulk-points-amount">5</div>
+    <div id="bulk-add-modal" class="fixed inset-0 bg-black/80 z-50 hidden items-center justify-center mobile-container backdrop-blur-sm">
+        <div class="parchment-bg rounded-2xl p-8 w-full max-w-md ancient-border transform animate-grow">
+            <div class="text-center mb-6">
+                <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-r from-gold to-bronze rounded-2xl flex items-center justify-center ancient-border">
+                    <i class="fas fa-users text-darkBrown text-3xl"></i>
                 </div>
-                <div class="text-center text-darkBrown font-medieval mobile-text-sm">
+                <h4 class="text-2xl font-bold text-darkBrown font-maguntia">Tambah XP Massal</h4>
+            </div>
+            <div class="space-y-6">
+                <div class="text-center">
+                    <label class="block text-darkBrown font-semibold mb-3 font-medieval text-lg">Jumlah XP</label>
+                    <div class="text-4xl font-bold text-gold gradient-text" id="bulk-points-amount">5</div>
+                </div>
+                <div class="text-center text-darkBrown font-medieval text-lg bg-oldPaper p-4 rounded-xl border-2 border-darkBrown">
+                    <i class="fas fa-info-circle text-gold mr-2"></i>
                     XP akan ditambahkan ke semua petualang aktif
                 </div>
-                <div class="flex space-x-2">
-                    <button onclick="addPointsToAllStudents()" class="flex-1 bg-gold hover:bg-yellow-600 text-darkBrown mobile-py-2 rounded-lg font-semibold transition-all duration-300 border-2 border-darkBrown font-medieval mobile-text-sm">
-                        Tambah Semua
+                <div class="flex space-x-4">
+                    <button onclick="addPointsToAllStudents()" class="flex-1 bg-gold hover:bg-yellow-600 text-darkBrown py-4 rounded-2xl font-semibold transition-all duration-300 border-3 border-darkBrown font-medieval text-lg shadow-lg hover:scale-105">
+                        <i class="fas fa-bolt mr-2"></i>Tambah Semua
                     </button>
-                    <button onclick="closeBulkAddModal()" class="flex-1 bg-deepRed hover:bg-red-800 text-parchment mobile-py-2 rounded-lg font-semibold transition-all duration-300 border-2 border-gold font-medieval mobile-text-sm">
-                        Batal
+                    <button onclick="closeBulkAddModal()" class="flex-1 bg-deepRed hover:bg-red-800 text-parchment py-4 rounded-2xl font-semibold transition-all duration-300 border-3 border-gold font-medieval text-lg shadow-lg hover:scale-105">
+                        <i class="fas fa-times mr-2"></i>Batal
                     </button>
                 </div>
             </div>
@@ -487,18 +611,14 @@
             }
 
             loadStudents() {
-                // FIXED: Gunakan SATU sumber data utama
                 const studentData = JSON.parse(localStorage.getItem('perpustakaan_abadi_students') || '[]');
                 
-                // Update status online/offline berdasarkan lastActivity
                 const updatedStudents = studentData.map(student => {
                     const lastActivity = new Date(student.lastActivity || student.lastLogin);
                     const now = new Date();
                     const minutesSinceLastActivity = (now - lastActivity) / (1000 * 60);
                     
-                    // Jika lebih dari 5 menit tidak aktif, anggap offline
                     student.isOnline = minutesSinceLastActivity < 5;
-                    
                     return student;
                 });
 
@@ -507,13 +627,11 @@
             }
 
             setupEventListeners() {
-                // Search input event
                 document.getElementById('search-input').addEventListener('input', (e) => {
                     this.searchTerm = e.target.value.toLowerCase().trim();
                     this.applyFilters();
                 });
 
-                // Auto-refresh setiap 3 detik untuk data real-time
                 setInterval(() => {
                     this.loadStudents();
                 }, 3000);
@@ -528,7 +646,6 @@
             applyFilters() {
                 let filtered = [...this.students];
 
-                // Apply search filter
                 if (this.searchTerm) {
                     filtered = filtered.filter(student => 
                         student.name.toLowerCase().includes(this.searchTerm) ||
@@ -536,12 +653,10 @@
                     );
                 }
 
-                // Apply class filter
                 if (this.selectedClass) {
                     filtered = filtered.filter(student => student.class === this.selectedClass);
                 }
 
-                // Apply status filter
                 if (this.selectedStatus !== 'all') {
                     filtered = filtered.filter(student => {
                         if (this.selectedStatus === 'online') return student.isOnline === true;
@@ -550,13 +665,8 @@
                     });
                 }
 
-                // Apply sorting
                 filtered.sort((a, b) => {
-                    if (this.sortDescending) {
-                        return b.points - a.points;
-                    } else {
-                        return a.points - b.points;
-                    }
+                    return this.sortDescending ? b.points - a.points : a.points - b.points;
                 });
 
                 this.filteredStudents = filtered;
@@ -577,8 +687,13 @@
 
                 document.getElementById('total-students').textContent = totalStudents;
                 document.getElementById('online-students').textContent = onlineStudents;
-                document.getElementById('total-points').textContent = totalPoints;
+                document.getElementById('total-points').textContent = totalPoints.toLocaleString();
                 document.getElementById('avg-points').textContent = avgPoints;
+                document.getElementById('avg-points-display').textContent = avgPoints;
+
+                // Update online progress
+                const onlinePercent = totalStudents > 0 ? (onlineStudents / totalStudents) * 100 : 0;
+                document.getElementById('online-progress').style.width = `${onlinePercent}%`;
             }
 
             updateStudentsTable() {
@@ -587,7 +702,7 @@
                 const noResultsState = document.getElementById('no-results-state');
                 const studentCount = document.getElementById('student-count');
 
-                studentCount.textContent = `${this.filteredStudents.length} petualang`;
+                studentCount.innerHTML = `<i class="fas fa-users mr-2"></i><span>${this.filteredStudents.length} petualang</span>`;
 
                 if (this.students.length === 0) {
                     tbody.innerHTML = '';
@@ -607,58 +722,58 @@
                 noResultsState.classList.add('hidden');
 
                 tbody.innerHTML = this.filteredStudents.map(student => `
-                    <tr class="student-row border-b border-darkBrown hover:bg-gold/10">
-                        <td class="mobile-px-3 mobile-py-2">
-                            <div class="flex items-center space-x-2">
-                                <div class="w-8 h-8 bg-gradient-to-r from-gold to-bronze rounded-full flex items-center justify-center text-darkBrown font-semibold ancient-border mobile-text-sm">
-                                    <i class="fas fa-${student.profileIcon || 'book-reader'}"></i>
+                    <tr class="student-row">
+                        <td class="px-6 py-5">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-gradient-to-r from-gold to-bronze rounded-2xl flex items-center justify-center ancient-border text-darkBrown font-semibold">
+                                    <i class="fas fa-${student.profileIcon || 'book-reader'} text-lg"></i>
                                 </div>
                                 <div>
-                                    <div class="font-semibold text-darkBrown mobile-text-sm">
+                                    <div class="font-semibold text-darkBrown text-lg">
                                         ${this.highlightSearchTerm(student.name)}
                                     </div>
-                                    <div class="text-darkBrown font-medieval mobile-text-xs">ID: ${student.id.slice(-4)}</div>
+                                    <div class="text-darkBrown font-medieval text-sm opacity-70">ID: ${student.id.slice(-6)}</div>
                                 </div>
                             </div>
                         </td>
-                        <td class="mobile-px-3 mobile-py-2">
-                            <span class="bg-gold/20 text-darkBrown mobile-px-2 mobile-py-1 rounded-full mobile-text-xs font-semibold font-medieval border border-darkBrown">
+                        <td class="px-6 py-5">
+                            <span class="bg-gold/20 text-darkBrown px-4 py-2 rounded-xl text-base font-semibold font-medieval border-2 border-darkBrown">
                                 ${student.class}
                             </span>
                         </td>
-                        <td class="mobile-px-3 mobile-py-2">
-                            <div class="flex flex-col space-y-1">
-                                <span class="font-bold text-darkBrown mobile-text-sm">${student.points}</span>
-                                <div class="w-20 bg-darkBrown rounded-full h-2">
-                                    <div class="rank-progress h-2 rounded-full transition-all duration-1000" 
+                        <td class="px-6 py-5">
+                            <div class="flex flex-col space-y-3">
+                                <span class="font-bold text-darkBrown text-xl">${student.points.toLocaleString()}</span>
+                                <div class="w-32 bg-darkBrown rounded-full h-3">
+                                    <div class="rank-progress h-3 rounded-full transition-all duration-1000" 
                                          style="width: ${Math.min(100, (student.points / 1000) * 100)}%"></div>
                                 </div>
                             </div>
                         </td>
-                        <td class="mobile-px-3 mobile-py-2">
-                            <span class="mobile-px-2 mobile-py-1 rounded mobile-text-xs font-semibold border border-darkBrown ${
+                        <td class="px-6 py-5">
+                            <span class="px-4 py-2 rounded-xl text-base font-semibold border-2 border-darkBrown ${
                                 this.getRankColor(student.points)
                             } font-medieval">
                                 ${this.getShortRankName(student.points)}
                             </span>
                         </td>
-                        <td class="mobile-px-3 mobile-py-2">
-                            <span class="mobile-px-2 mobile-py-1 rounded mobile-text-xs font-semibold border border-darkBrown ${
+                        <td class="px-6 py-5">
+                            <span class="px-4 py-2 rounded-xl text-base font-semibold border-2 border-darkBrown ${
                                 student.isOnline ? 'bg-forestGreen/20 text-forestGreen' : 'bg-deepRed/20 text-deepRed'
                             } font-medieval flex items-center">
                                 <span class="online-status ${student.isOnline ? 'status-online' : 'status-offline'}"></span>
                                 ${student.isOnline ? 'Online' : 'Offline'}
                             </span>
                         </td>
-                        <td class="mobile-px-3 mobile-py-2">
-                            <div class="flex flex-col space-y-1">
+                        <td class="px-6 py-5">
+                            <div class="flex flex-col space-y-2">
                                 <button onclick="adminSystem.showAddPointsModal('${student.id}')" 
-                                        class="bg-gold hover:bg-yellow-600 text-darkBrown mobile-px-2 mobile-py-1 rounded font-semibold transition-all duration-300 transform hover:scale-105 border border-darkBrown font-medieval mobile-text-xs flex items-center justify-center">
-                                    <i class="fas fa-plus mr-1"></i>XP
+                                        class="bg-gold hover:bg-yellow-600 text-darkBrown px-4 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 border-2 border-darkBrown font-medieval text-base flex items-center justify-center action-btn">
+                                    <i class="fas fa-plus mr-2"></i>Tambah XP
                                 </button>
                                 <button onclick="adminSystem.resetStudent('${student.id}')" 
-                                        class="bg-deepRed hover:bg-red-800 text-parchment mobile-px-2 mobile-py-1 rounded font-semibold transition-all duration-300 transform hover:scale-105 border border-gold font-medieval mobile-text-xs flex items-center justify-center">
-                                    <i class="fas fa-redo"></i>
+                                        class="bg-deepRed hover:bg-red-800 text-parchment px-4 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 border-2 border-gold font-medieval text-base flex items-center justify-center action-btn">
+                                    <i class="fas fa-redo mr-2"></i>Reset
                                 </button>
                             </div>
                         </td>
@@ -696,7 +811,6 @@
 
             highlightSearchTerm(text) {
                 if (!this.searchTerm) return text;
-                
                 const regex = new RegExp(`(${this.searchTerm})`, 'gi');
                 return text.replace(regex, '<span class="search-highlight">$1</span>');
             }
@@ -723,29 +837,23 @@
             }
 
             updateFilterButtons() {
-                // Remove active class from all buttons
                 document.querySelectorAll('.filter-btn').forEach(btn => {
                     btn.classList.remove('active');
                 });
 
-                // Add active class to current class filter
                 if (this.selectedClass === '') {
                     document.querySelector('.filter-btn:first-child').classList.add('active');
                 } else {
-                    const activeClassBtn = document.querySelector(`.filter-btn:contains("${this.selectedClass}")`);
-                    if (activeClassBtn) {
-                        activeClassBtn.classList.add('active');
-                    }
+                    const classButtons = document.querySelectorAll(`[onclick*="${this.selectedClass}"]`);
+                    classButtons.forEach(btn => btn.classList.add('active'));
                 }
 
-                // Add active class to current status filter
-                if (this.selectedStatus === 'all') {
-                    document.querySelectorAll('.filter-btn')[1].classList.add('active');
-                } else if (this.selectedStatus === 'online') {
-                    document.querySelectorAll('.filter-btn')[2].classList.add('active');
-                } else if (this.selectedStatus === 'offline') {
-                    document.querySelectorAll('.filter-btn')[3].classList.add('active');
-                }
+                const statusButtons = document.querySelectorAll('[onclick*="filterByStatus"]');
+                statusButtons.forEach(btn => {
+                    if (btn.onclick.toString().includes(this.selectedStatus)) {
+                        btn.classList.add('active');
+                    }
+                });
             }
 
             toggleSort() {
@@ -754,24 +862,22 @@
                 const sortText = document.getElementById('sort-text');
                 
                 if (this.sortDescending) {
-                    sortIcon.className = 'fas fa-sort-amount-down mr-1';
+                    sortIcon.className = 'fas fa-sort-amount-down mr-2';
                     sortText.textContent = 'XP Tertinggi';
                 } else {
-                    sortIcon.className = 'fas fa-sort-amount-up mr-1';
+                    sortIcon.className = 'fas fa-sort-amount-up mr-2';
                     sortText.textContent = 'XP Terendah';
                 }
                 
                 this.applyFilters();
             }
 
-            // Method untuk menampilkan modal tambah point
             showAddPointsModal(studentId) {
                 this.selectedStudentId = studentId;
                 document.getElementById('points-amount').value = 5;
                 document.getElementById('add-points-modal').classList.remove('hidden');
             }
 
-            // Method untuk menambahkan point ke student tertentu - FIXED
             addPointsToStudent() {
                 if (!this.selectedStudentId) {
                     this.showNotification('Tidak ada siswa yang dipilih', 'error');
@@ -779,8 +885,6 @@
                 }
 
                 const points = parseInt(document.getElementById('points-amount').value) || 5;
-
-                // Cari student berdasarkan ID
                 const studentIndex = this.students.findIndex(s => s.id === this.selectedStudentId);
                 
                 if (studentIndex === -1) {
@@ -788,11 +892,9 @@
                     return;
                 }
 
-                // Update data student
                 this.students[studentIndex].points += points;
                 this.students[studentIndex].lastActivity = new Date().toISOString();
 
-                // FIXED: Simpan ke SATU storage utama
                 this.saveChanges();
                 this.closeAddPointsModal();
                 
@@ -820,7 +922,7 @@
             }
 
             resetStudent(studentId) {
-                if (confirm('Reset XP petualang ini?')) {
+                if (confirm('Reset XP petualang ini? Semua progress akan hilang.')) {
                     const studentIndex = this.students.findIndex(s => s.id === studentId);
                     if (studentIndex !== -1) {
                         this.students[studentIndex].points = 0;
@@ -833,7 +935,6 @@
             }
 
             saveChanges() {
-                // FIXED: Simpan ke SATU storage utama saja
                 localStorage.setItem('perpustakaan_abadi_students', JSON.stringify(this.students));
                 this.applyFilters();
             }
@@ -850,10 +951,10 @@
 
             showNotification(message, type = 'info') {
                 const notification = document.createElement('div');
-                notification.className = `fixed top-4 right-4 z-50 mobile-px-4 mobile-py-2 rounded-lg font-semibold text-white transition-all duration-300 transform translate-x-full border ${
+                notification.className = `fixed top-6 right-6 z-50 px-6 py-4 rounded-2xl font-semibold text-white transition-all duration-300 transform translate-x-full border-2 ${
                     type === 'error' ? 'bg-deepRed border-red-300' : 
                     type === 'success' ? 'bg-forestGreen border-green-300' : 'bg-mysticBlue border-blue-300'
-                } font-medieval mobile-text-sm max-w-xs`;
+                } font-medieval text-lg max-w-sm shadow-2xl`;
                 notification.textContent = message;
 
                 document.body.appendChild(notification);
@@ -863,7 +964,7 @@
                 setTimeout(() => {
                     notification.style.transform = 'translateX(100%)';
                     setTimeout(() => notification.remove(), 300);
-                }, 3000);
+                }, 4000);
             }
 
             getRankName(points) {
@@ -876,12 +977,12 @@
             }
 
             getShortRankName(points) {
-                if (points >= 1000) return '🏆';
-                if (points >= 800) return '📗';
-                if (points >= 600) return '📘';
-                if (points >= 300) return '📜';
-                if (points >= 100) return '📚';
-                return '📖';
+                if (points >= 1000) return '🏆 Master';
+                if (points >= 800) return '📗 Expert';
+                if (points >= 600) return '📘 Advanced';
+                if (points >= 300) return '📜 Intermediate';
+                if (points >= 100) return '📚 Beginner';
+                return '📖 Newbie';
             }
 
             getRankColor(points) {
@@ -894,7 +995,7 @@
             }
         }
 
-        // Global functions untuk modal
+        // Global functions
         function showBulkAddModal(points) {
             adminSystem.showBulkAddModal(points);
         }
@@ -917,7 +1018,7 @@
 
         function refreshData() {
             adminSystem.loadStudents();
-            adminSystem.showNotification('Data diperbarui', 'success');
+            adminSystem.showNotification('Data berhasil diperbarui', 'success');
         }
 
         // Initialize admin system
