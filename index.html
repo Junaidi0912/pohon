@@ -553,17 +553,7 @@
     </footer>
 
     <script>
-        // Password Generator Function
-        function generatePassword(length = 6) {
-            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            let password = '';
-            for (let i = 0; i < length; i++) {
-                password += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-            return password;
-        }
-
-        // Student Management System - WITH PASSWORD SUPPORT
+        // Student Management System - FIXED SYNC ISSUES
         class StudentSystem {
             constructor() {
                 this.currentStudent = null;
@@ -613,33 +603,56 @@
             }
 
             startAutoSync() {
+                // FIXED: Sync lebih sering untuk real-time updates
                 setInterval(() => {
                     this.syncWithMainData();
-                }, 2000);
+                }, 1000); // Sync setiap 1 detik
             }
 
+            // FIXED: Improved sync method
             syncWithMainData() {
                 if (!this.currentStudent) return;
 
-                const mainStudents = JSON.parse(localStorage.getItem('perpustakaan_abadi_students') || '[]');
-                const latestStudentData = mainStudents.find(s => s.id === this.currentStudent.id);
-                
-                if (latestStudentData && latestStudentData.points !== this.currentStudent.points) {
-                    console.log('Data tersinkronisasi:', latestStudentData.points);
-                    this.currentStudent.points = latestStudentData.points;
-                    this.updateDisplay();
-                    this.saveCurrentStudent();
+                try {
+                    const mainStudents = JSON.parse(localStorage.getItem('perpustakaan_abadi_students') || '[]');
+                    const latestStudentData = mainStudents.find(s => s.id === this.currentStudent.id);
+                    
+                    if (latestStudentData) {
+                        // Check if points changed
+                        if (latestStudentData.points !== this.currentStudent.points) {
+                            console.log('Points berubah:', this.currentStudent.points, '->', latestStudentData.points);
+                            this.currentStudent.points = latestStudentData.points;
+                            this.currentStudent.level = this.getLevelFromPoints(latestStudentData.points);
+                            this.updateDisplay();
+                        }
+
+                        // Sync other important fields
+                        if (latestStudentData.profileIcon !== this.currentStudent.profileIcon) {
+                            this.currentStudent.profileIcon = latestStudentData.profileIcon;
+                            this.updateProfileIcon();
+                        }
+
+                        // Update session storage
+                        this.saveCurrentStudent();
+                    }
+                } catch (error) {
+                    console.error('Error syncing data:', error);
                 }
             }
 
             checkExistingSession() {
                 const savedStudent = localStorage.getItem('current_student');
                 if (savedStudent) {
-                    this.currentStudent = JSON.parse(savedStudent);
-                    this.selectedProfileIcon = this.currentStudent.profileIcon || 'book-reader';
-                    this.showMainInterface();
-                    this.updateStudentStatus(true);
-                    this.syncWithMainData();
+                    try {
+                        this.currentStudent = JSON.parse(savedStudent);
+                        this.selectedProfileIcon = this.currentStudent.profileIcon || 'book-reader';
+                        this.showMainInterface();
+                        this.updateStudentStatus(true);
+                        this.syncWithMainData(); // Sync immediately
+                    } catch (error) {
+                        console.error('Error loading session:', error);
+                        localStorage.removeItem('current_student');
+                    }
                 }
             }
 
@@ -670,7 +683,7 @@
                     return;
                 }
 
-                this.currentStudent = student;
+                this.currentStudent = { ...student }; // Create copy to avoid reference issues
                 this.currentStudent.lastLogin = new Date().toISOString();
                 this.currentStudent.lastActivity = new Date().toISOString();
                 this.currentStudent.isOnline = true;
@@ -729,7 +742,7 @@
                 };
 
                 this.students.push(student);
-                this.currentStudent = student;
+                this.currentStudent = { ...student }; // Create copy
 
                 this.saveToStorage();
                 this.showMainInterface();
@@ -844,11 +857,13 @@
                 this.updateCharacter(level);
                 this.updateNextRankProgress(points, level);
 
-                if (level > this.currentStudent.level) {
+                // Check for level up
+                if (level > (this.currentStudent.level || 0)) {
                     this.currentStudent.level = level;
                     this.showLevelUp(level);
                 }
 
+                // Check for completion
                 if (points >= 1000) {
                     this.showCompletion();
                 }
@@ -1002,18 +1017,27 @@
             }
 
             saveToStorage() {
-                localStorage.setItem('perpustakaan_abadi_students', JSON.stringify(this.students));
+                try {
+                    localStorage.setItem('perpustakaan_abadi_students', JSON.stringify(this.students));
+                    console.log('Data tersimpan:', this.students);
+                } catch (error) {
+                    console.error('Error saving to storage:', error);
+                }
             }
 
             saveCurrentStudent() {
                 if (this.currentStudent) {
-                    localStorage.setItem('current_student', JSON.stringify(this.currentStudent));
-                    
-                    // Update student di array utama
-                    const studentIndex = this.students.findIndex(s => s.id === this.currentStudent.id);
-                    if (studentIndex !== -1) {
-                        this.students[studentIndex] = this.currentStudent;
-                        this.saveToStorage();
+                    try {
+                        localStorage.setItem('current_student', JSON.stringify(this.currentStudent));
+                        
+                        // Update student di array utama
+                        const studentIndex = this.students.findIndex(s => s.id === this.currentStudent.id);
+                        if (studentIndex !== -1) {
+                            this.students[studentIndex] = { ...this.currentStudent };
+                            this.saveToStorage();
+                        }
+                    } catch (error) {
+                        console.error('Error saving current student:', error);
                     }
                 }
             }
