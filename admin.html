@@ -21,7 +21,8 @@
                         mysticBlue: '#1E3A5F',
                         deepRed: '#8B0000',
                         forestGreen: '#228B22',
-                        lightBrown: '#A0522D'
+                        lightBrown: '#A0522D',
+                        black: '#000000'
                     },
                     fontFamily: {
                         'cinzel': ['Cinzel', 'serif'],
@@ -82,6 +83,15 @@
             box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
         }
 
+        /* Text Colors - FIXED to Black */
+        .text-dark {
+            color: #000000 !important;
+        }
+        
+        .text-darker {
+            color: #1a1a1a !important;
+        }
+
         /* Mobile First Design */
         .mobile-container {
             padding-left: 1rem;
@@ -126,12 +136,14 @@
             border-radius: 3px;
             padding: 0 3px;
             font-weight: 600;
+            color: #000000 !important;
         }
 
         /* Filter buttons */
         .filter-btn {
             transition: all 0.3s ease;
             border: 2px solid #8B4513;
+            color: #000000 !important;
         }
 
         .filter-btn:hover {
@@ -141,7 +153,7 @@
 
         .filter-btn.active {
             background: linear-gradient(135deg, #D4AF37, #8B4513);
-            color: white;
+            color: white !important;
             border-color: #8B4513;
             box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
         }
@@ -189,34 +201,6 @@
             animation: pulse-glow 2s ease-in-out infinite;
         }
 
-        /* Table responsive improvements */
-        @media (max-width: 1024px) {
-            .table-responsive {
-                font-size: 0.875rem;
-            }
-            
-            .table-responsive th,
-            .table-responsive td {
-                padding: 0.75rem 0.5rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .mobile-stack {
-                display: flex;
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .mobile-text-center {
-                text-align: center;
-            }
-            
-            .mobile-full-width {
-                width: 100%;
-            }
-        }
-
         /* Card hover effects */
         .card-hover {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -234,9 +218,24 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
+
+        /* Password field */
+        .password-field {
+            font-family: monospace;
+            letter-spacing: 1px;
+        }
+
+        .copy-password {
+            transition: all 0.3s ease;
+        }
+
+        .copy-password:hover {
+            transform: scale(1.1);
+            color: #D4AF37;
+        }
     </style>
 </head>
-<body class="font-cinzel text-oldPaper min-h-screen">
+<body class="font-cinzel text-black min-h-screen">
     <!-- Navigation -->
     <nav class="bg-darkBrown/95 backdrop-blur-md shadow-2xl border-b-2 border-gold sticky top-0 z-50">
         <div class="mobile-container">
@@ -273,8 +272,8 @@
                 <div class="stats-card parchment-bg rounded-2xl p-6 card-hover">
                     <div class="flex items-center justify-between">
                         <div class="space-y-2">
-                            <div class="text-3xl lg:text-4xl font-bold text-darkBrown" id="total-students">0</div>
-                            <div class="text-darkBrown font-medieval text-lg">Total Petualang</div>
+                            <div class="text-3xl lg:text-4xl font-bold text-dark" id="total-students">0</div>
+                            <div class="text-dark font-medieval text-lg">Total Petualang</div>
                         </div>
                         <div class="w-14 h-14 bg-gold/20 rounded-2xl flex items-center justify-center ancient-border">
                             <i class="fas fa-users text-gold text-2xl"></i>
@@ -288,8 +287,8 @@
                 <div class="stats-card parchment-bg rounded-2xl p-6 card-hover">
                     <div class="flex items-center justify-between">
                         <div class="space-y-2">
-                            <div class="text-3xl lg:text-4xl font-bold text-darkBrown" id="online-students">0</div>
-                            <div class="text-darkBrown font-medieval text-lg">Sedang Online</div>
+                            <div class="text-3xl lg:text-4xl font-bold text-dark" id="online-students">0</div>
+                            <div class="text-dark font-medieval text-lg">Sedang Online</div>
                         </div>
                         <div class="w-14 h-14 bg-forestGreen/20 rounded-2xl flex items-center justify-center ancient-border">
                             <i class="fas fa-wifi text-forestGreen text-2xl"></i>
@@ -303,14 +302,14 @@
                 <div class="stats-card parchment-bg rounded-2xl p-6 card-hover">
                     <div class="flex items-center justify-between">
                         <div class="space-y-2">
-                            <div class="text-3xl lg:text-4xl font-bold text-darkBrown" id="total-points">0</div>
-                            <div class="text-darkBrown font-medieval text-lg">Total XP</div>
+                            <div class="text-3xl lg:text-4xl font-bold text-dark" id="total-points">0</div>
+                            <div class="text-dark font-medieval text-lg">Total XP</div>
                         </div>
                         <div class="w-14 h-14 bg-gold/20 rounded-2xl flex items-center justify-center ancient-border">
                             <i class="fas fa-star text-gold text-2xl"></i>
                         </div>
                     </div>
-                    <div class="mt-4 text-sm text-darkBrown font-medieval">
+                    <div class="mt-4 text-sm text-dark font-medieval">
                         ⭐ Rata-rata: <span id="avg-points-display">0</span> XP
                     </div>
                 </div>
@@ -318,14 +317,14 @@
                 <div class="stats-card parchment-bg rounded-2xl p-6 card-hover">
                     <div class="flex items-center justify-between">
                         <div class="space-y-2">
-                            <div class="text-3xl lg:text-4xl font-bold text-darkBrown" id="avg-points">0</div>
-                            <div class="text-darkBrown font-medieval text-lg">Rata-rata XP</div>
+                            <div class="text-3xl lg:text-4xl font-bold text-dark" id="avg-points">0</div>
+                            <div class="text-dark font-medieval text-lg">Rata-rata XP</div>
                         </div>
                         <div class="w-14 h-14 bg-bronze/20 rounded-2xl flex items-center justify-center ancient-border">
                             <i class="fas fa-chart-line text-bronze text-2xl"></i>
                         </div>
                     </div>
-                    <div class="mt-4 text-sm text-darkBrown font-medieval">
+                    <div class="mt-4 text-sm text-dark font-medieval">
                         📈 Progress sistem
                     </div>
                 </div>
@@ -341,7 +340,7 @@
                                 type="text" 
                                 id="search-input"
                                 placeholder="Cari nama petualang atau kelas..."
-                                class="w-full px-6 py-4 bg-oldPaper border-3 border-darkBrown rounded-2xl focus:border-gold focus:ring-4 focus:ring-gold/20 transition-all duration-300 outline-none font-medieval text-lg placeholder-darkBrown/60 shadow-inner"
+                                class="w-full px-6 py-4 bg-oldPaper border-3 border-darkBrown rounded-2xl focus:border-gold focus:ring-4 focus:ring-gold/20 transition-all duration-300 outline-none font-medieval text-lg placeholder-black/60 shadow-inner text-dark"
                             >
                             <div class="absolute right-4 top-1/2 transform -translate-y-1/2 text-darkBrown text-xl">
                                 <i class="fas fa-search"></i>
@@ -361,36 +360,36 @@
 
                 <!-- Filter by Class -->
                 <div class="mb-6">
-                    <h3 class="text-darkBrown font-semibold font-medieval text-lg mb-4">Filter Kelas:</h3>
+                    <h3 class="text-dark font-semibold font-medieval text-lg mb-4">Filter Kelas:</h3>
                     <div class="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-10 gap-3">
-                        <button onclick="adminSystem.filterByClass('')" class="filter-btn active bg-gold/20 text-darkBrown py-3 rounded-xl text-sm font-semibold font-medieval">
+                        <button onclick="adminSystem.filterByClass('')" class="filter-btn active bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
                             Semua
                         </button>
-                        <button onclick="adminSystem.filterByClass('7A')" class="filter-btn bg-gold/20 text-darkBrown py-3 rounded-xl text-sm font-semibold font-medieval">
+                        <button onclick="adminSystem.filterByClass('7A')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
                             7A
                         </button>
-                        <button onclick="adminSystem.filterByClass('7B')" class="filter-btn bg-gold/20 text-darkBrown py-3 rounded-xl text-sm font-semibold font-medieval">
+                        <button onclick="adminSystem.filterByClass('7B')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
                             7B
                         </button>
-                        <button onclick="adminSystem.filterByClass('7C')" class="filter-btn bg-gold/20 text-darkBrown py-3 rounded-xl text-sm font-semibold font-medieval">
+                        <button onclick="adminSystem.filterByClass('7C')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
                             7C
                         </button>
-                        <button onclick="adminSystem.filterByClass('8A')" class="filter-btn bg-gold/20 text-darkBrown py-3 rounded-xl text-sm font-semibold font-medieval">
+                        <button onclick="adminSystem.filterByClass('8A')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
                             8A
                         </button>
-                        <button onclick="adminSystem.filterByClass('8B')" class="filter-btn bg-gold/20 text-darkBrown py-3 rounded-xl text-sm font-semibold font-medieval">
+                        <button onclick="adminSystem.filterByClass('8B')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
                             8B
                         </button>
-                        <button onclick="adminSystem.filterByClass('8C')" class="filter-btn bg-gold/20 text-darkBrown py-3 rounded-xl text-sm font-semibold font-medieval">
+                        <button onclick="adminSystem.filterByClass('8C')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
                             8C
                         </button>
-                        <button onclick="adminSystem.filterByClass('9A')" class="filter-btn bg-gold/20 text-darkBrown py-3 rounded-xl text-sm font-semibold font-medieval">
+                        <button onclick="adminSystem.filterByClass('9A')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
                             9A
                         </button>
-                        <button onclick="adminSystem.filterByClass('9B')" class="filter-btn bg-gold/20 text-darkBrown py-3 rounded-xl text-sm font-semibold font-medieval">
+                        <button onclick="adminSystem.filterByClass('9B')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
                             9B
                         </button>
-                        <button onclick="adminSystem.filterByClass('9C')" class="filter-btn bg-gold/20 text-darkBrown py-3 rounded-xl text-sm font-semibold font-medieval">
+                        <button onclick="adminSystem.filterByClass('9C')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
                             9C
                         </button>
                     </div>
@@ -398,25 +397,25 @@
 
                 <!-- Status Filter -->
                 <div class="mb-4">
-                    <h3 class="text-darkBrown font-semibold font-medieval text-lg mb-4">Filter Status:</h3>
+                    <h3 class="text-dark font-semibold font-medieval text-lg mb-4">Filter Status:</h3>
                     <div class="flex flex-wrap gap-3">
-                        <button onclick="adminSystem.filterByStatus('all')" class="filter-btn active bg-gold/20 text-darkBrown px-6 py-3 rounded-xl text-base font-semibold font-medieval">
+                        <button onclick="adminSystem.filterByStatus('all')" class="filter-btn active bg-gold/20 px-6 py-3 rounded-xl text-base font-semibold font-medieval">
                             Semua Status
                         </button>
-                        <button onclick="adminSystem.filterByStatus('online')" class="filter-btn bg-gold/20 text-darkBrown px-6 py-3 rounded-xl text-base font-semibold font-medieval">
+                        <button onclick="adminSystem.filterByStatus('online')" class="filter-btn bg-gold/20 px-6 py-3 rounded-xl text-base font-semibold font-medieval">
                             <span class="online-status status-online"></span>Online
                         </button>
-                        <button onclick="adminSystem.filterByStatus('offline')" class="filter-btn bg-gold/20 text-darkBrown px-6 py-3 rounded-xl text-base font-semibold font-medieval">
+                        <button onclick="adminSystem.filterByStatus('offline')" class="filter-btn bg-gold/20 px-6 py-3 rounded-xl text-base font-semibold font-medieval">
                             <span class="online-status status-offline"></span>Offline
                         </button>
                     </div>
                 </div>
 
                 <!-- Search Results Info -->
-                <div id="search-info" class="mt-4 p-4 bg-oldPaper rounded-xl border-2 border-darkBrown text-darkBrown font-medieval text-base hidden">
+                <div id="search-info" class="mt-4 p-4 bg-oldPaper rounded-xl border-2 border-darkBrown text-dark font-medieval text-base hidden">
                     <div class="flex items-center space-x-2">
                         <i class="fas fa-info-circle text-gold"></i>
-                        <span>Menampilkan <span class="font-bold text-darkBrown" id="result-count">0</span> dari <span class="font-bold text-darkBrown" id="total-count">0</span> petualang</span>
+                        <span>Menampilkan <span class="font-bold text-dark" id="result-count">0</span> dari <span class="font-bold text-dark" id="total-count">0</span> petualang</span>
                         <span id="search-term-display" class="font-semibold text-gold"></span>
                     </div>
                 </div>
@@ -428,8 +427,8 @@
                 <div class="px-6 lg:px-8 py-6 border-b-2 border-darkBrown bg-gradient-to-r from-oldPaper to-parchment">
                     <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center space-y-4 lg:space-y-0">
                         <div>
-                            <h3 class="text-2xl lg:text-3xl font-bold text-darkBrown font-maguntia mb-2">Daftar Petualang</h3>
-                            <p class="text-darkBrown font-medieval text-lg">Kelola XP dan pantau progress literasi</p>
+                            <h3 class="text-2xl lg:text-3xl font-bold text-dark font-maguntia mb-2">Daftar Petualang</h3>
+                            <p class="text-dark font-medieval text-lg">Kelola XP dan pantau progress literasi</p>
                         </div>
                         <div id="student-count" class="bg-gold/30 text-darkBrown px-6 py-3 rounded-xl text-base font-semibold border-2 border-darkBrown font-medieval">
                             <i class="fas fa-users mr-2"></i>
@@ -440,40 +439,46 @@
 
                 <!-- Table Container -->
                 <div class="overflow-x-auto custom-scrollbar">
-                    <table class="w-full min-w-[800px] lg:min-w-full">
+                    <table class="w-full min-w-[1000px] lg:min-w-full">
                         <thead>
                             <tr class="bg-gradient-to-r from-oldPaper to-parchment">
-                                <th class="px-6 py-5 text-left font-bold text-darkBrown font-medieval text-lg border-b-2 border-darkBrown">
+                                <th class="px-6 py-5 text-left font-bold text-dark font-medieval text-lg border-b-2 border-darkBrown">
                                     <div class="flex items-center space-x-2">
                                         <i class="fas fa-user text-gold"></i>
                                         <span>Nama Petualang</span>
                                     </div>
                                 </th>
-                                <th class="px-6 py-5 text-left font-bold text-darkBrown font-medieval text-lg border-b-2 border-darkBrown">
+                                <th class="px-6 py-5 text-left font-bold text-dark font-medieval text-lg border-b-2 border-darkBrown">
                                     <div class="flex items-center space-x-2">
                                         <i class="fas fa-graduation-cap text-gold"></i>
                                         <span>Kelas</span>
                                     </div>
                                 </th>
-                                <th class="px-6 py-5 text-left font-bold text-darkBrown font-medieval text-lg border-b-2 border-darkBrown">
+                                <th class="px-6 py-5 text-left font-bold text-dark font-medieval text-lg border-b-2 border-darkBrown">
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fas fa-key text-gold"></i>
+                                        <span>Password</span>
+                                    </div>
+                                </th>
+                                <th class="px-6 py-5 text-left font-bold text-dark font-medieval text-lg border-b-2 border-darkBrown">
                                     <div class="flex items-center space-x-2">
                                         <i class="fas fa-star text-gold"></i>
                                         <span>XP</span>
                                     </div>
                                 </th>
-                                <th class="px-6 py-5 text-left font-bold text-darkBrown font-medieval text-lg border-b-2 border-darkBrown">
+                                <th class="px-6 py-5 text-left font-bold text-dark font-medieval text-lg border-b-2 border-darkBrown">
                                     <div class="flex items-center space-x-2">
                                         <i class="fas fa-trophy text-gold"></i>
                                         <span>Rank</span>
                                     </div>
                                 </th>
-                                <th class="px-6 py-5 text-left font-bold text-darkBrown font-medieval text-lg border-b-2 border-darkBrown">
+                                <th class="px-6 py-5 text-left font-bold text-dark font-medieval text-lg border-b-2 border-darkBrown">
                                     <div class="flex items-center space-x-2">
                                         <i class="fas fa-signal text-gold"></i>
                                         <span>Status</span>
                                     </div>
                                 </th>
-                                <th class="px-6 py-5 text-left font-bold text-darkBrown font-medieval text-lg border-b-2 border-darkBrown">
+                                <th class="px-6 py-5 text-left font-bold text-dark font-medieval text-lg border-b-2 border-darkBrown">
                                     <div class="flex items-center space-x-2">
                                         <i class="fas fa-cogs text-gold"></i>
                                         <span>Aksi</span>
@@ -489,13 +494,13 @@
 
                 <!-- Empty States -->
                 <div class="mobile-text-center mobile-full-width">
-                    <div class="mobile-px-4 mobile-py-16 border-t-2 border-darkBrown text-center text-darkBrown font-medieval" id="empty-state">
+                    <div class="mobile-px-4 mobile-py-16 border-t-2 border-darkBrown text-center text-dark font-medieval" id="empty-state">
                         <i class="fas fa-scroll text-6xl mb-6 opacity-40"></i>
                         <p class="text-2xl mb-3">Belum ada petualang</p>
                         <p class="text-lg opacity-80">Arahkan siswa untuk login ke sistem</p>
                     </div>
 
-                    <div class="mobile-px-4 mobile-py-16 border-t-2 border-darkBrown text-center text-darkBrown font-medieval hidden" id="no-results-state">
+                    <div class="mobile-px-4 mobile-py-16 border-t-2 border-darkBrown text-center text-dark font-medieval hidden" id="no-results-state">
                         <i class="fas fa-search text-6xl mb-6 opacity-40"></i>
                         <p class="text-2xl mb-3">Tidak ditemukan</p>
                         <p class="text-lg opacity-80">Coba dengan kata kunci atau filter lain</p>
@@ -505,24 +510,24 @@
 
             <!-- Quick Actions Section -->
             <div class="parchment-bg rounded-2xl p-6 lg:p-8 ancient-border">
-                <h3 class="text-2xl lg:text-3xl font-bold text-darkBrown font-maguntia mb-6">Aksi Cepat Tambah XP</h3>
+                <h3 class="text-2xl lg:text-3xl font-bold text-dark font-maguntia mb-6">Aksi Cepat Tambah XP</h3>
                 <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
-                    <button onclick="showBulkAddModal(5)" class="parchment-bg hover:bg-gold/30 text-darkBrown py-6 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 border-3 border-darkBrown font-medieval text-lg flex flex-col items-center justify-center action-btn shadow-lg">
+                    <button onclick="showBulkAddModal(5)" class="parchment-bg hover:bg-gold/30 text-dark py-6 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 border-3 border-darkBrown font-medieval text-lg flex flex-col items-center justify-center action-btn shadow-lg">
                         <i class="fas fa-plus-circle text-3xl mb-3 text-gold"></i>
                         <span>+5 XP</span>
                         <span class="text-sm opacity-70 mt-1">Tambah Sedikit</span>
                     </button>
-                    <button onclick="showBulkAddModal(15)" class="parchment-bg hover:bg-gold/30 text-darkBrown py-6 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 border-3 border-darkBrown font-medieval text-lg flex flex-col items-center justify-center action-btn shadow-lg">
+                    <button onclick="showBulkAddModal(15)" class="parchment-bg hover:bg-gold/30 text-dark py-6 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 border-3 border-darkBrown font-medieval text-lg flex flex-col items-center justify-center action-btn shadow-lg">
                         <i class="fas fa-plus-circle text-3xl mb-3 text-bronze"></i>
                         <span>+15 XP</span>
                         <span class="text-sm opacity-70 mt-1">Tambah Medium</span>
                     </button>
-                    <button onclick="showBulkAddModal(20)" class="parchment-bg hover:bg-gold/30 text-darkBrown py-6 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 border-3 border-darkBrown font-medieval text-lg flex flex-col items-center justify-center action-btn shadow-lg">
+                    <button onclick="showBulkAddModal(20)" class="parchment-bg hover:bg-gold/30 text-dark py-6 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 border-3 border-darkBrown font-medieval text-lg flex flex-col items-center justify-center action-btn shadow-lg">
                         <i class="fas fa-plus-circle text-3xl mb-3 text-gold"></i>
                         <span>+20 XP</span>
                         <span class="text-sm opacity-70 mt-1">Tambah Banyak</span>
                     </button>
-                    <button onclick="showBulkAddModal(30)" class="parchment-bg hover:bg-gold/30 text-darkBrown py-6 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 border-3 border-darkBrown font-medieval text-lg flex flex-col items-center justify-center action-btn shadow-lg">
+                    <button onclick="showBulkAddModal(30)" class="parchment-bg hover:bg-gold/30 text-dark py-6 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 border-3 border-darkBrown font-medieval text-lg flex flex-col items-center justify-center action-btn shadow-lg">
                         <i class="fas fa-plus-circle text-3xl mb-3 text-bronze"></i>
                         <span>+30 XP</span>
                         <span class="text-sm opacity-70 mt-1">Tambah Maximum</span>
@@ -539,13 +544,13 @@
                 <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-r from-gold to-bronze rounded-2xl flex items-center justify-center ancient-border">
                     <i class="fas fa-plus text-darkBrown text-3xl"></i>
                 </div>
-                <h4 class="text-2xl font-bold text-darkBrown font-maguntia">Tambah XP</h4>
+                <h4 class="text-2xl font-bold text-dark font-maguntia">Tambah XP</h4>
             </div>
             <div class="space-y-6">
                 <div>
-                    <label class="block text-darkBrown font-semibold mb-3 font-medieval text-lg">Jumlah XP</label>
+                    <label class="block text-dark font-semibold mb-3 font-medieval text-lg">Jumlah XP</label>
                     <input type="number" id="points-amount" 
-                           class="w-full px-6 py-4 bg-oldPaper border-3 border-darkBrown rounded-2xl focus:border-gold focus:ring-4 focus:ring-gold/20 transition-all duration-300 outline-none font-medieval text-lg text-center"
+                           class="w-full px-6 py-4 bg-oldPaper border-3 border-darkBrown rounded-2xl focus:border-gold focus:ring-4 focus:ring-gold/20 transition-all duration-300 outline-none font-medieval text-lg text-center text-dark"
                            min="1" max="100" value="5">
                 </div>
                 <div class="flex space-x-4">
@@ -567,14 +572,14 @@
                 <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-r from-gold to-bronze rounded-2xl flex items-center justify-center ancient-border">
                     <i class="fas fa-users text-darkBrown text-3xl"></i>
                 </div>
-                <h4 class="text-2xl font-bold text-darkBrown font-maguntia">Tambah XP Massal</h4>
+                <h4 class="text-2xl font-bold text-dark font-maguntia">Tambah XP Massal</h4>
             </div>
             <div class="space-y-6">
                 <div class="text-center">
-                    <label class="block text-darkBrown font-semibold mb-3 font-medieval text-lg">Jumlah XP</label>
+                    <label class="block text-dark font-semibold mb-3 font-medieval text-lg">Jumlah XP</label>
                     <div class="text-4xl font-bold text-gold gradient-text" id="bulk-points-amount">5</div>
                 </div>
-                <div class="text-center text-darkBrown font-medieval text-lg bg-oldPaper p-4 rounded-xl border-2 border-darkBrown">
+                <div class="text-center text-dark font-medieval text-lg bg-oldPaper p-4 rounded-xl border-2 border-darkBrown">
                     <i class="fas fa-info-circle text-gold mr-2"></i>
                     XP akan ditambahkan ke semua petualang aktif
                 </div>
@@ -649,7 +654,8 @@
                 if (this.searchTerm) {
                     filtered = filtered.filter(student => 
                         student.name.toLowerCase().includes(this.searchTerm) ||
-                        student.class.toLowerCase().includes(this.searchTerm)
+                        student.class.toLowerCase().includes(this.searchTerm) ||
+                        (student.password && student.password.includes(this.searchTerm))
                     );
                 }
 
@@ -729,21 +735,31 @@
                                     <i class="fas fa-${student.profileIcon || 'book-reader'} text-lg"></i>
                                 </div>
                                 <div>
-                                    <div class="font-semibold text-darkBrown text-lg">
+                                    <div class="font-semibold text-dark text-lg">
                                         ${this.highlightSearchTerm(student.name)}
                                     </div>
-                                    <div class="text-darkBrown font-medieval text-sm opacity-70">ID: ${student.id.slice(-6)}</div>
+                                    <div class="text-dark font-medieval text-sm opacity-70">ID: ${student.id.slice(-6)}</div>
                                 </div>
                             </div>
                         </td>
                         <td class="px-6 py-5">
-                            <span class="bg-gold/20 text-darkBrown px-4 py-2 rounded-xl text-base font-semibold font-medieval border-2 border-darkBrown">
+                            <span class="bg-gold/20 text-dark px-4 py-2 rounded-xl text-base font-semibold font-medieval border-2 border-darkBrown">
                                 ${student.class}
                             </span>
                         </td>
                         <td class="px-6 py-5">
+                            <div class="flex items-center space-x-2">
+                                <span class="font-mono text-dark text-lg password-field bg-oldPaper px-3 py-1 rounded border border-darkBrown">
+                                    ${student.password || 'belum-set'}
+                                </span>
+                                <button onclick="adminSystem.copyPassword('${student.id}')" class="copy-password text-gold hover:text-bronze text-lg" title="Salin Password">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </td>
+                        <td class="px-6 py-5">
                             <div class="flex flex-col space-y-3">
-                                <span class="font-bold text-darkBrown text-xl">${student.points.toLocaleString()}</span>
+                                <span class="font-bold text-dark text-xl">${student.points.toLocaleString()}</span>
                                 <div class="w-32 bg-darkBrown rounded-full h-3">
                                     <div class="rank-progress h-3 rounded-full transition-all duration-1000" 
                                          style="width: ${Math.min(100, (student.points / 1000) * 100)}%"></div>
@@ -779,6 +795,16 @@
                         </td>
                     </tr>
                 `).join('');
+            }
+
+            copyPassword(studentId) {
+                const student = this.students.find(s => s.id === studentId);
+                if (student && student.password) {
+                    navigator.clipboard.writeText(student.password);
+                    this.showNotification('Password berhasil disalin!', 'success');
+                } else {
+                    this.showNotification('Password belum diatur', 'error');
+                }
             }
 
             updateSearchInfo() {
