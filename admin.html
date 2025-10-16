@@ -616,19 +616,27 @@
             }
 
             loadStudents() {
-                const studentData = JSON.parse(localStorage.getItem('perpustakaan_abadi_students') || '[]');
-                
-                const updatedStudents = studentData.map(student => {
-                    const lastActivity = new Date(student.lastActivity || student.lastLogin);
-                    const now = new Date();
-                    const minutesSinceLastActivity = (now - lastActivity) / (1000 * 60);
+                try {
+                    // FIXED: Load dari storage utama yang sama dengan siswa
+                    const studentData = JSON.parse(localStorage.getItem('perpustakaan_abadi_students') || '[]');
+                    console.log('Data siswa yang diload:', studentData);
                     
-                    student.isOnline = minutesSinceLastActivity < 5;
-                    return student;
-                });
+                    const updatedStudents = studentData.map(student => {
+                        const lastActivity = new Date(student.lastActivity || student.lastLogin || student.createdAt);
+                        const now = new Date();
+                        const minutesSinceLastActivity = (now - lastActivity) / (1000 * 60);
+                        
+                        student.isOnline = minutesSinceLastActivity < 5;
+                        return student;
+                    });
 
-                this.students = updatedStudents;
-                this.applyFilters();
+                    this.students = updatedStudents;
+                    this.applyFilters();
+                } catch (error) {
+                    console.error('Error loading students:', error);
+                    this.students = [];
+                    this.applyFilters();
+                }
             }
 
             setupEventListeners() {
@@ -904,6 +912,7 @@
                 document.getElementById('add-points-modal').classList.remove('hidden');
             }
 
+            // FIXED: Method untuk menambahkan point ke student tertentu
             addPointsToStudent() {
                 if (!this.selectedStudentId) {
                     this.showNotification('Tidak ada siswa yang dipilih', 'error');
@@ -911,6 +920,9 @@
                 }
 
                 const points = parseInt(document.getElementById('points-amount').value) || 5;
+                console.log('Menambah points:', points, 'ke student:', this.selectedStudentId);
+
+                // Cari student berdasarkan ID
                 const studentIndex = this.students.findIndex(s => s.id === this.selectedStudentId);
                 
                 if (studentIndex === -1) {
@@ -918,14 +930,31 @@
                     return;
                 }
 
-                this.students[studentIndex].points += points;
+                // Update data student - FIXED: Pastikan update semua field yang diperlukan
+                const oldPoints = this.students[studentIndex].points;
+                this.students[studentIndex].points = oldPoints + points;
                 this.students[studentIndex].lastActivity = new Date().toISOString();
+                
+                // Update level berdasarkan points baru
+                this.students[studentIndex].level = this.getLevelFromPoints(this.students[studentIndex].points);
 
+                console.log('Points sebelum:', oldPoints, 'setelah:', this.students[studentIndex].points);
+
+                // Simpan perubahan
                 this.saveChanges();
                 this.closeAddPointsModal();
                 
                 const studentName = this.students[studentIndex].name;
                 this.showNotification(`+${points} XP berhasil ditambahkan ke ${studentName}`, 'success');
+            }
+
+            getLevelFromPoints(points) {
+                if (points >= 1000) return 5;
+                if (points >= 800) return 4;
+                if (points >= 600) return 3;
+                if (points >= 300) return 2;
+                if (points >= 100) return 1;
+                return 0;
             }
 
             showBulkAddModal(points) {
@@ -934,12 +963,18 @@
                 document.getElementById('bulk-add-modal').classList.remove('hidden');
             }
 
+            // FIXED: Method untuk menambahkan point ke semua student
             addPointsToAllStudents() {
                 const points = this.bulkPoints;
+                console.log('Menambah points ke semua siswa:', points);
                 
                 this.students.forEach((student, index) => {
-                    this.students[index].points += points;
+                    const oldPoints = student.points;
+                    this.students[index].points = oldPoints + points;
                     this.students[index].lastActivity = new Date().toISOString();
+                    this.students[index].level = this.getLevelFromPoints(this.students[index].points);
+                    
+                    console.log(`Student ${student.name}: ${oldPoints} -> ${this.students[index].points}`);
                 });
 
                 this.saveChanges();
@@ -960,9 +995,21 @@
                 }
             }
 
+            // FIXED: Method untuk menyimpan perubahan
             saveChanges() {
-                localStorage.setItem('perpustakaan_abadi_students', JSON.stringify(this.students));
-                this.applyFilters();
+                try {
+                    console.log('Menyimpan data siswa:', this.students);
+                    localStorage.setItem('perpustakaan_abadi_students', JSON.stringify(this.students));
+                    
+                    // Verifikasi penyimpanan
+                    const savedData = JSON.parse(localStorage.getItem('perpustakaan_abadi_students') || '[]');
+                    console.log('Data tersimpan:', savedData);
+                    
+                    this.applyFilters();
+                } catch (error) {
+                    console.error('Error saving data:', error);
+                    this.showNotification('Error menyimpan data', 'error');
+                }
             }
 
             closeAddPointsModal() {
