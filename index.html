@@ -21,7 +21,8 @@
                         bronze: '#CD7F32',
                         mysticBlue: '#1E3A5F',
                         deepRed: '#8B0000',
-                        forestGreen: '#228B22'
+                        forestGreen: '#228B22',
+                        black: '#000000'
                     },
                     fontFamily: {
                         'cinzel': ['Cinzel', 'serif'],
@@ -104,6 +105,11 @@
             50% { opacity: 1; transform: scale(1); }
         }
 
+        /* Text Colors - FIXED to Black */
+        .text-dark {
+            color: #000000 !important;
+        }
+
         /* Mobile Optimizations */
         @media (max-width: 768px) {
             .mobile-padding {
@@ -170,9 +176,44 @@
         .offline {
             background-color: #ef4444;
         }
+
+        /* Auth Tabs */
+        .auth-tab {
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            padding: 1rem 2rem;
+            cursor: pointer;
+            color: #000000;
+        }
+
+        .auth-tab.active {
+            border-bottom-color: #D4AF37;
+            color: #D4AF37;
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+            animation: grow 0.5s ease-out forwards;
+        }
+
+        /* Password toggle */
+        .password-toggle {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .password-toggle:hover {
+            color: #D4AF37;
+            transform: scale(1.1);
+        }
     </style>
 </head>
-<body class="font-cinzel text-oldPaper min-h-screen">
+<body class="font-cinzel text-black min-h-screen">
     <!-- Background Elements -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none">
         <div class="absolute top-10 left-4 text-gold text-xl opacity-20 floating-book">
@@ -231,21 +272,32 @@
                 <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-gold to-bronze rounded-2xl flex items-center justify-center ancient-border">
                     <i class="fas fa-scroll text-darkBrown text-2xl"></i>
                 </div>
-                <h2 class="text-2xl md:text-3xl font-bold text-darkBrown font-maguntia mb-2">Perpustakaan Abadi</h2>
-                <p class="text-darkBrown font-medieval text-sm">Masuk untuk memulai petualangan literasimu!</p>
+                <h2 class="text-2xl md:text-3xl font-bold text-dark font-maguntia mb-2">Perpustakaan Abadi</h2>
+                <p class="text-dark font-medieval text-sm">Bergabung dalam petualangan literasi!</p>
             </div>
 
-            <form id="login-form" class="space-y-4">
+            <!-- Auth Tabs -->
+            <div class="flex border-b-2 border-darkBrown mb-6">
+                <div class="auth-tab active flex-1 text-center font-medieval font-semibold" onclick="switchAuthTab('login')">
+                    <i class="fas fa-sign-in-alt mr-2"></i>Login
+                </div>
+                <div class="auth-tab flex-1 text-center font-medieval font-semibold" onclick="switchAuthTab('register')">
+                    <i class="fas fa-user-plus mr-2"></i>Daftar
+                </div>
+            </div>
+
+            <!-- Login Form -->
+            <form id="login-form" class="auth-form active space-y-4">
                 <div>
-                    <label class="block text-darkBrown font-semibold mb-2 font-medieval text-sm">Nama Petualang</label>
-                    <input type="text" id="student-name" required 
-                           class="w-full px-3 py-2 bg-oldPaper border-2 border-darkBrown rounded-lg focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all duration-300 outline-none font-medieval text-sm"
+                    <label class="block text-dark font-semibold mb-2 font-medieval text-sm">Nama Petualang</label>
+                    <input type="text" id="login-name" required 
+                           class="w-full px-3 py-2 bg-oldPaper border-2 border-darkBrown rounded-lg focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all duration-300 outline-none font-medieval text-sm text-dark"
                            placeholder="Masukkan nama petualang">
                 </div>
                 <div>
-                    <label class="block text-darkBrown font-semibold mb-2 font-medieval text-sm">Kelas</label>
-                    <select id="student-class" required 
-                            class="w-full px-3 py-2 bg-oldPaper border-2 border-darkBrown rounded-lg focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all duration-300 outline-none font-medieval text-sm">
+                    <label class="block text-dark font-semibold mb-2 font-medieval text-sm">Kelas</label>
+                    <select id="login-class" required 
+                            class="w-full px-3 py-2 bg-oldPaper border-2 border-darkBrown rounded-lg focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all duration-300 outline-none font-medieval text-sm text-dark">
                         <option value="">Pilih Kelas</option>
                         <option value="7A">Kelas 7A</option>
                         <option value="7B">Kelas 7B</option>
@@ -258,10 +310,69 @@
                         <option value="9C">Kelas 9C</option>
                     </select>
                 </div>
+                <div class="relative">
+                    <label class="block text-dark font-semibold mb-2 font-medieval text-sm">Password</label>
+                    <input type="password" id="login-password" required 
+                           class="w-full px-3 py-2 bg-oldPaper border-2 border-darkBrown rounded-lg focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all duration-300 outline-none font-medieval text-sm text-dark pr-10"
+                           placeholder="Masukkan password">
+                    <div class="absolute right-3 top-9 transform -translate-y-1/2 password-toggle" onclick="togglePassword('login-password')">
+                        <i class="fas fa-eye text-darkBrown"></i>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full bg-gradient-to-r from-gold to-bronze text-darkBrown py-3 rounded-lg font-bold text-base transition-all duration-300 transform hover:scale-105 hover:shadow-lg border-2 border-darkBrown font-medieval">
+                    <i class="fas fa-dragon mr-2"></i>Masuk Petualangan
+                </button>
+            </form>
+
+            <!-- Register Form -->
+            <form id="register-form" class="auth-form space-y-4">
+                <div>
+                    <label class="block text-dark font-semibold mb-2 font-medieval text-sm">Nama Petualang Baru</label>
+                    <input type="text" id="register-name" required 
+                           class="w-full px-3 py-2 bg-oldPaper border-2 border-darkBrown rounded-lg focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all duration-300 outline-none font-medieval text-sm text-dark"
+                           placeholder="Buat nama petualang baru">
+                </div>
+                <div>
+                    <label class="block text-dark font-semibold mb-2 font-medieval text-sm">Kelas</label>
+                    <select id="register-class" required 
+                            class="w-full px-3 py-2 bg-oldPaper border-2 border-darkBrown rounded-lg focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all duration-300 outline-none font-medieval text-sm text-dark">
+                        <option value="">Pilih Kelas</option>
+                        <option value="7A">Kelas 7A</option>
+                        <option value="7B">Kelas 7B</option>
+                        <option value="7C">Kelas 7C</option>
+                        <option value="8A">Kelas 8A</option>
+                        <option value="8B">Kelas 8B</option>
+                        <option value="8C">Kelas 8C</option>
+                        <option value="9A">Kelas 9A</option>
+                        <option value="9B">Kelas 9B</option>
+                        <option value="9C">Kelas 9C</option>
+                    </select>
+                </div>
+                <div class="relative">
+                    <label class="block text-dark font-semibold mb-2 font-medieval text-sm">Password</label>
+                    <input type="password" id="register-password" required 
+                           class="w-full px-3 py-2 bg-oldPaper border-2 border-darkBrown rounded-lg focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all duration-300 outline-none font-medieval text-sm text-dark pr-10"
+                           placeholder="Buat password (min. 4 karakter)"
+                           minlength="4">
+                    <div class="absolute right-3 top-9 transform -translate-y-1/2 password-toggle" onclick="togglePassword('register-password')">
+                        <i class="fas fa-eye text-darkBrown"></i>
+                    </div>
+                </div>
+                <div class="relative">
+                    <label class="block text-dark font-semibold mb-2 font-medieval text-sm">Konfirmasi Password</label>
+                    <input type="password" id="register-confirm-password" required 
+                           class="w-full px-3 py-2 bg-oldPaper border-2 border-darkBrown rounded-lg focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all duration-300 outline-none font-medieval text-sm text-dark pr-10"
+                           placeholder="Ulangi password"
+                           minlength="4">
+                    <div class="absolute right-3 top-9 transform -translate-y-1/2 password-toggle" onclick="togglePassword('register-confirm-password')">
+                        <i class="fas fa-eye text-darkBrown"></i>
+                    </div>
+                </div>
 
                 <!-- Custom Profile Icon Selection -->
                 <div>
-                    <label class="block text-darkBrown font-semibold mb-2 font-medieval text-sm">Pilih Ikon Profil</label>
+                    <label class="block text-dark font-semibold mb-2 font-medieval text-sm">Pilih Ikon Profil</label>
                     <div class="grid grid-cols-4 gap-2">
                         <div class="profile-icon w-12 h-12 bg-gradient-to-r from-gold to-bronze rounded-full flex items-center justify-center ancient-border text-darkBrown" data-icon="book-reader" onclick="selectProfileIcon('book-reader')">
                             <i class="fas fa-book-reader"></i>
@@ -290,8 +401,8 @@
                     </div>
                 </div>
 
-                <button type="submit" class="w-full bg-gradient-to-r from-gold to-bronze text-darkBrown py-3 rounded-lg font-bold text-base transition-all duration-300 transform hover:scale-105 hover:shadow-lg border-2 border-darkBrown font-medieval">
-                    <i class="fas fa-dragon mr-2"></i>Mulai Petualangan
+                <button type="submit" class="w-full bg-gradient-to-r from-forestGreen to-green-700 text-parchment py-3 rounded-lg font-bold text-base transition-all duration-300 transform hover:scale-105 hover:shadow-lg border-2 border-gold font-medieval">
+                    <i class="fas fa-shield-alt mr-2"></i>Daftar Petualangan
                 </button>
             </form>
         </div>
@@ -305,43 +416,42 @@
                 <div class="parchment-bg rounded-2xl p-4 md:p-6 ancient-border">
                     <div class="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0 mb-4 md:mb-6">
                         <div class="text-center md:text-left">
-                            <h3 class="text-xl md:text-2xl font-bold text-darkBrown font-maguntia mb-1">Progress Literasi</h3>
-                            <p class="text-darkBrown font-medieval text-sm" id="progress-text">Tingkatkan rank-mu dengan membaca!</p>
+                            <h3 class="text-xl md:text-2xl font-bold text-dark font-maguntia mb-1">Progress Literasi</h3>
+                            <p class="text-dark font-medieval text-sm" id="progress-text">Tingkatkan rank-mu dengan membaca!</p>
                         </div>
-                        <!-- Bagian lingkaran XP telah dihapus sesuai permintaan -->
                     </div>
                     
                     <!-- Rank Badges - Mobile Optimized -->
                     <div class="grid grid-cols-3 gap-2 md:grid-cols-6 md:gap-3">
                         <div class="text-center p-2 bg-oldPaper rounded-lg transition-all duration-300 rank-badge border border-darkBrown" data-level="0">
                             <div class="text-lg md:text-xl mb-1">📖</div>
-                            <div class="font-semibold text-darkBrown font-medieval text-xs">Pemula</div>
-                            <div class="text-xs text-darkBrown">0 XP</div>
+                            <div class="font-semibold text-dark font-medieval text-xs">Pemula</div>
+                            <div class="text-xs text-dark">0 XP</div>
                         </div>
                         <div class="text-center p-2 bg-oldPaper rounded-lg transition-all duration-300 rank-badge" data-level="1">
                             <div class="text-lg md:text-xl mb-1">📚</div>
-                            <div class="font-semibold text-darkBrown font-medieval text-xs">Penjelajah</div>
-                            <div class="text-xs text-darkBrown">100 XP</div>
+                            <div class="font-semibold text-dark font-medieval text-xs">Penjelajah</div>
+                            <div class="text-xs text-dark">100 XP</div>
                         </div>
                         <div class="text-center p-2 bg-oldPaper rounded-lg transition-all duration-300 rank-badge" data-level="2">
                             <div class="text-lg md:text-xl mb-1">📜</div>
-                            <div class="font-semibold text-darkBrown font-medieval text-xs">Pencari</div>
-                            <div class="text-xs text-darkBrown">300 XP</div>
+                            <div class="font-semibold text-dark font-medieval text-xs">Pencari</div>
+                            <div class="text-xs text-dark">300 XP</div>
                         </div>
                         <div class="text-center p-2 bg-oldPaper rounded-lg transition-all duration-300 rank-badge" data-level="3">
                             <div class="text-lg md:text-xl mb-1">📘</div>
-                            <div class="font-semibold text-darkBrown font-medieval text-xs">Penjaga</div>
-                            <div class="text-xs text-darkBrown">600 XP</div>
+                            <div class="font-semibold text-dark font-medieval text-xs">Penjaga</div>
+                            <div class="text-xs text-dark">600 XP</div>
                         </div>
                         <div class="text-center p-2 bg-oldPaper rounded-lg transition-all duration-300 rank-badge" data-level="4">
                             <div class="text-lg md:text-xl mb-1">📗</div>
-                            <div class="font-semibold text-darkBrown font-medieval text-xs">Ahli</div>
-                            <div class="text-xs text-darkBrown">800 XP</div>
+                            <div class="font-semibold text-dark font-medieval text-xs">Ahli</div>
+                            <div class="text-xs text-dark">800 XP</div>
                         </div>
                         <div class="text-center p-2 bg-oldPaper rounded-lg transition-all duration-300 rank-badge" data-level="5">
                             <div class="text-lg md:text-xl mb-1">📕</div>
-                            <div class="font-semibold text-darkBrown font-medieval text-xs">Penguasa</div>
-                            <div class="text-xs text-darkBrown">1000 XP</div>
+                            <div class="font-semibold text-dark font-medieval text-xs">Penguasa</div>
+                            <div class="text-xs text-dark">1000 XP</div>
                         </div>
                     </div>
                 </div>
@@ -350,7 +460,7 @@
             <!-- Character Display Section -->
             <div id="character-section" class="hidden max-w-6xl mx-auto">
                 <div class="parchment-bg rounded-2xl p-4 md:p-6 ancient-border text-center">
-                    <h3 class="text-xl md:text-2xl font-bold text-darkBrown font-maguntia mb-4 md:mb-6" id="character-title">Petualang Literasi</h3>
+                    <h3 class="text-xl md:text-2xl font-bold text-dark font-maguntia mb-4 md:mb-6" id="character-title">Petualang Literasi</h3>
                     
                     <div class="flex flex-col lg:flex-row items-center justify-between space-y-4 lg:space-y-0">
                         <!-- Character Avatar -->
@@ -363,35 +473,35 @@
                         <!-- Character Stats -->
                         <div class="text-left space-y-3 w-full lg:w-1/2">
                             <div class="bg-oldPaper p-3 rounded-lg border-2 border-darkBrown">
-                                <h4 class="font-bold text-darkBrown font-medieval mb-2 text-sm md:text-base">Status Petualang</h4>
+                                <h4 class="font-bold text-dark font-medieval mb-2 text-sm md:text-base">Status Petualang</h4>
                                 <div class="space-y-2">
                                     <div class="flex justify-between">
-                                        <span class="text-darkBrown text-sm">Rank:</span>
+                                        <span class="text-dark text-sm">Rank:</span>
                                         <span class="font-semibold text-gold text-sm" id="current-rank">📖 Pemula Naskah</span>
                                     </div>
                                     <div class="flex justify-between">
-                                        <span class="text-darkBrown text-sm">Total XP:</span>
+                                        <span class="text-dark text-sm">Total XP:</span>
                                         <span class="font-semibold text-bronze text-sm" id="total-xp">0</span>
                                     </div>
                                     <div class="flex justify-between">
-                                        <span class="text-darkBrown text-sm">Status:</span>
+                                        <span class="text-dark text-sm">Status:</span>
                                         <span class="font-semibold text-forestGreen text-sm" id="current-status">🟢 Online</span>
                                     </div>
                                 </div>
                             </div>
                             
-                            <!-- Next Rank Progress - FIXED -->
+                            <!-- Next Rank Progress -->
                             <div class="bg-oldPaper p-3 rounded-lg border-2 border-darkBrown">
-                                <h4 class="font-bold text-darkBrown font-medieval mb-2 text-sm md:text-base">Menuju Rank Berikutnya</h4>
+                                <h4 class="font-bold text-dark font-medieval mb-2 text-sm md:text-base">Menuju Rank Berikutnya</h4>
                                 <div class="w-full bg-darkBrown rounded-full h-3">
                                     <div id="next-rank-progress" class="bg-gradient-to-r from-gold to-bronze h-3 rounded-full transition-all duration-1000" style="width: 0%"></div>
                                 </div>
-                                <div class="flex justify-between mt-1 text-xs text-darkBrown">
+                                <div class="flex justify-between mt-1 text-xs text-dark">
                                     <span id="current-rank-xp">0</span>
                                     <span id="next-rank-xp">100</span>
                                 </div>
                                 <div class="text-center mt-1">
-                                    <span class="text-xs text-darkBrown font-medieval" id="next-rank-name">📚 Penjelajah Halaman</span>
+                                    <span class="text-xs text-dark font-medieval" id="next-rank-name">📚 Penjelajah Halaman</span>
                                 </div>
                             </div>
                         </div>
@@ -403,8 +513,8 @@
                             <div class="w-16 h-16 mx-auto mb-3 bg-gradient-to-r from-gold to-bronze rounded-full flex items-center justify-center ancient-border">
                                 <i class="fas fa-trophy text-darkBrown text-xl"></i>
                             </div>
-                            <h4 class="text-lg md:text-xl font-bold text-darkBrown font-maguntia mb-2" id="achievement-title">Rank Up!</h4>
-                            <p class="text-darkBrown font-medieval mb-3 text-sm" id="achievement-desc">Petualanganmu semakin maju!</p>
+                            <h4 class="text-lg md:text-xl font-bold text-dark font-maguntia mb-2" id="achievement-title">Rank Up!</h4>
+                            <p class="text-dark font-medieval mb-3 text-sm" id="achievement-desc">Petualanganmu semakin maju!</p>
                             <button onclick="closeAchievement()" class="bg-gold text-darkBrown px-4 py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105 border-2 border-darkBrown font-medieval text-sm">
                                 Lanjutkan!
                             </button>
@@ -417,9 +527,9 @@
                             <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-r from-gold to-bronze rounded-full flex items-center justify-center ancient-border">
                                 <i class="fas fa-crown text-darkBrown text-2xl"></i>
                             </div>
-                            <h3 class="text-2xl md:text-3xl font-bold text-darkBrown font-maguntia mb-3">Legenda Terbentuk! 🏆</h3>
-                            <p class="text-darkBrown font-medieval mb-2 text-sm">Kamu telah menjadi Penguasa Cerita!</p>
-                            <p class="text-darkBrown font-medieval mb-4 text-sm">Perpustakaan Abadi mengenang namamu!</p>
+                            <h3 class="text-2xl md:text-3xl font-bold text-dark font-maguntia mb-3">Legenda Terbentuk! 🏆</h3>
+                            <p class="text-dark font-medieval mb-2 text-sm">Kamu telah menjadi Penguasa Cerita!</p>
+                            <p class="text-dark font-medieval mb-4 text-sm">Perpustakaan Abadi mengenang namamu!</p>
                             <div class="space-y-2">
                                 <button onclick="restartJourney()" class="w-full bg-gradient-to-r from-gold to-bronze text-darkBrown py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105 border-2 border-darkBrown font-medieval text-sm">
                                     <i class="fas fa-redo mr-2"></i>Mulai Petualangan Baru
@@ -443,12 +553,22 @@
     </footer>
 
     <script>
-        // Student Management System - FIXED SYNC ISSUES
+        // Password Generator Function
+        function generatePassword(length = 6) {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let password = '';
+            for (let i = 0; i < length; i++) {
+                password += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return password;
+        }
+
+        // Student Management System - WITH PASSWORD SUPPORT
         class StudentSystem {
             constructor() {
                 this.currentStudent = null;
                 this.students = JSON.parse(localStorage.getItem('perpustakaan_abadi_students')) || [];
-                this.selectedProfileIcon = 'book-reader'; // Default icon
+                this.selectedProfileIcon = 'book-reader';
                 this.init();
             }
 
@@ -466,6 +586,12 @@
                     this.handleLogin();
                 });
 
+                // Register form
+                document.getElementById('register-form').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.handleRegister();
+                });
+
                 // Logout button
                 document.getElementById('logout-btn').addEventListener('click', () => {
                     this.handleLogout();
@@ -473,14 +599,12 @@
             }
 
             setupBeforeUnload() {
-                // Update status to offline when leaving the page
                 window.addEventListener('beforeunload', () => {
                     if (this.currentStudent) {
                         this.updateStudentStatus(false);
                     }
                 });
 
-                // Update status to online when returning to the page
                 window.addEventListener('pageshow', () => {
                     if (this.currentStudent) {
                         this.updateStudentStatus(true);
@@ -489,7 +613,6 @@
             }
 
             startAutoSync() {
-                // Auto-sync dengan data utama setiap 2 detik - FIXED
                 setInterval(() => {
                     this.syncWithMainData();
                 }, 2000);
@@ -498,7 +621,6 @@
             syncWithMainData() {
                 if (!this.currentStudent) return;
 
-                // Ambil data terbaru dari storage utama
                 const mainStudents = JSON.parse(localStorage.getItem('perpustakaan_abadi_students') || '[]');
                 const latestStudentData = mainStudents.find(s => s.id === this.currentStudent.id);
                 
@@ -506,7 +628,7 @@
                     console.log('Data tersinkronisasi:', latestStudentData.points);
                     this.currentStudent.points = latestStudentData.points;
                     this.updateDisplay();
-                    this.saveToStorage();
+                    this.saveCurrentStudent();
                 }
             }
 
@@ -516,48 +638,106 @@
                     this.currentStudent = JSON.parse(savedStudent);
                     this.selectedProfileIcon = this.currentStudent.profileIcon || 'book-reader';
                     this.showMainInterface();
-                    this.updateStudentStatus(true); // Set status online
-                    this.syncWithMainData(); // Sync immediately
+                    this.updateStudentStatus(true);
+                    this.syncWithMainData();
                 }
             }
 
             handleLogin() {
-                const name = document.getElementById('student-name').value.trim();
-                const studentClass = document.getElementById('student-class').value;
+                const name = document.getElementById('login-name').value.trim();
+                const studentClass = document.getElementById('login-class').value;
+                const password = document.getElementById('login-password').value;
 
-                if (!name || !studentClass) {
+                if (!name || !studentClass || !password) {
                     this.showNotification('Harap isi semua field!', 'error');
                     return;
                 }
 
-                // Cari atau buat student baru
-                let student = this.students.find(s => s.name === name && s.class === studentClass);
+                // Cari student yang sudah terdaftar
+                const student = this.students.find(s => 
+                    s.name.toLowerCase() === name.toLowerCase() && 
+                    s.class === studentClass
+                );
                 
                 if (!student) {
-                    student = {
-                        id: Date.now().toString(),
-                        name: name,
-                        class: studentClass,
-                        points: 0,
-                        level: 0,
-                        profileIcon: this.selectedProfileIcon,
-                        isOnline: true,
-                        createdAt: new Date().toISOString(),
-                        lastLogin: new Date().toISOString(),
-                        lastActivity: new Date().toISOString()
-                    };
-                    this.students.push(student);
-                } else {
-                    student.lastLogin = new Date().toISOString();
-                    student.lastActivity = new Date().toISOString();
-                    student.profileIcon = this.selectedProfileIcon;
-                    student.isOnline = true;
+                    this.showNotification('Akun tidak ditemukan! Silakan daftar terlebih dahulu.', 'error');
+                    return;
+                }
+
+                // Check password
+                if (student.password !== password) {
+                    this.showNotification('Password salah! Silakan coba lagi.', 'error');
+                    return;
                 }
 
                 this.currentStudent = student;
+                this.currentStudent.lastLogin = new Date().toISOString();
+                this.currentStudent.lastActivity = new Date().toISOString();
+                this.currentStudent.isOnline = true;
+
+                this.saveCurrentStudent();
+                this.showMainInterface();
+                this.showNotification(`Selamat datang kembali, ${name}!`, 'success');
+            }
+
+            handleRegister() {
+                const name = document.getElementById('register-name').value.trim();
+                const studentClass = document.getElementById('register-class').value;
+                const password = document.getElementById('register-password').value;
+                const confirmPassword = document.getElementById('register-confirm-password').value;
+
+                if (!name || !studentClass || !password || !confirmPassword) {
+                    this.showNotification('Harap isi semua field!', 'error');
+                    return;
+                }
+
+                if (password.length < 4) {
+                    this.showNotification('Password minimal 4 karakter!', 'error');
+                    return;
+                }
+
+                if (password !== confirmPassword) {
+                    this.showNotification('Password dan konfirmasi password tidak cocok!', 'error');
+                    return;
+                }
+
+                // Cek apakah nama sudah terdaftar di kelas yang sama
+                const existingStudent = this.students.find(s => 
+                    s.name.toLowerCase() === name.toLowerCase() && 
+                    s.class === studentClass
+                );
+                
+                if (existingStudent) {
+                    this.showNotification('Nama sudah terdaftar di kelas ini! Silakan login.', 'error');
+                    switchAuthTab('login');
+                    return;
+                }
+
+                // Buat student baru
+                const student = {
+                    id: this.generateStudentId(),
+                    name: name,
+                    class: studentClass,
+                    password: password,
+                    points: 0,
+                    level: 0,
+                    profileIcon: this.selectedProfileIcon,
+                    isOnline: true,
+                    createdAt: new Date().toISOString(),
+                    lastLogin: new Date().toISOString(),
+                    lastActivity: new Date().toISOString()
+                };
+
+                this.students.push(student);
+                this.currentStudent = student;
+
                 this.saveToStorage();
                 this.showMainInterface();
                 this.showNotification(`Selamat datang, ${name}! Petualangan menantimu!`, 'success');
+            }
+
+            generateStudentId() {
+                return 'STU_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
             }
 
             handleLogout() {
@@ -576,11 +756,16 @@
                 this.currentStudent.isOnline = isOnline;
                 this.currentStudent.lastActivity = new Date().toISOString();
                 
-                // Update display
-                this.updateStatusDisplay();
+                // Update di storage utama
+                const studentIndex = this.students.findIndex(s => s.id === this.currentStudent.id);
+                if (studentIndex !== -1) {
+                    this.students[studentIndex].isOnline = isOnline;
+                    this.students[studentIndex].lastActivity = this.currentStudent.lastActivity;
+                    this.saveToStorage();
+                }
                 
-                // Save to storage
-                this.saveToStorage();
+                this.updateStatusDisplay();
+                this.saveCurrentStudent();
             }
 
             updateStatusDisplay() {
@@ -615,11 +800,9 @@
                 document.getElementById('user-info').classList.remove('hidden');
                 document.getElementById('logout-btn').classList.remove('hidden');
 
-                // Update user info
                 document.getElementById('user-name').textContent = this.currentStudent.name;
                 this.updateProfileIcon();
                 this.updateStatusDisplay();
-
                 this.updateDisplay();
             }
 
@@ -639,12 +822,10 @@
                 const level = this.getLevelFromPoints(points);
                 const rankName = this.getRankName(level);
 
-                // Update progress - FIXED: Pastikan semua element ter-update
                 document.getElementById('total-xp').textContent = points;
                 document.getElementById('current-rank').textContent = rankName;
                 document.getElementById('user-rank').textContent = rankName;
 
-                const progressPercent = (points / 1000) * 100;
                 document.getElementById('progress-text').textContent = `${points} XP - ${rankName}`;
 
                 // Update rank badges
@@ -660,24 +841,19 @@
                     }
                 });
 
-                // Update character display
                 this.updateCharacter(level);
-
-                // Update next rank progress - FIXED
                 this.updateNextRankProgress(points, level);
 
-                // Check for level up
                 if (level > this.currentStudent.level) {
                     this.currentStudent.level = level;
                     this.showLevelUp(level);
                 }
 
-                // Check for completion
                 if (points >= 1000) {
                     this.showCompletion();
                 }
 
-                this.saveToStorage();
+                this.saveCurrentStudent();
             }
 
             getLevelFromPoints(points) {
@@ -724,7 +900,6 @@
 
                 document.getElementById('character-title').textContent = config.title;
 
-                // Add special effects for higher ranks
                 if (level >= 3) {
                     this.addMagicEffects(level);
                 }
@@ -739,12 +914,10 @@
                 const rankRange = nextThreshold - currentThreshold;
                 const progressPercent = rankRange > 0 ? (progressInRank / rankRange) * 100 : 100;
 
-                // FIXED: Update progress bar
                 document.getElementById('next-rank-progress').style.width = `${Math.min(100, Math.max(0, progressPercent))}%`;
                 document.getElementById('current-rank-xp').textContent = currentThreshold;
                 document.getElementById('next-rank-xp').textContent = nextThreshold;
                 
-                // Update next rank name
                 const nextRankName = this.getRankName(level + 1) || this.getRankName(level);
                 document.getElementById('next-rank-name').textContent = nextRankName;
             }
@@ -753,7 +926,6 @@
                 const characterDisplay = document.getElementById('character-display');
                 const effectCount = level * 2;
 
-                // Remove existing effects
                 document.querySelectorAll('.magic-effect').forEach(el => el.remove());
 
                 for (let i = 0; i < effectCount; i++) {
@@ -787,7 +959,6 @@
                 desc.textContent = messages[level];
                 achievement.classList.remove('hidden');
 
-                // Celebration effect
                 this.createCelebration();
             }
 
@@ -831,25 +1002,59 @@
             }
 
             saveToStorage() {
-                // FIXED: Simpan ke SATU storage utama
                 localStorage.setItem('perpustakaan_abadi_students', JSON.stringify(this.students));
+            }
+
+            saveCurrentStudent() {
                 if (this.currentStudent) {
                     localStorage.setItem('current_student', JSON.stringify(this.currentStudent));
+                    
+                    // Update student di array utama
+                    const studentIndex = this.students.findIndex(s => s.id === this.currentStudent.id);
+                    if (studentIndex !== -1) {
+                        this.students[studentIndex] = this.currentStudent;
+                        this.saveToStorage();
+                    }
                 }
             }
         }
 
         // Global functions
+        function switchAuthTab(tab) {
+            // Update tabs
+            document.querySelectorAll('.auth-tab').forEach(tabElement => {
+                tabElement.classList.remove('active');
+            });
+            document.querySelector(`[onclick="switchAuthTab('${tab}')"]`).classList.add('active');
+
+            // Update forms
+            document.querySelectorAll('.auth-form').forEach(form => {
+                form.classList.remove('active');
+            });
+            document.getElementById(`${tab}-form`).classList.add('active');
+        }
+
         function selectProfileIcon(iconName) {
             studentSystem.selectedProfileIcon = iconName;
             
-            // Remove selected class from all icons
             document.querySelectorAll('.profile-icon').forEach(icon => {
                 icon.classList.remove('selected');
             });
             
-            // Add selected class to clicked icon
             event.target.closest('.profile-icon').classList.add('selected');
+        }
+
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const icon = input.nextElementSibling.querySelector('i');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.className = 'fas fa-eye-slash text-darkBrown';
+            } else {
+                input.type = 'password';
+                icon.className = 'fas fa-eye text-darkBrown';
+            }
         }
 
         function closeAchievement() {
@@ -861,7 +1066,7 @@
                 studentSystem.currentStudent.points = 0;
                 studentSystem.currentStudent.level = 0;
                 studentSystem.updateDisplay();
-                studentSystem.saveToStorage();
+                studentSystem.saveCurrentStudent();
                 document.getElementById('completion-screen').classList.add('hidden');
                 studentSystem.showNotification('Petualangan baru dimulai!', 'success');
             }
