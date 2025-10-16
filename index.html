@@ -211,6 +211,22 @@
             color: #D4AF37;
             transform: scale(1.1);
         }
+
+        /* Leaderboard Styles */
+        .leaderboard-item {
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(139, 69, 19, 0.2);
+        }
+        
+        .leaderboard-item:hover {
+            background: linear-gradient(90deg, rgba(212, 175, 55, 0.08), rgba(139, 69, 19, 0.05));
+            transform: translateX(4px);
+        }
+        
+        .top-3 {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(139, 69, 19, 0.1));
+            border: 2px solid #D4AF37;
+        }
     </style>
 </head>
 <body class="font-cinzel text-black min-h-screen">
@@ -419,6 +435,14 @@
                             <h3 class="text-xl md:text-2xl font-bold text-dark font-maguntia mb-1">Progress Literasi</h3>
                             <p class="text-dark font-medieval text-sm" id="progress-text">Tingkatkan rank-mu dengan membaca!</p>
                         </div>
+                        <div class="flex space-x-3">
+                            <button onclick="studentSystem.showLeaderboard()" class="bg-mysticBlue hover:bg-blue-800 text-parchment px-4 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 border-2 border-gold font-medieval text-sm">
+                                <i class="fas fa-trophy mr-2"></i>Papan Peringkat
+                            </button>
+                            <button onclick="studentSystem.exportData()" class="bg-forestGreen hover:bg-green-800 text-parchment px-4 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 border-2 border-gold font-medieval text-sm">
+                                <i class="fas fa-download mr-2"></i>Ekspor Data
+                            </button>
+                        </div>
                     </div>
                     
                     <!-- Rank Badges - Mobile Optimized -->
@@ -487,6 +511,10 @@
                                         <span class="text-dark text-sm">Status:</span>
                                         <span class="font-semibold text-forestGreen text-sm" id="current-status">🟢 Online</span>
                                     </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-dark text-sm">Peringkat:</span>
+                                        <span class="font-semibold text-mysticBlue text-sm" id="global-rank">-</span>
+                                    </div>
                                 </div>
                             </div>
                             
@@ -518,6 +546,24 @@
                             <button onclick="closeAchievement()" class="bg-gold text-darkBrown px-4 py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105 border-2 border-darkBrown font-medieval text-sm">
                                 Lanjutkan!
                             </button>
+                        </div>
+                    </div>
+
+                    <!-- Leaderboard Modal -->
+                    <div id="leaderboard-modal" class="hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+                        <div class="parchment-bg rounded-2xl p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto ancient-border">
+                            <div class="text-center mb-6">
+                                <h3 class="text-2xl md:text-3xl font-bold text-dark font-maguntia">Papan Peringkat</h3>
+                                <p class="text-dark font-medieval">Petualang Terhebat Perpustakaan Abadi</p>
+                            </div>
+                            <div id="leaderboard-content" class="space-y-3">
+                                <!-- Leaderboard items will be populated here -->
+                            </div>
+                            <div class="text-center mt-6">
+                                <button onclick="studentSystem.closeLeaderboard()" class="bg-gold text-darkBrown px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 border-2 border-darkBrown font-medieval">
+                                    Tutup
+                                </button>
+                            </div>
                         </div>
                     </div>
 
@@ -553,7 +599,7 @@
     </footer>
 
     <script>
-        // Student Management System - FIXED SYNC ISSUES
+        // Enhanced Student Management System - FIXED ALL SYNC ISSUES
         class StudentSystem {
             constructor() {
                 this.currentStudent = null;
@@ -567,6 +613,22 @@
                 this.checkExistingSession();
                 this.startAutoSync();
                 this.setupBeforeUnload();
+                this.initializeData();
+            }
+
+            initializeData() {
+                // Initialize activity logs if not exists
+                if (!localStorage.getItem('activity_logs')) {
+                    localStorage.setItem('activity_logs', JSON.stringify([]));
+                }
+                
+                // Initialize admin settings if not exists
+                if (!localStorage.getItem('admin_settings')) {
+                    localStorage.setItem('admin_settings', JSON.stringify({
+                        autoBackup: true,
+                        backupInterval: 24 // hours
+                    }));
+                }
             }
 
             setupEventListeners() {
@@ -603,13 +665,17 @@
             }
 
             startAutoSync() {
-                // FIXED: Sync lebih sering untuk real-time updates
+                // Enhanced sync with better error handling
                 setInterval(() => {
                     this.syncWithMainData();
-                }, 1000); // Sync setiap 1 detik
+                }, 2000);
+
+                // Auto-backup every hour
+                setInterval(() => {
+                    this.createBackup();
+                }, 60 * 60 * 1000);
             }
 
-            // FIXED: Improved sync method
             syncWithMainData() {
                 if (!this.currentStudent) return;
 
@@ -620,10 +686,11 @@
                     if (latestStudentData) {
                         // Check if points changed
                         if (latestStudentData.points !== this.currentStudent.points) {
-                            console.log('Points berubah:', this.currentStudent.points, '->', latestStudentData.points);
+                            console.log('🔁 Sync: Points berubah:', this.currentStudent.points, '->', latestStudentData.points);
                             this.currentStudent.points = latestStudentData.points;
                             this.currentStudent.level = this.getLevelFromPoints(latestStudentData.points);
                             this.updateDisplay();
+                            this.logActivity('points_updated', `XP diperbarui menjadi ${latestStudentData.points}`);
                         }
 
                         // Sync other important fields
@@ -631,6 +698,9 @@
                             this.currentStudent.profileIcon = latestStudentData.profileIcon;
                             this.updateProfileIcon();
                         }
+
+                        // Update global rank
+                        this.updateGlobalRank();
 
                         // Update session storage
                         this.saveCurrentStudent();
@@ -648,7 +718,8 @@
                         this.selectedProfileIcon = this.currentStudent.profileIcon || 'book-reader';
                         this.showMainInterface();
                         this.updateStudentStatus(true);
-                        this.syncWithMainData(); // Sync immediately
+                        this.syncWithMainData();
+                        this.updateGlobalRank();
                     } catch (error) {
                         console.error('Error loading session:', error);
                         localStorage.removeItem('current_student');
@@ -683,13 +754,14 @@
                     return;
                 }
 
-                this.currentStudent = { ...student }; // Create copy to avoid reference issues
+                this.currentStudent = { ...student };
                 this.currentStudent.lastLogin = new Date().toISOString();
                 this.currentStudent.lastActivity = new Date().toISOString();
                 this.currentStudent.isOnline = true;
 
                 this.saveCurrentStudent();
                 this.showMainInterface();
+                this.logActivity('login', 'Berhasil login ke sistem');
                 this.showNotification(`Selamat datang kembali, ${name}!`, 'success');
             }
 
@@ -738,14 +810,16 @@
                     isOnline: true,
                     createdAt: new Date().toISOString(),
                     lastLogin: new Date().toISOString(),
-                    lastActivity: new Date().toISOString()
+                    lastActivity: new Date().toISOString(),
+                    achievements: []
                 };
 
                 this.students.push(student);
-                this.currentStudent = { ...student }; // Create copy
+                this.currentStudent = { ...student };
 
                 this.saveToStorage();
                 this.showMainInterface();
+                this.logActivity('register', 'Bergabung dengan Perpustakaan Abadi');
                 this.showNotification(`Selamat datang, ${name}! Petualangan menantimu!`, 'success');
             }
 
@@ -756,6 +830,7 @@
             handleLogout() {
                 if (this.currentStudent) {
                     this.updateStudentStatus(false);
+                    this.logActivity('logout', 'Keluar dari sistem');
                 }
                 this.currentStudent = null;
                 localStorage.removeItem('current_student');
@@ -817,6 +892,7 @@
                 this.updateProfileIcon();
                 this.updateStatusDisplay();
                 this.updateDisplay();
+                this.updateGlobalRank();
             }
 
             updateProfileIcon() {
@@ -869,6 +945,16 @@
                 }
 
                 this.saveCurrentStudent();
+            }
+
+            updateGlobalRank() {
+                if (!this.currentStudent) return;
+
+                const sortedStudents = [...this.students].sort((a, b) => b.points - a.points);
+                const rank = sortedStudents.findIndex(s => s.id === this.currentStudent.id) + 1;
+                const totalStudents = sortedStudents.length;
+
+                document.getElementById('global-rank').textContent = `#${rank} dari ${totalStudents}`;
             }
 
             getLevelFromPoints(points) {
@@ -974,11 +1060,13 @@
                 desc.textContent = messages[level];
                 achievement.classList.remove('hidden');
 
+                this.logActivity('level_up', `Naik ke level ${level + 1} - ${rankNames[level]}`);
                 this.createCelebration();
             }
 
             showCompletion() {
                 document.getElementById('completion-screen').classList.remove('hidden');
+                this.logActivity('completion', 'Mencapai level maksimum - Penguasa Cerita!');
             }
 
             createCelebration() {
@@ -995,6 +1083,117 @@
 
                         setTimeout(() => confetti.remove(), 5000);
                     }, i * 100);
+                }
+            }
+
+            // NEW FEATURE: Leaderboard
+            showLeaderboard() {
+                const leaderboardModal = document.getElementById('leaderboard-modal');
+                const leaderboardContent = document.getElementById('leaderboard-content');
+
+                const sortedStudents = [...this.students]
+                    .sort((a, b) => b.points - a.points)
+                    .slice(0, 20); // Top 20
+
+                leaderboardContent.innerHTML = sortedStudents.map((student, index) => `
+                    <div class="leaderboard-item ${index < 3 ? 'top-3' : ''} p-4 rounded-xl border-2 border-darkBrown">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-10 h-10 flex items-center justify-center bg-gradient-to-r from-gold to-bronze rounded-xl ancient-border font-bold text-darkBrown">
+                                    ${index + 1}
+                                </div>
+                                <div class="w-12 h-12 bg-gradient-to-r from-gold to-bronze rounded-2xl flex items-center justify-center ancient-border text-darkBrown">
+                                    <i class="fas fa-${student.profileIcon || 'book-reader'}"></i>
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-dark text-lg">${student.name}</div>
+                                    <div class="text-dark font-medieval text-sm">${student.class} • ${this.getRankName(this.getLevelFromPoints(student.points))}</div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-bold text-gold text-xl">${student.points} XP</div>
+                                <div class="text-dark font-medieval text-sm">${student.isOnline ? '🟢 Online' : '🔴 Offline'}</div>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+
+                leaderboardModal.classList.remove('hidden');
+            }
+
+            closeLeaderboard() {
+                document.getElementById('leaderboard-modal').classList.add('hidden');
+            }
+
+            // NEW FEATURE: Export Data
+            exportData() {
+                if (!this.currentStudent) return;
+
+                const data = {
+                    student: this.currentStudent,
+                    exportDate: new Date().toISOString(),
+                    totalStudents: this.students.length,
+                    globalRank: this.getGlobalRank()
+                };
+
+                const dataStr = JSON.stringify(data, null, 2);
+                const dataBlob = new Blob([dataStr], { type: 'application/json' });
+                const url = URL.createObjectURL(dataBlob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `progress_${this.currentStudent.name}_${new Date().toISOString().split('T')[0]}.json`;
+                link.click();
+                URL.revokeObjectURL(url);
+
+                this.logActivity('export_data', 'Mengekspor data progress');
+                this.showNotification('Data berhasil diekspor!', 'success');
+            }
+
+            getGlobalRank() {
+                const sortedStudents = [...this.students].sort((a, b) => b.points - a.points);
+                return sortedStudents.findIndex(s => s.id === this.currentStudent.id) + 1;
+            }
+
+            // NEW FEATURE: Activity Logging
+            logActivity(type, description) {
+                try {
+                    const logs = JSON.parse(localStorage.getItem('activity_logs') || '[]');
+                    logs.push({
+                        studentId: this.currentStudent?.id,
+                        studentName: this.currentStudent?.name,
+                        type: type,
+                        description: description,
+                        timestamp: new Date().toISOString(),
+                        ip: 'local' // In real app, this would be actual IP
+                    });
+
+                    // Keep only last 1000 logs
+                    if (logs.length > 1000) {
+                        logs.splice(0, logs.length - 1000);
+                    }
+
+                    localStorage.setItem('activity_logs', JSON.stringify(logs));
+                } catch (error) {
+                    console.error('Error logging activity:', error);
+                }
+            }
+
+            // NEW FEATURE: Auto Backup
+            createBackup() {
+                try {
+                    const settings = JSON.parse(localStorage.getItem('admin_settings') || '{}');
+                    if (!settings.autoBackup) return;
+
+                    const backup = {
+                        students: this.students,
+                        timestamp: new Date().toISOString(),
+                        version: '1.0'
+                    };
+
+                    localStorage.setItem('backup_' + new Date().toISOString(), JSON.stringify(backup));
+                    console.log('Backup created successfully');
+                } catch (error) {
+                    console.error('Error creating backup:', error);
                 }
             }
 
@@ -1019,7 +1218,7 @@
             saveToStorage() {
                 try {
                     localStorage.setItem('perpustakaan_abadi_students', JSON.stringify(this.students));
-                    console.log('Data tersimpan:', this.students);
+                    console.log('✅ Data tersimpan:', this.students);
                 } catch (error) {
                     console.error('Error saving to storage:', error);
                 }
