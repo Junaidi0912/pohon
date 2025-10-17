@@ -690,7 +690,7 @@
     </div>
 
     <script>
-        // Enhanced Admin System with FIXED SYNC ISSUES
+        // Enhanced Admin System - TERHUBUNG DENGAN DATA SISWA
         class AdminSystem {
             constructor() {
                 this.students = [];
@@ -797,11 +797,12 @@
                 document.getElementById('admin-main').classList.remove('hidden');
             }
 
-            // FIXED: Enhanced data loading with better error handling
+            // FIXED: Load data dari sistem siswa (pohon_students)
             loadStudents() {
                 try {
-                    const studentData = JSON.parse(localStorage.getItem('perpustakaan_abadi_students') || '[]');
-                    console.log('🔄 Admin: Loading students data:', studentData);
+                    // Menggunakan key yang sama dengan sistem siswa
+                    const studentData = JSON.parse(localStorage.getItem('pohon_students') || '[]');
+                    console.log('🔄 Admin: Loading students data dari pohon_students:', studentData);
                     
                     const updatedStudents = studentData.map(student => {
                         const lastActivity = new Date(student.lastActivity || student.lastLogin || student.createdAt);
@@ -970,7 +971,6 @@
                 `).join('');
             }
 
-            // FIXED: Enhanced points addition with proper sync
             showAddPointsModal(studentId) {
                 this.selectedStudentId = studentId;
                 document.getElementById('points-amount').value = 5;
@@ -1002,7 +1002,7 @@
 
                 console.log('✅ Points sebelum:', oldPoints, 'setelah:', this.students[studentIndex].points);
 
-                // Simpan perubahan ke localStorage
+                // Simpan perubahan ke localStorage dengan key yang sama
                 this.saveChanges();
                 this.closeAddPointsModal();
                 
@@ -1017,7 +1017,6 @@
                 document.getElementById('bulk-add-modal').classList.remove('hidden');
             }
 
-            // FIXED: Enhanced bulk points addition
             addPointsToAllStudents() {
                 const points = this.bulkPoints;
                 console.log('🎯 Admin: Menambah points ke semua siswa:', points);
@@ -1056,15 +1055,15 @@
                 }
             }
 
-            // FIXED: Enhanced save method with verification
+            // FIXED: Save menggunakan key yang sama dengan sistem siswa
             saveChanges() {
                 try {
-                    console.log('💾 Admin: Menyimpan data siswa:', this.students);
-                    localStorage.setItem('perpustakaan_abadi_students', JSON.stringify(this.students));
+                    console.log('💾 Admin: Menyimpan data siswa ke pohon_students:', this.students);
+                    localStorage.setItem('pohon_students', JSON.stringify(this.students));
                     
                     // Verifikasi penyimpanan
-                    const savedData = JSON.parse(localStorage.getItem('perpustakaan_abadi_students') || '[]');
-                    console.log('✅ Data tersimpan:', savedData);
+                    const savedData = JSON.parse(localStorage.getItem('pohon_students') || '[]');
+                    console.log('✅ Data tersimpan di pohon_students:', savedData);
                     
                     this.applyFilters();
                 } catch (error) {
