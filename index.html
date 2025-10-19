@@ -58,7 +58,6 @@
         }
     </script>
     <style>
-
         /* KEEP ALL YOUR EXISTING CSS STYLES */
         body {
             background: linear-gradient(135deg, #1a2f1a 0%, #0f200f 50%, #081508 100%);
@@ -157,7 +156,15 @@
             box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
         }
 
-        
+        .online-status {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid white;
+        }
         
         .online {
             background-color: #22c55e;
@@ -190,7 +197,10 @@
             animation: grow 0.5s ease-out forwards;
         }
 
-
+        .password-toggle {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
 
         .password-toggle:hover {
             color: #D4AF37;
@@ -198,7 +208,6 @@
         }
 
         .leaderboard-item {
-            padding : 12px 16px;
             transition: all 0.3s ease;
             border-bottom: 1px solid rgba(139, 69, 19, 0.2);
         }
@@ -279,7 +288,7 @@
                     <div id="user-info" class="hidden items-center space-x-2">
                         <div class="text-right hidden sm:block">
                             <div class="font-semibold text-forestGreen text-sm" id="user-name">Nama Petualang</div>
-                            <div class="text-xs text-silver font-medieval" id="user-rank">🌱 Bibit</div>
+                            <div class="text-xs text-silver font-medieval" id="user-rank">🌱 Seedling</div>
                         </div>
                         <!-- Profile Icon dengan Status Online -->
                         <div class="relative">
@@ -331,15 +340,33 @@
                     <select id="login-class" required 
                             class="w-full px-3 py-2 bg-oldPaper border-2 border-darkBrown rounded-lg focus:border-forestGreen focus:ring-2 focus:ring-forestGreen/30 transition-all duration-300 outline-none font-medieval text-sm text-dark">
                         <option value="">Pilih Kelas</option>
-                        <option value="7A">Kelas 7A</option>
-                        <option value="7B">Kelas 7B</option>
-                        <option value="7C">Kelas 7C</option>
-                        <option value="8A">Kelas 8A</option>
-                        <option value="8B">Kelas 8B</option>
-                        <option value="8C">Kelas 8C</option>
-                        <option value="9A">Kelas 9A</option>
-                        <option value="9B">Kelas 9B</option>
-                        <option value="9C">Kelas 9C</option>
+                        <option value="X1">X1</option>
+                        <option value="X2">X2</option>
+                        <option value="X3">X3</option>
+                        <option value="X4">X4</option>
+                        <option value="X5">X5</option>
+                        <option value="X6">X6</option>
+                        <option value="X7">X7</option>
+                        <option value="X8">X8</option>
+                        <option value="X9">X9</option>
+                        <option value="XI MIPA 1">XI MIPA 1</option>
+                        <option value="XI MIPA 2">XI MIPA 2</option>
+                        <option value="XI MIPA 3">XI MIPA 3</option>
+                        <option value="XI MIPA 4">XI MIPA 4</option>
+                        <option value="XI MIPA 5">XI MIPA 5</option>
+                        <option value="XI IPS 1">XI IPS 1</option>
+                        <option value="XI IPS 2">XI IPS 2</option>
+                        <option value="XI IPS 3">XI IPS 3</option>
+                        <option value="XI IPS 4">XI IPS 4</option>
+                        <option value="XII MIPA 1">XII MIPA 1</option>
+                        <option value="XII MIPA 2">XII MIPA 2</option>
+                        <option value="XII MIPA 3">XII MIPA 3</option>
+                        <option value="XII MIPA 4">XII MIPA 4</option>
+                        <option value="XII MIPA 5">XII MIPA 5</option>
+                        <option value="XII IPS 1">XII IPS 1</option>
+                        <option value="XII IPS 2">XII IPS 2</option>
+                        <option value="XII IPS 3">XII IPS 3</option>
+                        <option value="XII BAHASA">XII BAHASA</option>
                     </select>
                 </div>
                 <div class="relative">
@@ -370,15 +397,33 @@
                     <select id="register-class" required 
                             class="w-full px-3 py-2 bg-oldPaper border-2 border-darkBrown rounded-lg focus:border-forestGreen focus:ring-2 focus:ring-forestGreen/30 transition-all duration-300 outline-none font-medieval text-sm text-dark">
                         <option value="">Pilih Kelas</option>
-                        <option value="7A">Kelas 7A</option>
-                        <option value="7B">Kelas 7B</option>
-                        <option value="7C">Kelas 7C</option>
-                        <option value="8A">Kelas 8A</option>
-                        <option value="8B">Kelas 8B</option>
-                        <option value="8C">Kelas 8C</option>
-                        <option value="9A">Kelas 9A</option>
-                        <option value="9B">Kelas 9B</option>
-                        <option value="9C">Kelas 9C</option>
+                        <option value="X1">X1</option>
+                        <option value="X2">X2</option>
+                        <option value="X3">X3</option>
+                        <option value="X4">X4</option>
+                        <option value="X5">X5</option>
+                        <option value="X6">X6</option>
+                        <option value="X7">X7</option>
+                        <option value="X8">X8</option>
+                        <option value="X9">X9</option>
+                        <option value="XI MIPA 1">XI MIPA 1</option>
+                        <option value="XI MIPA 2">XI MIPA 2</option>
+                        <option value="XI MIPA 3">XI MIPA 3</option>
+                        <option value="XI MIPA 4">XI MIPA 4</option>
+                        <option value="XI MIPA 5">XI MIPA 5</option>
+                        <option value="XI IPS 1">XI IPS 1</option>
+                        <option value="XI IPS 2">XI IPS 2</option>
+                        <option value="XI IPS 3">XI IPS 3</option>
+                        <option value="XI IPS 4">XI IPS 4</option>
+                        <option value="XII MIPA 1">XII MIPA 1</option>
+                        <option value="XII MIPA 2">XII MIPA 2</option>
+                        <option value="XII MIPA 3">XII MIPA 3</option>
+                        <option value="XII MIPA 4">XII MIPA 4</option>
+                        <option value="XII MIPA 5">XII MIPA 5</option>
+                        <option value="XII IPS 1">XII IPS 1</option>
+                        <option value="XII IPS 2">XII IPS 2</option>
+                        <option value="XII IPS 3">XII IPS 3</option>
+                        <option value="XII BAHASA">XII BAHASA</option>
                     </select>
                 </div>
                 <div class="relative">
@@ -465,32 +510,32 @@
                     <div class="grid grid-cols-3 gap-2 md:grid-cols-6 md:gap-3">
                         <div class="text-center p-2 bg-oldPaper rounded-lg transition-all duration-300 rank-badge border border-darkBrown" data-level="0">
                             <div class="text-lg md:text-xl mb-1">🌱</div>
-                            <div class="font-semibold text-dark font-medieval text-xs">Bibit</div>
+                            <div class="font-semibold text-dark font-medieval text-xs">Seedling</div>
                             <div class="text-xs text-dark">0 XP</div>
                         </div>
                         <div class="text-center p-2 bg-oldPaper rounded-lg transition-all duration-300 rank-badge" data-level="1">
                             <div class="text-lg md:text-xl mb-1">🍃</div>
-                            <div class="font-semibold text-dark font-medieval text-xs">Tunas</div>
+                            <div class="font-semibold text-dark font-medieval text-xs">Forest Sprout</div>
                             <div class="text-xs text-dark">100 XP</div>
                         </div>
                         <div class="text-center p-2 bg-oldPaper rounded-lg transition-all duration-300 rank-badge" data-level="2">
                             <div class="text-lg md:text-xl mb-1">🌿</div>
-                            <div class="font-semibold text-dark font-medieval text-xs">Pencari Daun</div>
+                            <div class="font-semibold text-dark font-medieval text-xs">Leaf Seeker</div>
                             <div class="text-xs text-dark">300 XP</div>
                         </div>
                         <div class="text-center p-2 bg-oldPaper rounded-lg transition-all duration-300 rank-badge" data-level="3">
                             <div class="text-lg md:text-xl mb-1">🌳</div>
-                            <div class="font-semibold text-dark font-medieval text-xs">Pohon Muda</div>
+                            <div class="font-semibold text-dark font-medieval text-xs">Young Oak</div>
                             <div class="text-xs text-dark">600 XP</div>
                         </div>
                         <div class="text-center p-2 bg-oldPaper rounded-lg transition-all duration-300 rank-badge" data-level="4">
                             <div class="text-lg md:text-xl mb-1">🌲</div>
-                            <div class="font-semibold text-dark font-medieval text-xs">Pohon Dewasa</div>
+                            <div class="font-semibold text-dark font-medieval text-xs">Ancient Guardian</div>
                             <div class="text-xs text-dark">800 XP</div>
                         </div>
                         <div class="text-center p-2 bg-oldPaper rounded-lg transition-all duration-300 rank-badge" data-level="5">
                             <div class="text-lg md:text-xl mb-1">🏆</div>
-                            <div class="font-semibold text-dark font-medieval text-xs">Pohon Legenda</div>
+                            <div class="font-semibold text-dark font-medieval text-xs">Forest Legend</div>
                             <div class="text-xs text-dark">1000 XP</div>
                         </div>
                     </div>
@@ -500,7 +545,7 @@
             <!-- Character Display Section -->
             <div id="character-section" class="hidden max-w-6xl mx-auto">
                 <div class="parchment-bg rounded-2xl p-4 md:p-6 ancient-border text-center">
-                    <h3 class="text-xl md:text-2xl font-bold text-dark font-maguntia mb-4 md:mb-6" id="character-title">Petualang Pohon</h3>
+                    <h3 class="text-xl md:text-2xl font-bold text-dark font-maguntia mb-4 md:mb-6" id="character-title">Forest Adventurer</h3>
                     
                     <div class="flex flex-col lg:flex-row items-center justify-between space-y-4 lg:space-y-0">
                         <!-- Character Avatar -->
@@ -513,11 +558,11 @@
                         <!-- Character Stats -->
                         <div class="text-left space-y-3 w-full lg:w-1/2">
                             <div class="bg-oldPaper p-3 rounded-lg border-2 border-darkBrown">
-                                <h4 class="font-bold text-dark font-medieval mb-2 text-sm md:text-base">Status Petualang</h4>
+                                <h4 class="font-bold text-dark font-medieval mb-2 text-sm md:text-base">Adventurer Status</h4>
                                 <div class="space-y-2">
                                     <div class="flex justify-between">
                                         <span class="text-dark text-sm">Rank:</span>
-                                        <span class="font-semibold text-forestGreen text-sm" id="current-rank">🌱 Bibit</span>
+                                        <span class="font-semibold text-forestGreen text-sm" id="current-rank">🌱 Seedling</span>
                                     </div>
                                     <div class="flex justify-between">
                                         <span class="text-dark text-sm">Total XP:</span>
@@ -528,7 +573,7 @@
                                         <span class="font-semibold text-forestGreen text-sm" id="current-status">🟢 Online</span>
                                     </div>
                                     <div class="flex justify-between">
-                                        <span class="text-dark text-sm">Peringkat:</span>
+                                        <span class="text-dark text-sm">Global Rank:</span>
                                         <span class="font-semibold text-mysticBlue text-sm" id="global-rank">-</span>
                                     </div>
                                 </div>
@@ -536,7 +581,7 @@
                             
                             <!-- Next Rank Progress -->
                             <div class="bg-oldPaper p-3 rounded-lg border-2 border-darkBrown">
-                                <h4 class="font-bold text-dark font-medieval mb-2 text-sm md:text-base">Menuju Rank Berikutnya</h4>
+                                <h4 class="font-bold text-dark font-medieval mb-2 text-sm md:text-base">Next Rank Progress</h4>
                                 <div class="w-full bg-darkBrown rounded-full h-3">
                                     <div id="next-rank-progress" class="bg-gradient-to-r from-forestGreen to-green-600 h-3 rounded-full transition-all duration-1000" style="width: 0%"></div>
                                 </div>
@@ -545,7 +590,7 @@
                                     <span id="next-rank-xp">100</span>
                                 </div>
                                 <div class="text-center mt-1">
-                                    <span class="text-xs text-dark font-medieval" id="next-rank-name">🍃 Tunas</span>
+                                    <span class="text-xs text-dark font-medieval" id="next-rank-name">🍃 Forest Sprout</span>
                                 </div>
                             </div>
                         </div>
@@ -558,9 +603,9 @@
                                 <i class="fas fa-trophy text-darkBrown text-xl"></i>
                             </div>
                             <h4 class="text-lg md:text-xl font-bold text-dark font-maguntia mb-2" id="achievement-title">Rank Up!</h4>
-                            <p class="text-dark font-medieval mb-3 text-sm" id="achievement-desc">Petualanganmu semakin maju!</p>
+                            <p class="text-dark font-medieval mb-3 text-sm" id="achievement-desc">Your adventure progresses!</p>
                             <button onclick="closeAchievement()" class="bg-gold text-darkBrown px-4 py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105 border-2 border-darkBrown font-medieval text-sm">
-                                Lanjutkan!
+                                Continue!
                             </button>
                         </div>
                     </div>
@@ -569,15 +614,15 @@
                     <div id="leaderboard-modal" class="hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
                         <div class="parchment-bg rounded-2xl p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto ancient-border">
                             <div class="text-center mb-6">
-                                <h3 class="text-2xl md:text-3xl font-bold text-dark font-maguntia">Papan Peringkat</h3>
-                                <p class="text-dark font-medieval">Petualang Terhebat Pohon</p>
+                                <h3 class="text-2xl md:text-3xl font-bold text-dark font-maguntia">Leaderboard</h3>
+                                <p class="text-dark font-medieval">Greatest Forest Adventurers</p>
                             </div>
                             <div id="leaderboard-content" class="space-y-3">
                                 <!-- Leaderboard items will be populated here -->
                             </div>
                             <div class="text-center mt-6">
                                 <button onclick="studentSystem.closeLeaderboard()" class="bg-gold text-darkBrown px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 border-2 border-darkBrown font-medieval">
-                                    Tutup
+                                    Close
                                 </button>
                             </div>
                         </div>
@@ -589,15 +634,15 @@
                             <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-r from-gold to-bronze rounded-full flex items-center justify-center ancient-border">
                                 <i class="fas fa-crown text-darkBrown text-2xl"></i>
                             </div>
-                            <h3 class="text-2xl md:text-3xl font-bold text-dark font-maguntia mb-3">Legenda Terbentuk! 🏆</h3>
-                            <p class="text-dark font-medieval mb-2 text-sm">Kamu telah menjadi Pohon Legenda!</p>
-                            <p class="text-dark font-medieval mb-4 text-sm">Pohon mengenang namamu!</p>
+                            <h3 class="text-2xl md:text-3xl font-bold text-dark font-maguntia mb-3">Legend Forged! 🏆</h3>
+                            <p class="text-dark font-medieval mb-2 text-sm">You have become a Forest Legend!</p>
+                            <p class="text-dark font-medieval mb-4 text-sm">The forest remembers your name!</p>
                             <div class="space-y-2">
                                 <button onclick="restartJourney()" class="w-full bg-gradient-to-r from-gold to-bronze text-darkBrown py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105 border-2 border-darkBrown font-medieval text-sm">
-                                    <i class="fas fa-redo mr-2"></i>Mulai Petualangan Baru
+                                    <i class="fas fa-redo mr-2"></i>Start New Adventure
                                 </button>
                                 <button onclick="shareAchievement()" class="w-full bg-gradient-to-r from-forestGreen to-green-800 text-parchment py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105 border-2 border-forestGreen font-medieval text-sm">
-                                    <i class="fas fa-share-alt mr-2"></i>Bagikan Legenda
+                                    <i class="fas fa-share-alt mr-2"></i>Share Legend
                                 </button>
                             </div>
                         </div>
@@ -610,7 +655,7 @@
     <!-- Footer -->
     <footer class="bg-darkBrown/90 text-silver py-4 border-t-2 border-forestGreen">
         <div class="container mx-auto px-4 text-center font-medieval text-xs">
-            <p>© 2024 Pohon. Tempat para legenda pengetahuan tercipta.</p>
+            <p>© 2024 Pohon. Where knowledge legends are born.</p>
         </div>
     </footer>
 
@@ -680,17 +725,17 @@
                     if (response.ok) {
                         this.isOnline = true;
                         console.log('✅ Connected to JSON Server');
-                        this.updateConnectionStatus(true, 'Terhubung ke server');
-                        this.showNotification('🔄 Terhubung ke server database', 'success');
+                        this.updateConnectionStatus(true, 'Connected to server');
+                        this.showNotification('🔄 Connected to database server', 'success');
                     } else {
                         throw new Error('Server not responding');
                     }
                 } catch (error) {
                     console.error('❌ JSON Server connection failed:', error);
                     this.isOnline = false;
-                    this.updateConnectionStatus(false, 'Mode offline');
+                    this.updateConnectionStatus(false, 'Offline mode');
                     this.fallbackToLocalStorage();
-                    this.showNotification('📴 Mode offline - menggunakan penyimpanan lokal', 'warning');
+                    this.showNotification('📴 Offline mode - using local storage', 'warning');
                 }
             }
 
@@ -805,17 +850,17 @@
                 const confirmPassword = document.getElementById('register-confirm-password').value;
 
                 if (!name || !studentClass || !password || !confirmPassword) {
-                    this.showNotification('Harap isi semua field!', 'error');
+                    this.showNotification('Please fill all fields!', 'error');
                     return;
                 }
 
                 if (password.length < 4) {
-                    this.showNotification('Password minimal 4 karakter!', 'error');
+                    this.showNotification('Password minimum 4 characters!', 'error');
                     return;
                 }
 
                 if (password !== confirmPassword) {
-                    this.showNotification('Password dan konfirmasi password tidak cocok!', 'error');
+                    this.showNotification('Password and confirmation do not match!', 'error');
                     return;
                 }
 
@@ -829,7 +874,7 @@
                 );
                 
                 if (existingStudent) {
-                    this.showNotification('Nama sudah terdaftar di kelas ini! Silakan login.', 'error');
+                    this.showNotification('Name already registered in this class! Please login.', 'error');
                     switchAuthTab('login');
                     return;
                 }
@@ -854,17 +899,17 @@
                 const savedToServer = await this.saveStudentToServer(student);
                 
                 if (savedToServer) {
-                    this.showNotification('✅ Akun berhasil dibuat dan tersimpan di database!', 'success');
+                    this.showNotification('✅ Account created and saved to database!', 'success');
                 } else {
-                    this.showNotification('⚠️ Akun dibuat di mode offline', 'warning');
+                    this.showNotification('⚠️ Account created in offline mode', 'warning');
                 }
 
                 this.currentStudent = { ...student };
                 this.saveCurrentStudent();
 
                 this.showMainInterface();
-                this.logActivity('register', 'Bergabung dengan Pohon');
-                this.showNotification(`🎉 Selamat datang, ${name}! Petualangan menantimu!`, 'success');
+                this.logActivity('register', 'Joined the Forest');
+                this.showNotification(`🎉 Welcome, ${name}! Adventure awaits!`, 'success');
             }
 
             async handleLogin() {
@@ -873,7 +918,7 @@
                 const password = document.getElementById('login-password').value;
 
                 if (!name || !studentClass || !password) {
-                    this.showNotification('Harap isi semua field!', 'error');
+                    this.showNotification('Please fill all fields!', 'error');
                     return;
                 }
 
@@ -887,13 +932,13 @@
                 );
                 
                 if (!student) {
-                    this.showNotification('Akun tidak ditemukan! Silakan daftar terlebih dahulu.', 'error');
+                    this.showNotification('Account not found! Please register first.', 'error');
                     return;
                 }
 
                 // Check password
                 if (student.password !== password) {
-                    this.showNotification('Password salah! Silakan coba lagi.', 'error');
+                    this.showNotification('Wrong password! Please try again.', 'error');
                     return;
                 }
 
@@ -908,19 +953,19 @@
                 
                 this.showMainInterface();
                 this.startAutoSync();
-                this.logActivity('login', 'Berhasil login ke sistem');
-                this.showNotification(`👋 Selamat datang kembali, ${name}!`, 'success');
+                this.logActivity('login', 'Successfully logged in');
+                this.showNotification(`👋 Welcome back, ${name}!`, 'success');
             }
 
             handleLogout() {
                 if (this.currentStudent) {
                     this.updateStudentStatus(false);
-                    this.logActivity('logout', 'Keluar dari sistem');
+                    this.logActivity('logout', 'Logged out from system');
                 }
                 this.currentStudent = null;
                 localStorage.removeItem('current_student');
                 this.showAuthInterface();
-                this.showNotification('Sampai bertemu lagi, petualang!', 'info');
+                this.showNotification('Until we meet again, adventurer!', 'info');
             }
 
             async updateStudentStatus(isOnline) {
@@ -1032,7 +1077,7 @@
                 const rank = sortedStudents.findIndex(s => s.id === this.currentStudent.id) + 1;
                 const totalStudents = sortedStudents.length;
 
-                document.getElementById('global-rank').textContent = `#${rank} dari ${totalStudents}`;
+                document.getElementById('global-rank').textContent = `#${rank} of ${totalStudents}`;
             }
 
             getLevelFromPoints(points) {
@@ -1045,19 +1090,19 @@
             }
 
             getRankName(level) {
-                const ranks = ['🌱 Bibit', '🍃 Tunas', '🌿 Pencari Daun', '🌳 Pohon Muda', '🌲 Pohon Dewasa', '🏆 Pohon Legenda'];
-                return ranks[level] || '🌱 Bibit';
+                const ranks = ['🌱 Seedling', '🍃 Forest Sprout', '🌿 Leaf Seeker', '🌳 Young Oak', '🌲 Ancient Guardian', '🏆 Forest Legend'];
+                return ranks[level] || '🌱 Seedling';
             }
 
             updateCharacter(level) {
                 const characterDisplay = document.getElementById('character-display');
                 const characterConfigs = [
-                    { color: 'from-gray-400 to-gray-600', title: 'Bibit' },
-                    { color: 'from-green-400 to-green-600', title: 'Tunas' },
-                    { color: 'from-emerald-400 to-emerald-600', title: 'Pencari Daun' },
-                    { color: 'from-teal-400 to-teal-600', title: 'Pohon Muda' },
-                    { color: 'from-forestGreen to-green-600', title: 'Pohon Dewasa' },
-                    { color: 'from-yellow-400 to-red-600', title: 'Pohon Legenda' }
+                    { color: 'from-gray-400 to-gray-600', title: 'Seedling' },
+                    { color: 'from-green-400 to-green-600', title: 'Forest Sprout' },
+                    { color: 'from-emerald-400 to-emerald-600', title: 'Leaf Seeker' },
+                    { color: 'from-teal-400 to-teal-600', title: 'Young Oak' },
+                    { color: 'from-forestGreen to-green-600', title: 'Ancient Guardian' },
+                    { color: 'from-yellow-400 to-red-600', title: 'Forest Legend' }
                 ];
 
                 const config = characterConfigs[level];
@@ -1117,27 +1162,27 @@
                 const title = document.getElementById('achievement-title');
                 const desc = document.getElementById('achievement-desc');
 
-                const rankNames = ['Bibit', 'Tunas', 'Pencari Daun', 'Pohon Muda', 'Pohon Dewasa', 'Pohon Legenda'];
+                const rankNames = ['Seedling', 'Forest Sprout', 'Leaf Seeker', 'Young Oak', 'Ancient Guardian', 'Forest Legend'];
                 const messages = [
-                    'Perjalanan pohonmu dimulai!',
-                    'Kamu mulai bertunas dan tumbuh!',
-                    'Daun-daun pengetahuan mulai bermunculan!',
-                    'Kamu menjadi pohon muda yang kuat!',
-                    'Pohonmu semakin dewasa dan rindang!',
-                    'Kamu menjadi legenda hutan pengetahuan!'
+                    'Your forest journey begins!',
+                    'You start to sprout and grow!',
+                    'Leaves of knowledge begin to appear!',
+                    'You become a strong young oak!',
+                    'Your tree grows mature and lush!',
+                    'You become a legend of the knowledge forest!'
                 ];
 
                 title.textContent = `${rankNames[level]}!`;
                 desc.textContent = messages[level];
                 achievement.classList.remove('hidden');
 
-                this.logActivity('level_up', `Naik ke level ${level + 1} - ${rankNames[level]}`);
+                this.logActivity('level_up', `Level up to ${level + 1} - ${rankNames[level]}`);
                 this.createCelebration();
             }
 
             showCompletion() {
                 document.getElementById('completion-screen').classList.remove('hidden');
-                this.logActivity('completion', 'Mencapai level maksimum - Pohon Legenda!');
+                this.logActivity('completion', 'Reached maximum level - Forest Legend!');
             }
 
             createCelebration() {
@@ -1216,8 +1261,8 @@
                 link.click();
                 URL.revokeObjectURL(url);
 
-                this.logActivity('export_data', 'Mengekspor data progress');
-                this.showNotification('Data berhasil diekspor!', 'success');
+                this.logActivity('export_data', 'Exported progress data');
+                this.showNotification('Data successfully exported!', 'success');
             }
 
             getGlobalRank() {
@@ -1281,7 +1326,7 @@
                     
                     // Show sync notification
                     if (latestStudentData.points > this.currentStudent.points) {
-                        this.showNotification(`🔄 +${latestStudentData.points - this.currentStudent.points} XP dari admin!`, 'info');
+                        this.showNotification(`🔄 +${latestStudentData.points - this.currentStudent.points} XP from admin!`, 'info');
                     }
                 }
             }
@@ -1360,23 +1405,23 @@
                 studentSystem.updateDisplay();
                 studentSystem.saveCurrentStudent();
                 document.getElementById('completion-screen').classList.add('hidden');
-                studentSystem.showNotification('Petualangan baru dimulai!', 'success');
+                studentSystem.showNotification('New adventure begins!', 'success');
             }
         }
 
         function shareAchievement() {
             const student = studentSystem.currentStudent;
             if (student) {
-                const shareText = `Aku telah menjadi ${studentSystem.getRankName(studentSystem.getLevelFromPoints(student.points))} di Pohon! 🏆\nTotal XP: ${student.points}`;
+                const shareText = `I have become ${studentSystem.getRankName(studentSystem.getLevelFromPoints(student.points))} in the Forest! 🏆\nTotal XP: ${student.points}`;
                 
                 if (navigator.share) {
                     navigator.share({
-                        title: 'Pencapaian Pohon',
+                        title: 'Forest Achievement',
                         text: shareText
                     });
                 } else {
                     navigator.clipboard.writeText(shareText);
-                    studentSystem.showNotification('Legenda disalin ke clipboard!', 'success');
+                    studentSystem.showNotification('Legend copied to clipboard!', 'success');
                 }
             }
         }
