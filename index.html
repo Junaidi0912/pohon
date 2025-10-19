@@ -246,6 +246,31 @@
             border: 1px solid #ef4444;
             color: #ef4444;
         }
+        
+        /* Custom Scrollbar untuk Form Register */
+        .scrollable-form {
+            max-height: 60vh;
+            overflow-y: auto;
+            padding-right: 8px;
+        }
+        
+        .scrollable-form::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .scrollable-form::-webkit-scrollbar-track {
+            background: rgba(139, 69, 19, 0.1);
+            border-radius: 10px;
+        }
+        
+        .scrollable-form::-webkit-scrollbar-thumb {
+            background: rgba(139, 69, 19, 0.3);
+            border-radius: 10px;
+        }
+        
+        .scrollable-form::-webkit-scrollbar-thumb:hover {
+            background: rgba(139, 69, 19, 0.5);
+        }
     </style>
 </head>
 <body class="font-cinzel text-black min-h-screen">
@@ -385,7 +410,7 @@
             </form>
 
             <!-- Register Form -->
-            <form id="register-form" class="auth-form space-y-4">
+            <form id="register-form" class="auth-form space-y-4 scrollable-form">
                 <div>
                     <label class="block text-dark font-semibold mb-2 font-medieval text-sm">Nama Petualang Baru</label>
                     <input type="text" id="register-name" required 
