@@ -248,6 +248,49 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
+
+        /* PERBAIKAN: Tampilan Rank yang Tidak Terpotong */
+        .rank-display {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            max-width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .rank-text {
+            font-size: 0.875rem;
+            font-weight: 600;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: 150px;
+        }
+
+        @media (min-width: 768px) {
+            .rank-text {
+                font-size: 1rem;
+                max-width: 180px;
+            }
+        }
+
+        .table-rank {
+            font-size: 0.875rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: 140px;
+            display: inline-block;
+        }
+
+        @media (min-width: 1024px) {
+            .table-rank {
+                font-size: 1rem;
+                max-width: 160px;
+            }
+        }
     </style>
 </head>
 <body class="font-cinzel text-black min-h-screen">
@@ -995,9 +1038,10 @@
                             </div>
                         </td>
                         <td class="px-6 py-5">
+                            <!-- PERBAIKAN: Rank display dengan class table-rank -->
                             <span class="px-4 py-2 rounded-xl text-base font-semibold border-2 border-darkBrown ${
                                 this.getRankColor(student.points)
-                            } font-medieval">
+                            } font-medieval table-rank" title="${this.getRankName(student.points)}">
                                 ${this.getRankName(student.points)}
                             </span>
                         </td>
