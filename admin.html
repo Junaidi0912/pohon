@@ -39,6 +39,7 @@
         }
     </script>
     <style>
+        /* KEEP ALL YOUR EXISTING CSS STYLES */
         body {
             background: linear-gradient(135deg, #2C1810 0%, #1A0F0A 50%, #0F0805 100%);
             min-height: 100vh;
@@ -291,9 +292,40 @@
                 max-width: 160px;
             }
         }
+        
+        /* NEW: Real-time sync indicator */
+        .sync-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .sync-active {
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid #22c55e;
+            color: #22c55e;
+        }
+        
+        .sync-inactive {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid #ef4444;
+            color: #ef4444;
+        }
     </style>
 </head>
 <body class="font-cinzel text-black min-h-screen">
+    <!-- Sync Indicator -->
+    <div id="sync-indicator" class="sync-indicator sync-active hidden">
+        <i class="fas fa-sync-alt mr-1"></i>
+        <span>Real-time Sync</span>
+    </div>
+
     <!-- Admin Authentication Modal -->
     <div id="admin-auth-modal" class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 admin-auth-modal">
         <div class="parchment-bg rounded-2xl p-8 max-w-md w-full transform animate-grow ancient-border">
@@ -803,12 +835,14 @@
                     username: 'admin',
                     password: 'admin123'
                 };
+                this.dataKey = 'pohon_students'; // KEY YANG SAMA DENGAN SISWA
                 this.init();
             }
 
             init() {
                 this.setupEventListeners();
                 this.checkAdminSession();
+                this.showSyncIndicator();
             }
 
             setupEventListeners() {
@@ -898,8 +932,8 @@
             loadStudents() {
                 try {
                     // Menggunakan key yang sama dengan sistem siswa
-                    const studentData = JSON.parse(localStorage.getItem('pohon_students') || '[]');
-                    console.log('🔄 Admin: Loading students data dari pohon_students:', studentData);
+                    const studentData = JSON.parse(localStorage.getItem(this.dataKey) || '[]');
+                    console.log('🔄 Admin: Loading students data dari', this.dataKey + ':', studentData);
                     
                     const updatedStudents = studentData.map(student => {
                         const lastActivity = new Date(student.lastActivity || student.lastLogin || student.createdAt);
@@ -1075,7 +1109,7 @@
                 document.getElementById('add-points-modal').classList.remove('hidden');
             }
 
-            // PERBAIKAN BUG: Method addPointsToStudent yang benar
+            // PERBAIKAN BESAR: Method addPointsToStudent yang benar
             addPointsToStudent() {
                 if (!this.selectedStudentId) {
                     this.showNotification('No student selected', 'error');
@@ -1086,7 +1120,7 @@
                 console.log('🎯 Admin: Adding points:', points, 'to student:', this.selectedStudentId);
 
                 // PERBAIKAN: Load data terbaru dari localStorage sebelum update
-                const currentStudents = JSON.parse(localStorage.getItem('pohon_students') || '[]');
+                const currentStudents = JSON.parse(localStorage.getItem(this.dataKey) || '[]');
                 
                 // Cari student berdasarkan ID
                 const studentIndex = currentStudents.findIndex(s => s.id === this.selectedStudentId);
@@ -1105,7 +1139,7 @@
                 console.log('✅ Points before:', oldPoints, 'after:', currentStudents[studentIndex].points);
 
                 // PERBAIKAN: Simpan perubahan ke localStorage dan update local state
-                localStorage.setItem('pohon_students', JSON.stringify(currentStudents));
+                localStorage.setItem(this.dataKey, JSON.stringify(currentStudents));
                 
                 // Update state lokal
                 this.students = currentStudents;
@@ -1117,8 +1151,8 @@
                 this.logAdminActivity('add_points', `Added ${points} XP to ${studentName}`);
                 this.showNotification(`✅ +${points} XP successfully added to ${studentName}`, 'success');
 
-                // PERBAIKAN: Paksa refresh data siswa yang sedang login
-                this.forceStudentRefresh();
+                // PERBAIKAN BARU: Trigger real-time sync untuk siswa
+                this.triggerStudentSync();
             }
 
             showBulkAddModal(points) {
@@ -1127,13 +1161,13 @@
                 document.getElementById('bulk-add-modal').classList.remove('hidden');
             }
 
-            // PERBAIKAN BUG: Method addPointsToAllStudents yang benar
+            // PERBAIKAN BESAR: Method addPointsToAllStudents yang benar
             addPointsToAllStudents() {
                 const points = this.bulkPoints;
                 console.log('🎯 Admin: Adding points to all students:', points);
                 
                 // PERBAIKAN: Load data terbaru dari localStorage
-                const currentStudents = JSON.parse(localStorage.getItem('pohon_students') || '[]');
+                const currentStudents = JSON.parse(localStorage.getItem(this.dataKey) || '[]');
                 
                 let updatedCount = 0;
                 currentStudents.forEach((student, index) => {
@@ -1147,7 +1181,7 @@
                 });
 
                 // PERBAIKAN: Simpan ke localStorage dan update state
-                localStorage.setItem('pohon_students', JSON.stringify(currentStudents));
+                localStorage.setItem(this.dataKey, JSON.stringify(currentStudents));
                 this.students = currentStudents;
                 
                 this.applyFilters();
@@ -1156,14 +1190,14 @@
                 this.logAdminActivity('bulk_add_points', `Added ${points} XP to all ${updatedCount} students`);
                 this.showNotification(`✅ +${points} XP to ${updatedCount} adventurers`, 'success');
 
-                // PERBAIKAN: Paksa refresh data siswa yang sedang login
-                this.forceStudentRefresh();
+                // PERBAIKAN BARU: Trigger real-time sync untuk siswa
+                this.triggerStudentSync();
             }
 
             resetStudent(studentId) {
                 if (confirm('Reset this adventurer\'s XP? All progress will be lost.')) {
                     // PERBAIKAN: Load data terbaru dari localStorage
-                    const currentStudents = JSON.parse(localStorage.getItem('pohon_students') || '[]');
+                    const currentStudents = JSON.parse(localStorage.getItem(this.dataKey) || '[]');
                     
                     const studentIndex = currentStudents.findIndex(s => s.id === studentId);
                     if (studentIndex !== -1) {
@@ -1173,44 +1207,67 @@
                         currentStudents[studentIndex].lastActivity = new Date().toISOString();
                         
                         // PERBAIKAN: Simpan ke localStorage dan update state
-                        localStorage.setItem('pohon_students', JSON.stringify(currentStudents));
+                        localStorage.setItem(this.dataKey, JSON.stringify(currentStudents));
                         this.students = currentStudents;
                         this.applyFilters();
                         
                         this.logAdminActivity('reset_student', `Reset XP for ${studentName}`);
                         this.showNotification(`🔄 ${studentName}'s XP reset`, 'info');
 
-                        // PERBAIKAN: Paksa refresh data siswa yang sedang login
-                        this.forceStudentRefresh();
+                        // PERBAIKAN BARU: Trigger real-time sync untuk siswa
+                        this.triggerStudentSync();
                     }
                 }
             }
 
-            // PERBAIKAN BARU: Method untuk memaksa refresh data siswa
-            forceStudentRefresh() {
-                // Tambahkan timestamp untuk trigger refresh di sisi siswa
-                const refreshTrigger = {
-                    lastAdminUpdate: new Date().toISOString(),
-                    timestamp: Date.now()
+            // PERBAIKAN BARU: Method untuk trigger sync ke siswa
+            triggerStudentSync() {
+                const syncTrigger = {
+                    timestamp: Date.now(),
+                    type: 'admin_update',
+                    message: 'Data updated by admin'
                 };
-                localStorage.setItem('admin_refresh_trigger', JSON.stringify(refreshTrigger));
-                console.log('🔄 Admin: Triggering student data refresh');
+                localStorage.setItem('admin_sync_trigger', JSON.stringify(syncTrigger));
+                console.log('🔄 Admin: Triggering student sync');
+                
+                // Show sync indicator
+                this.showSyncIndicator();
+            }
+
+            // PERBAIKAN BARU: Show sync indicator
+            showSyncIndicator() {
+                const indicator = document.getElementById('sync-indicator');
+                if (indicator) {
+                    indicator.classList.remove('hidden');
+                    indicator.classList.add('sync-active');
+                    
+                    // Blink effect
+                    setTimeout(() => {
+                        indicator.classList.remove('sync-active');
+                        indicator.classList.add('sync-inactive');
+                    }, 1000);
+                    
+                    setTimeout(() => {
+                        indicator.classList.remove('sync-inactive');
+                        indicator.classList.add('sync-active');
+                    }, 2000);
+                }
             }
 
             // FIXED: Save menggunakan key yang sama dengan sistem siswa
             saveChanges() {
                 try {
-                    console.log('💾 Admin: Saving student data to pohon_students:', this.students);
-                    localStorage.setItem('pohon_students', JSON.stringify(this.students));
+                    console.log('💾 Admin: Saving student data to', this.dataKey + ':', this.students);
+                    localStorage.setItem(this.dataKey, JSON.stringify(this.students));
                     
                     // Verifikasi penyimpanan
-                    const savedData = JSON.parse(localStorage.getItem('pohon_students') || '[]');
-                    console.log('✅ Data saved to pohon_students:', savedData);
+                    const savedData = JSON.parse(localStorage.getItem(this.dataKey) || '[]');
+                    console.log('✅ Data saved to', this.dataKey + ':', savedData);
                     
                     this.applyFilters();
 
-                    // Trigger refresh untuk siswa
-                    this.forceStudentRefresh();
+                    // Trigger sync untuk siswa
+                    this.triggerStudentSync();
                 } catch (error) {
                     console.error('❌ Error saving data:', error);
                     this.showNotification('Error saving data', 'error');
@@ -1219,8 +1276,6 @@
 
             // NEW FEATURE: Export all data
             exportAllData() {
-                if (!this.currentStudent) return;
-
                 const data = {
                     students: this.students,
                     exportDate: new Date().toISOString(),
