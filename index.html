@@ -298,9 +298,40 @@
         .progress-bar-animated {
             transition: width 1s ease-in-out;
         }
+        
+        /* NEW: Real-time sync indicator */
+        .sync-indicator {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 100;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .sync-active {
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid #22c55e;
+            color: #22c55e;
+        }
+        
+        .sync-inactive {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid #ef4444;
+            color: #ef4444;
+        }
     </style>
 </head>
 <body class="font-cinzel text-black min-h-screen">
+    <!-- Sync Indicator -->
+    <div id="sync-indicator" class="sync-indicator sync-active hidden">
+        <i class="fas fa-sync-alt mr-1"></i>
+        <span>Real-time Sync</span>
+    </div>
+
     <!-- Connection Status Indicator -->
     <div id="connection-status" class="connection-status hidden">
         <i class="fas fa-wifi mr-1"></i>
@@ -719,7 +750,7 @@
 
     <script>
         // =============================================
-        // COMPLETE STUDENT SYSTEM WITH JSON SERVER
+        // COMPLETE STUDENT SYSTEM WITH REAL-TIME SYNC
         // =============================================
         class StudentSystem {
             constructor() {
@@ -729,10 +760,7 @@
                 this.isOnline = false;
                 this.lastAdminUpdate = null;
                 this.adminUpdateCheckInterval = null;
-                
-                // ⚠️ IMPORTANT: Ganti dengan IP komputer server saat presentasi!
-                this.API_BASE = 'http://localhost:3000';
-                // Contoh: this.API_BASE = 'http://192.168.1.100:3000';
+                this.dataKey = 'pohon_students'; // KEY YANG SAMA DENGAN ADMIN
                 
                 this.checkServerConnection();
                 this.init();
@@ -781,7 +809,7 @@
                 });
             }
 
-            // PERBAIKAN BARU: Admin Update Checker
+            // PERBAIKAN BARU: Admin Update Checker dengan real-time sync
             startAdminUpdateChecker() {
                 if (this.adminUpdateCheckInterval) {
                     clearInterval(this.adminUpdateCheckInterval);
@@ -789,7 +817,7 @@
                 
                 this.adminUpdateCheckInterval = setInterval(() => {
                     this.checkForAdminUpdates();
-                }, 2000);
+                }, 1000); // Check every second for real-time updates
             }
 
             stopAdminUpdateChecker() {
@@ -799,21 +827,22 @@
                 }
             }
 
-            // PERBAIKAN BARU: Check for admin updates
+            // PERBAIKAN BESAR: Check for admin updates dengan real-time sync
             checkForAdminUpdates() {
                 if (!this.currentStudent) return;
 
                 try {
-                    // Check admin refresh trigger
-                    const refreshTrigger = JSON.parse(localStorage.getItem('admin_refresh_trigger') || 'null');
-                    if (refreshTrigger && refreshTrigger.timestamp !== this.lastAdminUpdate) {
-                        console.log('🔄 Student: Detected admin update trigger');
-                        this.lastAdminUpdate = refreshTrigger.timestamp;
+                    // Check admin sync trigger
+                    const syncTrigger = JSON.parse(localStorage.getItem('admin_sync_trigger') || 'null');
+                    if (syncTrigger && syncTrigger.timestamp !== this.lastAdminUpdate) {
+                        console.log('🔄 Student: Detected admin sync trigger');
+                        this.lastAdminUpdate = syncTrigger.timestamp;
                         this.loadStudentData();
+                        this.showSyncIndicator();
                     }
 
                     // Check for direct data changes
-                    const currentData = JSON.parse(localStorage.getItem('pohon_students') || '[]');
+                    const currentData = JSON.parse(localStorage.getItem(this.dataKey) || '[]');
                     const currentStudentData = currentData.find(s => s.id === this.currentStudent.id);
                     
                     if (currentStudentData && currentStudentData.points !== this.currentStudent.points) {
@@ -843,7 +872,7 @@
                 if (!this.currentStudent) return;
 
                 try {
-                    const currentData = JSON.parse(localStorage.getItem('pohon_students') || '[]');
+                    const currentData = JSON.parse(localStorage.getItem(this.dataKey) || '[]');
                     const currentStudentData = currentData.find(s => s.id === this.currentStudent.id);
                     
                     if (currentStudentData) {
@@ -887,6 +916,26 @@
                 
                 // Also show regular notification
                 this.showNotification(`🎁 ${message}`, 'success');
+            }
+
+            // PERBAIKAN BARU: Show sync indicator
+            showSyncIndicator() {
+                const indicator = document.getElementById('sync-indicator');
+                if (indicator) {
+                    indicator.classList.remove('hidden');
+                    indicator.classList.add('sync-active');
+                    
+                    // Blink effect
+                    setTimeout(() => {
+                        indicator.classList.remove('sync-active');
+                        indicator.classList.add('sync-inactive');
+                    }, 1000);
+                    
+                    setTimeout(() => {
+                        indicator.classList.remove('sync-inactive');
+                        indicator.classList.add('sync-active');
+                    }, 2000);
+                }
             }
 
             async checkServerConnection() {
@@ -944,7 +993,7 @@
 
             fallbackToLocalStorage() {
                 console.log('🔄 Using localStorage fallback');
-                this.students = JSON.parse(localStorage.getItem('pohon_students')) || [];
+                this.students = JSON.parse(localStorage.getItem(this.dataKey)) || [];
             }
 
             async saveStudentToServer(student) {
@@ -994,7 +1043,7 @@
                 } else {
                     this.students.push(student);
                 }
-                localStorage.setItem('pohon_students', JSON.stringify(this.students));
+                localStorage.setItem(this.dataKey, JSON.stringify(this.students));
             }
 
             checkExistingSession() {
