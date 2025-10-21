@@ -271,6 +271,28 @@
         .scrollable-form::-webkit-scrollbar-thumb:hover {
             background: rgba(139, 69, 19, 0.5);
         }
+
+        /* PERBAIKAN: Admin Update Notification */
+        .admin-update-notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            z-index: 100;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: bold;
+            background: rgba(212, 175, 55, 0.9);
+            border: 2px solid #8B4513;
+            color: #000000;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            transform: translateX(120%);
+            transition: transform 0.3s ease;
+        }
+
+        .admin-update-notification.show {
+            transform: translateX(0);
+        }
     </style>
 </head>
 <body class="font-cinzel text-black min-h-screen">
@@ -278,6 +300,12 @@
     <div id="connection-status" class="connection-status hidden">
         <i class="fas fa-wifi mr-1"></i>
         <span id="connection-text">Connecting...</span>
+    </div>
+
+    <!-- Admin Update Notification -->
+    <div id="admin-update-notification" class="admin-update-notification hidden">
+        <i class="fas fa-bell mr-2"></i>
+        <span id="admin-update-message">Admin updated your points!</span>
     </div>
 
     <!-- Background Elements - Tree Theme -->
@@ -694,6 +722,8 @@
                 this.students = [];
                 this.selectedProfileIcon = 'tree';
                 this.isOnline = false;
+                this.lastAdminUpdate = null;
+                this.adminUpdateCheckInterval = null;
                 
                 // ⚠️ IMPORTANT: Ganti dengan IP komputer server saat presentasi!
                 this.API_BASE = 'http://localhost:3000';
@@ -708,6 +738,7 @@
                 this.checkExistingSession();
                 this.startAutoSync();
                 this.setupBeforeUnload();
+                this.startAdminUpdateChecker(); // PERBAIKAN: Start admin update checker
             }
 
             setupEventListeners() {
@@ -734,13 +765,123 @@
                     if (this.currentStudent) {
                         this.updateStudentStatus(false);
                     }
+                    this.stopAdminUpdateChecker(); // PERBAIKAN: Stop checker saat unload
                 });
 
                 window.addEventListener('pageshow', () => {
                     if (this.currentStudent) {
                         this.updateStudentStatus(true);
                     }
+                    this.startAdminUpdateChecker(); // PERBAIKAN: Restart checker
                 });
+            }
+
+            // PERBAIKAN BARU: Admin Update Checker
+            startAdminUpdateChecker() {
+                if (this.adminUpdateCheckInterval) {
+                    clearInterval(this.adminUpdateCheckInterval);
+                }
+                
+                this.adminUpdateCheckInterval = setInterval(() => {
+                    this.checkForAdminUpdates();
+                }, 2000); // Check every 2 seconds
+            }
+
+            stopAdminUpdateChecker() {
+                if (this.adminUpdateCheckInterval) {
+                    clearInterval(this.adminUpdateCheckInterval);
+                    this.adminUpdateCheckInterval = null;
+                }
+            }
+
+            // PERBAIKAN BARU: Check for admin updates
+            checkForAdminUpdates() {
+                if (!this.currentStudent) return;
+
+                try {
+                    // Check admin refresh trigger
+                    const refreshTrigger = JSON.parse(localStorage.getItem('admin_refresh_trigger') || 'null');
+                    if (refreshTrigger && refreshTrigger.timestamp !== this.lastAdminUpdate) {
+                        console.log('🔄 Student: Detected admin update trigger');
+                        this.lastAdminUpdate = refreshTrigger.timestamp;
+                        this.loadStudentData();
+                    }
+
+                    // Check for direct data changes
+                    const currentData = JSON.parse(localStorage.getItem('pohon_students') || '[]');
+                    const currentStudentData = currentData.find(s => s.id === this.currentStudent.id);
+                    
+                    if (currentStudentData && currentStudentData.points !== this.currentStudent.points) {
+                        const pointsDiff = currentStudentData.points - this.currentStudent.points;
+                        console.log('🎯 Student: Points updated by admin:', pointsDiff);
+                        
+                        // Update current student data
+                        this.currentStudent.points = currentStudentData.points;
+                        this.currentStudent.level = currentStudentData.level;
+                        this.currentStudent.lastActivity = currentStudentData.lastActivity;
+                        
+                        this.updateDisplay();
+                        this.saveCurrentStudent();
+                        
+                        // Show notification
+                        if (pointsDiff > 0) {
+                            this.showAdminUpdateNotification(`+${pointsDiff} XP from Admin!`);
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error checking admin updates:', error);
+                }
+            }
+
+            // PERBAIKAN BARU: Load student data from localStorage
+            loadStudentData() {
+                if (!this.currentStudent) return;
+
+                try {
+                    const currentData = JSON.parse(localStorage.getItem('pohon_students') || '[]');
+                    const currentStudentData = currentData.find(s => s.id === this.currentStudent.id);
+                    
+                    if (currentStudentData) {
+                        const oldPoints = this.currentStudent.points;
+                        this.currentStudent.points = currentStudentData.points;
+                        this.currentStudent.level = currentStudentData.level;
+                        this.currentStudent.lastActivity = currentStudentData.lastActivity;
+                        
+                        this.updateDisplay();
+                        this.saveCurrentStudent();
+
+                        // Show notification if points increased
+                        if (currentStudentData.points > oldPoints) {
+                            const pointsDiff = currentStudentData.points - oldPoints;
+                            this.showAdminUpdateNotification(`+${pointsDiff} XP from Admin!`);
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error loading student data:', error);
+                }
+            }
+
+            // PERBAIKAN BARU: Show admin update notification
+            showAdminUpdateNotification(message) {
+                const notification = document.getElementById('admin-update-notification');
+                const messageElement = document.getElementById('admin-update-message');
+                
+                if (notification && messageElement) {
+                    messageElement.textContent = message;
+                    notification.classList.remove('hidden');
+                    notification.classList.add('show');
+                    
+                    // Auto hide after 5 seconds
+                    setTimeout(() => {
+                        notification.classList.remove('show');
+                        setTimeout(() => {
+                            notification.classList.add('hidden');
+                        }, 300);
+                    }, 5000);
+                }
+                
+                // Also show regular notification
+                this.showNotification(`🎁 ${message}`, 'success');
             }
 
             async checkServerConnection() {
@@ -861,6 +1002,9 @@
                         this.updateStudentStatus(true);
                         this.startAutoSync();
                         this.updateGlobalRank();
+                        
+                        // PERBAIKAN: Load latest data saat session dimulai
+                        this.loadStudentData();
                     } catch (error) {
                         console.error('Error loading session:', error);
                         localStorage.removeItem('current_student');
@@ -1027,6 +1171,7 @@
                 document.getElementById('character-section').classList.add('hidden');
                 document.getElementById('user-info').classList.add('hidden');
                 document.getElementById('logout-btn').classList.add('hidden');
+                this.stopAdminUpdateChecker(); // PERBAIKAN: Stop checker saat logout
             }
 
             showMainInterface() {
@@ -1041,6 +1186,7 @@
                 this.updateStatusDisplay();
                 this.updateDisplay();
                 this.updateGlobalRank();
+                this.startAdminUpdateChecker(); // PERBAIKAN: Start checker saat login
             }
 
             updateProfileIcon() {
