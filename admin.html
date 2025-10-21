@@ -39,7 +39,6 @@
         }
     </script>
     <style>
-        /* KEEP ALL YOUR EXISTING CSS STYLES */
         body {
             background: linear-gradient(135deg, #2C1810 0%, #1A0F0A 50%, #0F0805 100%);
             min-height: 100vh;
@@ -249,83 +248,9 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
-
-        /* PERBAIKAN: Tampilan Rank yang Tidak Terpotong */
-        .rank-display {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.25rem;
-            max-width: 100%;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .rank-text {
-            font-size: 0.875rem;
-            font-weight: 600;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            max-width: 150px;
-        }
-
-        @media (min-width: 768px) {
-            .rank-text {
-                font-size: 1rem;
-                max-width: 180px;
-            }
-        }
-
-        .table-rank {
-            font-size: 0.875rem;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            max-width: 140px;
-            display: inline-block;
-        }
-
-        @media (min-width: 1024px) {
-            .table-rank {
-                font-size: 1rem;
-                max-width: 160px;
-            }
-        }
-        
-        /* NEW: Real-time sync indicator */
-        .sync-indicator {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 100;
-            padding: 8px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-        
-        .sync-active {
-            background: rgba(34, 197, 94, 0.2);
-            border: 1px solid #22c55e;
-            color: #22c55e;
-        }
-        
-        .sync-inactive {
-            background: rgba(239, 68, 68, 0.2);
-            border: 1px solid #ef4444;
-            color: #ef4444;
-        }
     </style>
 </head>
 <body class="font-cinzel text-black min-h-screen">
-    <!-- Sync Indicator -->
-    <div id="sync-indicator" class="sync-indicator sync-active hidden">
-        <i class="fas fa-sync-alt mr-1"></i>
-        <span>Real-time Sync</span>
-    </div>
-
     <!-- Admin Authentication Modal -->
     <div id="admin-auth-modal" class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 admin-auth-modal">
         <div class="parchment-bg rounded-2xl p-8 max-w-md w-full transform animate-grow ancient-border">
@@ -387,16 +312,16 @@
                 <!-- Action Buttons -->
                 <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-end">
                     <button onclick="adminSystem.exportAllData()" class="bg-forestGreen hover:bg-green-800 text-parchment px-6 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 border-2 border-gold font-medieval text-sm lg:text-base flex items-center justify-center shadow-lg export-btn">
-                        <i class="fas fa-download mr-3"></i>Export Data
+                        <i class="fas fa-download mr-3"></i>Ekspor Data
                     </button>
                     <button onclick="adminSystem.showBackupModal()" class="bg-mysticBlue hover:bg-blue-800 text-parchment px-6 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 border-2 border-gold font-medieval text-sm lg:text-base flex items-center justify-center shadow-lg">
                         <i class="fas fa-database mr-3"></i>Backup
                     </button>
                     <button onclick="adminSystem.refreshData()" class="bg-gold hover:bg-yellow-600 text-darkBrown px-6 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 border-2 border-darkBrown font-medieval text-sm lg:text-base flex items-center justify-center shadow-lg">
-                        <i class="fas fa-sync-alt mr-3"></i>Refresh Data
+                        <i class="fas fa-sync-alt mr-3"></i>Perbarui Data
                     </button>
                     <a href="siswa.html" class="bg-deepRed hover:bg-red-800 text-parchment px-6 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 border-2 border-gold font-medieval text-sm lg:text-base flex items-center justify-center shadow-lg">
-                        <i class="fas fa-eye mr-3"></i>View Students
+                        <i class="fas fa-eye mr-3"></i>Lihat Siswa
                     </a>
                     <button onclick="adminSystem.logout()" class="bg-darkBrown hover:bg-black text-parchment px-6 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 border-2 border-gold font-medieval text-sm lg:text-base flex items-center justify-center shadow-lg">
                         <i class="fas fa-sign-out-alt mr-3"></i>Logout
@@ -415,7 +340,7 @@
                     <div class="flex items-center justify-between">
                         <div class="space-y-2">
                             <div class="text-3xl lg:text-4xl font-bold text-dark" id="total-students">0</div>
-                            <div class="text-dark font-medieval text-lg">Total Adventurers</div>
+                            <div class="text-dark font-medieval text-lg">Total Petualang</div>
                         </div>
                         <div class="w-14 h-14 bg-gold/20 rounded-2xl flex items-center justify-center ancient-border">
                             <i class="fas fa-users text-gold text-2xl"></i>
@@ -430,7 +355,7 @@
                     <div class="flex items-center justify-between">
                         <div class="space-y-2">
                             <div class="text-3xl lg:text-4xl font-bold text-dark" id="online-students">0</div>
-                            <div class="text-dark font-medieval text-lg">Currently Online</div>
+                            <div class="text-dark font-medieval text-lg">Sedang Online</div>
                         </div>
                         <div class="w-14 h-14 bg-forestGreen/20 rounded-2xl flex items-center justify-center ancient-border">
                             <i class="fas fa-wifi text-forestGreen text-2xl"></i>
@@ -452,7 +377,7 @@
                         </div>
                     </div>
                     <div class="mt-4 text-sm text-dark font-medieval">
-                        ⭐ Average: <span id="avg-points-display">0</span> XP
+                        ⭐ Rata-rata: <span id="avg-points-display">0</span> XP
                     </div>
                 </div>
 
@@ -460,14 +385,14 @@
                     <div class="flex items-center justify-between">
                         <div class="space-y-2">
                             <div class="text-3xl lg:text-4xl font-bold text-dark" id="avg-points">0</div>
-                            <div class="text-dark font-medieval text-lg">Average XP</div>
+                            <div class="text-dark font-medieval text-lg">Rata-rata XP</div>
                         </div>
                         <div class="w-14 h-14 bg-bronze/20 rounded-2xl flex items-center justify-center ancient-border">
                             <i class="fas fa-chart-line text-bronze text-2xl"></i>
                         </div>
                     </div>
                     <div class="mt-4 text-sm text-dark font-medieval">
-                        📈 System Progress
+                        📈 Progress sistem
                     </div>
                 </div>
             </div>
@@ -481,7 +406,7 @@
                             <input 
                                 type="text" 
                                 id="search-input"
-                                placeholder="Search adventurer name or class..."
+                                placeholder="Cari nama petualang atau kelas..."
                                 class="w-full px-6 py-4 bg-oldPaper border-3 border-darkBrown rounded-2xl focus:border-gold focus:ring-4 focus:ring-gold/20 transition-all duration-300 outline-none font-medieval text-lg placeholder-black/60 shadow-inner text-dark"
                             >
                             <div class="absolute right-4 top-1/2 transform -translate-y-1/2 text-darkBrown text-xl">
@@ -495,98 +420,44 @@
                         </button>
                         <button onclick="adminSystem.toggleSort()" class="bg-mysticBlue hover:bg-blue-800 text-parchment px-6 py-4 rounded-2xl font-semibold transition-all duration-300 border-3 border-gold font-medieval text-base flex items-center justify-center action-btn">
                             <i class="fas fa-sort-amount-down mr-2" id="sort-icon"></i>
-                            <span id="sort-text">Highest XP</span>
+                            <span id="sort-text">XP Tertinggi</span>
                         </button>
                     </div>
                 </div>
 
                 <!-- Filter by Class -->
                 <div class="mb-6">
-                    <h3 class="text-dark font-semibold font-medieval text-lg mb-4">Filter Class:</h3>
-                    <div class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-8 gap-3">
+                    <h3 class="text-dark font-semibold font-medieval text-lg mb-4">Filter Kelas:</h3>
+                    <div class="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-10 gap-3">
                         <button onclick="adminSystem.filterByClass('')" class="filter-btn active bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
-                            All
+                            Semua
                         </button>
-                        <button onclick="adminSystem.filterByClass('X1')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
-                            X1
+                        <button onclick="adminSystem.filterByClass('7A')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
+                            7A
                         </button>
-                        <button onclick="adminSystem.filterByClass('X2')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
-                            X2
+                        <button onclick="adminSystem.filterByClass('7B')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
+                            7B
                         </button>
-                        <button onclick="adminSystem.filterByClass('X3')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
-                            X3
+                        <button onclick="adminSystem.filterByClass('7C')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
+                            7C
                         </button>
-                        <button onclick="adminSystem.filterByClass('X4')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
-                            X4
+                        <button onclick="adminSystem.filterByClass('8A')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
+                            8A
                         </button>
-                        <button onclick="adminSystem.filterByClass('X5')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
-                            X5
+                        <button onclick="adminSystem.filterByClass('8B')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
+                            8B
                         </button>
-                        <button onclick="adminSystem.filterByClass('X6')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
-                            X6
+                        <button onclick="adminSystem.filterByClass('8C')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
+                            8C
                         </button>
-                        <button onclick="adminSystem.filterByClass('X7')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
-                            X7
+                        <button onclick="adminSystem.filterByClass('9A')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
+                            9A
                         </button>
-                        <button onclick="adminSystem.filterByClass('X8')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
-                            X8
+                        <button onclick="adminSystem.filterByClass('9B')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
+                            9B
                         </button>
-                        <button onclick="adminSystem.filterByClass('X9')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
-                            X9
-                        </button>
-                        <button onclick="adminSystem.filterByClass('XI MIPA 1')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
-                            XI MIPA 1
-                        </button>
-                        <button onclick="adminSystem.filterByClass('XI MIPA 2')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
-                            XI MIPA 2
-                        </button>
-                        <button onclick="adminSystem.filterByClass('XI MIPA 3')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
-                            XI MIPA 3
-                        </button>
-                        <button onclick="adminSystem.filterByClass('XI MIPA 4')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
-                            XI MIPA 4
-                        </button>
-                        <button onclick="adminSystem.filterByClass('XI MIPA 5')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
-                            XI MIPA 5
-                        </button>
-                        <button onclick="adminSystem.filterByClass('XI IPS 1')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
-                            XI IPS 1
-                        </button>
-                        <button onclick="adminSystem.filterByClass('XI IPS 2')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
-                            XI IPS 2
-                        </button>
-                        <button onclick="adminSystem.filterByClass('XI IPS 3')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
-                            XI IPS 3
-                        </button>
-                        <button onclick="adminSystem.filterByClass('XI IPS 4')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
-                            XI IPS 4
-                        </button>
-                        <button onclick="adminSystem.filterByClass('XII MIPA 1')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
-                            XII MIPA 1
-                        </button>
-                        <button onclick="adminSystem.filterByClass('XII MIPA 2')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
-                            XII MIPA 2
-                        </button>
-                        <button onclick="adminSystem.filterByClass('XII MIPA 3')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
-                            XII MIPA 3
-                        </button>
-                        <button onclick="adminSystem.filterByClass('XII MIPA 4')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
-                            XII MIPA 4
-                        </button>
-                        <button onclick="adminSystem.filterByClass('XII MIPA 5')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
-                            XII MIPA 5
-                        </button>
-                        <button onclick="adminSystem.filterByClass('XII IPS 1')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
-                            XII IPS 1
-                        </button>
-                        <button onclick="adminSystem.filterByClass('XII IPS 2')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
-                            XII IPS 2
-                        </button>
-                        <button onclick="adminSystem.filterByClass('XII IPS 3')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
-                            XII IPS 3
-                        </button>
-                        <button onclick="adminSystem.filterByClass('XII BAHASA')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
-                            XII BAHASA
+                        <button onclick="adminSystem.filterByClass('9C')" class="filter-btn bg-gold/20 py-3 rounded-xl text-sm font-semibold font-medieval">
+                            9C
                         </button>
                     </div>
                 </div>
@@ -596,7 +467,7 @@
                     <h3 class="text-dark font-semibold font-medieval text-lg mb-4">Filter Status:</h3>
                     <div class="flex flex-wrap gap-3">
                         <button onclick="adminSystem.filterByStatus('all')" class="filter-btn active bg-gold/20 px-6 py-3 rounded-xl text-base font-semibold font-medieval">
-                            All Status
+                            Semua Status
                         </button>
                         <button onclick="adminSystem.filterByStatus('online')" class="filter-btn bg-gold/20 px-6 py-3 rounded-xl text-base font-semibold font-medieval">
                             <span class="online-status status-online"></span>Online
@@ -611,7 +482,7 @@
                 <div id="search-info" class="mt-4 p-4 bg-oldPaper rounded-xl border-2 border-darkBrown text-dark font-medieval text-base hidden">
                     <div class="flex items-center space-x-2">
                         <i class="fas fa-info-circle text-gold"></i>
-                        <span>Showing <span class="font-bold text-dark" id="result-count">0</span> of <span class="font-bold text-dark" id="total-count">0</span> adventurers</span>
+                        <span>Menampilkan <span class="font-bold text-dark" id="result-count">0</span> dari <span class="font-bold text-dark" id="total-count">0</span> petualang</span>
                         <span id="search-term-display" class="font-semibold text-gold"></span>
                     </div>
                 </div>
@@ -623,12 +494,12 @@
                 <div class="px-6 lg:px-8 py-6 border-b-2 border-darkBrown bg-gradient-to-r from-oldPaper to-parchment">
                     <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center space-y-4 lg:space-y-0">
                         <div>
-                            <h3 class="text-2xl lg:text-3xl font-bold text-dark font-maguntia mb-2">Adventurers List</h3>
-                            <p class="text-dark font-medieval text-lg">Manage XP and monitor literacy progress</p>
+                            <h3 class="text-2xl lg:text-3xl font-bold text-dark font-maguntia mb-2">Daftar Petualang</h3>
+                            <p class="text-dark font-medieval text-lg">Kelola XP dan pantau progress literasi</p>
                         </div>
                         <div id="student-count" class="bg-gold/30 text-darkBrown px-6 py-3 rounded-xl text-base font-semibold border-2 border-darkBrown font-medieval">
                             <i class="fas fa-users mr-2"></i>
-                            <span>0 adventurers</span>
+                            <span>0 petualang</span>
                         </div>
                     </div>
                 </div>
@@ -641,13 +512,13 @@
                                 <th class="px-6 py-5 text-left font-bold text-dark font-medieval text-lg border-b-2 border-darkBrown">
                                     <div class="flex items-center space-x-2">
                                         <i class="fas fa-user text-gold"></i>
-                                        <span>Adventurer Name</span>
+                                        <span>Nama Petualang</span>
                                     </div>
                                 </th>
                                 <th class="px-6 py-5 text-left font-bold text-dark font-medieval text-lg border-b-2 border-darkBrown">
                                     <div class="flex items-center space-x-2">
                                         <i class="fas fa-graduation-cap text-gold"></i>
-                                        <span>Class</span>
+                                        <span>Kelas</span>
                                     </div>
                                 </th>
                                 <th class="px-6 py-5 text-left font-bold text-dark font-medieval text-lg border-b-2 border-darkBrown">
@@ -677,7 +548,7 @@
                                 <th class="px-6 py-5 text-left font-bold text-dark font-medieval text-lg border-b-2 border-darkBrown">
                                     <div class="flex items-center space-x-2">
                                         <i class="fas fa-cogs text-gold"></i>
-                                        <span>Actions</span>
+                                        <span>Aksi</span>
                                     </div>
                                 </th>
                             </tr>
@@ -692,41 +563,41 @@
                 <div class="mobile-text-center mobile-full-width">
                     <div class="mobile-px-4 mobile-py-16 border-t-2 border-darkBrown text-center text-dark font-medieval" id="empty-state">
                         <i class="fas fa-scroll text-6xl mb-6 opacity-40"></i>
-                        <p class="text-2xl mb-3">No adventurers yet</p>
-                        <p class="text-lg opacity-80">Direct students to login to the system</p>
+                        <p class="text-2xl mb-3">Belum ada petualang</p>
+                        <p class="text-lg opacity-80">Arahkan siswa untuk login ke sistem</p>
                     </div>
 
                     <div class="mobile-px-4 mobile-py-16 border-t-2 border-darkBrown text-center text-dark font-medieval hidden" id="no-results-state">
                         <i class="fas fa-search text-6xl mb-6 opacity-40"></i>
-                        <p class="text-2xl mb-3">No results found</p>
-                        <p class="text-lg opacity-80">Try different keywords or filters</p>
+                        <p class="text-2xl mb-3">Tidak ditemukan</p>
+                        <p class="text-lg opacity-80">Coba dengan kata kunci atau filter lain</p>
                     </div>
                 </div>
             </div>
 
             <!-- Quick Actions Section -->
             <div class="parchment-bg rounded-2xl p-6 lg:p-8 ancient-border">
-                <h3 class="text-2xl lg:text-3xl font-bold text-dark font-maguntia mb-6">Quick XP Actions</h3>
+                <h3 class="text-2xl lg:text-3xl font-bold text-dark font-maguntia mb-6">Aksi Cepat Tambah XP</h3>
                 <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
                     <button onclick="adminSystem.showBulkAddModal(5)" class="parchment-bg hover:bg-gold/30 text-dark py-6 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 border-3 border-darkBrown font-medieval text-lg flex flex-col items-center justify-center action-btn shadow-lg">
                         <i class="fas fa-plus-circle text-3xl mb-3 text-gold"></i>
                         <span>+5 XP</span>
-                        <span class="text-sm opacity-70 mt-1">Small Add</span>
+                        <span class="text-sm opacity-70 mt-1">Tambah Sedikit</span>
                     </button>
                     <button onclick="adminSystem.showBulkAddModal(15)" class="parchment-bg hover:bg-gold/30 text-dark py-6 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 border-3 border-darkBrown font-medieval text-lg flex flex-col items-center justify-center action-btn shadow-lg">
                         <i class="fas fa-plus-circle text-3xl mb-3 text-bronze"></i>
                         <span>+15 XP</span>
-                        <span class="text-sm opacity-70 mt-1">Medium Add</span>
+                        <span class="text-sm opacity-70 mt-1">Tambah Medium</span>
                     </button>
                     <button onclick="adminSystem.showBulkAddModal(20)" class="parchment-bg hover:bg-gold/30 text-dark py-6 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 border-3 border-darkBrown font-medieval text-lg flex flex-col items-center justify-center action-btn shadow-lg">
                         <i class="fas fa-plus-circle text-3xl mb-3 text-gold"></i>
                         <span>+20 XP</span>
-                        <span class="text-sm opacity-70 mt-1">Large Add</span>
+                        <span class="text-sm opacity-70 mt-1">Tambah Banyak</span>
                     </button>
                     <button onclick="adminSystem.showBulkAddModal(30)" class="parchment-bg hover:bg-gold/30 text-dark py-6 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 border-3 border-darkBrown font-medieval text-lg flex flex-col items-center justify-center action-btn shadow-lg">
                         <i class="fas fa-plus-circle text-3xl mb-3 text-bronze"></i>
                         <span>+30 XP</span>
-                        <span class="text-sm opacity-70 mt-1">Maximum Add</span>
+                        <span class="text-sm opacity-70 mt-1">Tambah Maximum</span>
                     </button>
                 </div>
             </div>
@@ -740,21 +611,21 @@
                 <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-r from-gold to-bronze rounded-2xl flex items-center justify-center ancient-border">
                     <i class="fas fa-plus text-darkBrown text-3xl"></i>
                 </div>
-                <h4 class="text-2xl font-bold text-dark font-maguntia">Add XP</h4>
+                <h4 class="text-2xl font-bold text-dark font-maguntia">Tambah XP</h4>
             </div>
             <div class="space-y-6">
                 <div>
-                    <label class="block text-dark font-semibold mb-3 font-medieval text-lg">XP Amount</label>
+                    <label class="block text-dark font-semibold mb-3 font-medieval text-lg">Jumlah XP</label>
                     <input type="number" id="points-amount" 
                            class="w-full px-6 py-4 bg-oldPaper border-3 border-darkBrown rounded-2xl focus:border-gold focus:ring-4 focus:ring-gold/20 transition-all duration-300 outline-none font-medieval text-lg text-center text-dark"
                            min="1" max="100" value="5">
                 </div>
                 <div class="flex space-x-4">
                     <button onclick="adminSystem.addPointsToStudent()" class="flex-1 bg-gold hover:bg-yellow-600 text-darkBrown py-4 rounded-2xl font-semibold transition-all duration-300 border-3 border-darkBrown font-medieval text-lg shadow-lg hover:scale-105">
-                        <i class="fas fa-check mr-2"></i>Add XP
+                        <i class="fas fa-check mr-2"></i>Tambah XP
                     </button>
                     <button onclick="adminSystem.closeAddPointsModal()" class="flex-1 bg-deepRed hover:bg-red-800 text-parchment py-4 rounded-2xl font-semibold transition-all duration-300 border-3 border-gold font-medieval text-lg shadow-lg hover:scale-105">
-                        <i class="fas fa-times mr-2"></i>Cancel
+                        <i class="fas fa-times mr-2"></i>Batal
                     </button>
                 </div>
             </div>
@@ -768,23 +639,23 @@
                 <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-r from-gold to-bronze rounded-2xl flex items-center justify-center ancient-border">
                     <i class="fas fa-users text-darkBrown text-3xl"></i>
                 </div>
-                <h4 class="text-2xl font-bold text-dark font-maguntia">Bulk Add XP</h4>
+                <h4 class="text-2xl font-bold text-dark font-maguntia">Tambah XP Massal</h4>
             </div>
             <div class="space-y-6">
                 <div class="text-center">
-                    <label class="block text-dark font-semibold mb-3 font-medieval text-lg">XP Amount</label>
+                    <label class="block text-dark font-semibold mb-3 font-medieval text-lg">Jumlah XP</label>
                     <div class="text-4xl font-bold text-gold gradient-text" id="bulk-points-amount">5</div>
                 </div>
                 <div class="text-center text-dark font-medieval text-lg bg-oldPaper p-4 rounded-xl border-2 border-darkBrown">
                     <i class="fas fa-info-circle text-gold mr-2"></i>
-                    XP will be added to all active adventurers
+                    XP akan ditambahkan ke semua petualang aktif
                 </div>
                 <div class="flex space-x-4">
                     <button onclick="adminSystem.addPointsToAllStudents()" class="flex-1 bg-gold hover:bg-yellow-600 text-darkBrown py-4 rounded-2xl font-semibold transition-all duration-300 border-3 border-darkBrown font-medieval text-lg shadow-lg hover:scale-105">
-                        <i class="fas fa-bolt mr-2"></i>Add to All
+                        <i class="fas fa-bolt mr-2"></i>Tambah Semua
                     </button>
                     <button onclick="adminSystem.closeBulkAddModal()" class="flex-1 bg-deepRed hover:bg-red-800 text-parchment py-4 rounded-2xl font-semibold transition-all duration-300 border-3 border-gold font-medieval text-lg shadow-lg hover:scale-105">
-                        <i class="fas fa-times mr-2"></i>Cancel
+                        <i class="fas fa-times mr-2"></i>Batal
                     </button>
                 </div>
             </div>
@@ -795,23 +666,23 @@
     <div id="backup-modal" class="fixed inset-0 bg-black/80 z-50 hidden items-center justify-center mobile-container backdrop-blur-sm">
         <div class="parchment-bg rounded-2xl p-8 w-full max-w-2xl ancient-border transform animate-grow">
             <div class="text-center mb-6">
-                <h4 class="text-2xl font-bold text-dark font-maguntia">Backup Management</h4>
-                <p class="text-dark font-medieval">Backup and restore system data</p>
+                <h4 class="text-2xl font-bold text-dark font-maguntia">Manajemen Backup</h4>
+                <p class="text-dark font-medieval">Cadangkan dan pulihkan data sistem</p>
             </div>
             <div class="space-y-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <button onclick="adminSystem.createBackup()" class="parchment-bg hover:bg-gold/30 text-dark py-6 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 border-3 border-darkBrown font-medieval text-lg flex flex-col items-center justify-center action-btn">
                         <i class="fas fa-save text-3xl mb-3 text-gold"></i>
-                        <span>Create Backup</span>
+                        <span>Buat Backup</span>
                     </button>
                     <button onclick="adminSystem.exportBackup()" class="parchment-bg hover:bg-gold/30 text-dark py-6 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 border-3 border-darkBrown font-medieval text-lg flex flex-col items-center justify-center action-btn">
                         <i class="fas fa-download text-3xl mb-3 text-bronze"></i>
-                        <span>Export Backup</span>
+                        <span>Ekspor Backup</span>
                     </button>
                 </div>
                 <div class="text-center">
                     <button onclick="adminSystem.closeBackupModal()" class="bg-deepRed hover:bg-red-800 text-parchment px-6 py-3 rounded-2xl font-semibold transition-all duration-300 border-3 border-gold font-medieval">
-                        Close
+                        Tutup
                     </button>
                 </div>
             </div>
@@ -819,7 +690,7 @@
     </div>
 
     <script>
-        // Enhanced Admin System - TERHUBUNG DENGAN DATA SISWA
+        // Enhanced Admin System with FIXED SYNC ISSUES
         class AdminSystem {
             constructor() {
                 this.students = [];
@@ -835,14 +706,12 @@
                     username: 'admin',
                     password: 'admin123'
                 };
-                this.dataKey = 'pohon_students'; // KEY YANG SAMA DENGAN SISWA
                 this.init();
             }
 
             init() {
                 this.setupEventListeners();
                 this.checkAdminSession();
-                this.showSyncIndicator();
             }
 
             setupEventListeners() {
@@ -902,10 +771,10 @@
                     this.isAuthenticated = true;
                     this.showAdminInterface();
                     this.loadStudents();
-                    this.showNotification('Successfully logged in as admin!', 'success');
+                    this.showNotification('Berhasil login sebagai admin!', 'success');
                     
                 } else {
-                    this.showNotification('Wrong admin username or password!', 'error');
+                    this.showNotification('Username atau password admin salah!', 'error');
                 }
             }
 
@@ -913,7 +782,7 @@
                 localStorage.removeItem('admin_session');
                 this.isAuthenticated = false;
                 this.showAuthInterface();
-                this.showNotification('Successfully logged out from admin panel', 'info');
+                this.showNotification('Berhasil logout dari admin panel', 'info');
             }
 
             showAuthInterface() {
@@ -928,12 +797,11 @@
                 document.getElementById('admin-main').classList.remove('hidden');
             }
 
-            // FIXED: Load data dari sistem siswa (pohon_students)
+            // FIXED: Enhanced data loading with better error handling
             loadStudents() {
                 try {
-                    // Menggunakan key yang sama dengan sistem siswa
-                    const studentData = JSON.parse(localStorage.getItem(this.dataKey) || '[]');
-                    console.log('🔄 Admin: Loading students data dari', this.dataKey + ':', studentData);
+                    const studentData = JSON.parse(localStorage.getItem('perpustakaan_abadi_students') || '[]');
+                    console.log('🔄 Admin: Loading students data:', studentData);
                     
                     const updatedStudents = studentData.map(student => {
                         const lastActivity = new Date(student.lastActivity || student.lastLogin || student.createdAt);
@@ -1013,7 +881,7 @@
                 const noResultsState = document.getElementById('no-results-state');
                 const studentCount = document.getElementById('student-count');
 
-                studentCount.innerHTML = `<i class="fas fa-users mr-2"></i><span>${this.filteredStudents.length} adventurers</span>`;
+                studentCount.innerHTML = `<i class="fas fa-users mr-2"></i><span>${this.filteredStudents.length} petualang</span>`;
 
                 if (this.students.length === 0) {
                     tbody.innerHTML = '';
@@ -1055,9 +923,9 @@
                         <td class="px-6 py-5">
                             <div class="flex items-center space-x-2">
                                 <span class="font-mono text-dark text-lg password-field bg-oldPaper px-3 py-1 rounded border border-darkBrown">
-                                    ${student.password || 'not-set'}
+                                    ${student.password || 'belum-set'}
                                 </span>
-                                <button onclick="adminSystem.copyPassword('${student.id}')" class="copy-password text-gold hover:text-bronze text-lg" title="Copy Password">
+                                <button onclick="adminSystem.copyPassword('${student.id}')" class="copy-password text-gold hover:text-bronze text-lg" title="Salin Password">
                                     <i class="fas fa-copy"></i>
                                 </button>
                             </div>
@@ -1072,11 +940,10 @@
                             </div>
                         </td>
                         <td class="px-6 py-5">
-                            <!-- PERBAIKAN: Rank display dengan class table-rank -->
                             <span class="px-4 py-2 rounded-xl text-base font-semibold border-2 border-darkBrown ${
                                 this.getRankColor(student.points)
-                            } font-medieval table-rank" title="${this.getRankName(student.points)}">
-                                ${this.getRankName(student.points)}
+                            } font-medieval">
+                                ${this.getShortRankName(student.points)}
                             </span>
                         </td>
                         <td class="px-6 py-5">
@@ -1091,7 +958,7 @@
                             <div class="flex flex-col space-y-2">
                                 <button onclick="adminSystem.showAddPointsModal('${student.id}')" 
                                         class="bg-gold hover:bg-yellow-600 text-darkBrown px-4 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 border-2 border-darkBrown font-medieval text-base flex items-center justify-center action-btn">
-                                    <i class="fas fa-plus mr-2"></i>Add XP
+                                    <i class="fas fa-plus mr-2"></i>Tambah XP
                                 </button>
                                 <button onclick="adminSystem.resetStudent('${student.id}')" 
                                         class="bg-deepRed hover:bg-red-800 text-parchment px-4 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 border-2 border-gold font-medieval text-base flex items-center justify-center action-btn">
@@ -1103,56 +970,45 @@
                 `).join('');
             }
 
+            // FIXED: Enhanced points addition with proper sync
             showAddPointsModal(studentId) {
                 this.selectedStudentId = studentId;
                 document.getElementById('points-amount').value = 5;
                 document.getElementById('add-points-modal').classList.remove('hidden');
             }
 
-            // PERBAIKAN BESAR: Method addPointsToStudent yang benar
             addPointsToStudent() {
                 if (!this.selectedStudentId) {
-                    this.showNotification('No student selected', 'error');
+                    this.showNotification('Tidak ada siswa yang dipilih', 'error');
                     return;
                 }
 
                 const points = parseInt(document.getElementById('points-amount').value) || 5;
-                console.log('🎯 Admin: Adding points:', points, 'to student:', this.selectedStudentId);
+                console.log('🎯 Admin: Menambah points:', points, 'ke student:', this.selectedStudentId);
 
-                // PERBAIKAN: Load data terbaru dari localStorage sebelum update
-                const currentStudents = JSON.parse(localStorage.getItem(this.dataKey) || '[]');
-                
                 // Cari student berdasarkan ID
-                const studentIndex = currentStudents.findIndex(s => s.id === this.selectedStudentId);
+                const studentIndex = this.students.findIndex(s => s.id === this.selectedStudentId);
                 
                 if (studentIndex === -1) {
-                    this.showNotification('Student not found', 'error');
+                    this.showNotification('Siswa tidak ditemukan', 'error');
                     return;
                 }
 
                 // Update data student
-                const oldPoints = currentStudents[studentIndex].points;
-                currentStudents[studentIndex].points = oldPoints + points;
-                currentStudents[studentIndex].lastActivity = new Date().toISOString();
-                currentStudents[studentIndex].level = this.getLevelFromPoints(currentStudents[studentIndex].points);
+                const oldPoints = this.students[studentIndex].points;
+                this.students[studentIndex].points = oldPoints + points;
+                this.students[studentIndex].lastActivity = new Date().toISOString();
+                this.students[studentIndex].level = this.getLevelFromPoints(this.students[studentIndex].points);
 
-                console.log('✅ Points before:', oldPoints, 'after:', currentStudents[studentIndex].points);
+                console.log('✅ Points sebelum:', oldPoints, 'setelah:', this.students[studentIndex].points);
 
-                // PERBAIKAN: Simpan perubahan ke localStorage dan update local state
-                localStorage.setItem(this.dataKey, JSON.stringify(currentStudents));
-                
-                // Update state lokal
-                this.students = currentStudents;
-                
-                this.applyFilters();
+                // Simpan perubahan ke localStorage
+                this.saveChanges();
                 this.closeAddPointsModal();
                 
-                const studentName = currentStudents[studentIndex].name;
-                this.logAdminActivity('add_points', `Added ${points} XP to ${studentName}`);
-                this.showNotification(`✅ +${points} XP successfully added to ${studentName}`, 'success');
-
-                // PERBAIKAN BARU: Trigger real-time sync untuk siswa
-                this.triggerStudentSync();
+                const studentName = this.students[studentIndex].name;
+                this.logAdminActivity('add_points', `Menambahkan ${points} XP ke ${studentName}`);
+                this.showNotification(`✅ +${points} XP berhasil ditambahkan ke ${studentName}`, 'success');
             }
 
             showBulkAddModal(points) {
@@ -1161,116 +1017,59 @@
                 document.getElementById('bulk-add-modal').classList.remove('hidden');
             }
 
-            // PERBAIKAN BESAR: Method addPointsToAllStudents yang benar
+            // FIXED: Enhanced bulk points addition
             addPointsToAllStudents() {
                 const points = this.bulkPoints;
-                console.log('🎯 Admin: Adding points to all students:', points);
-                
-                // PERBAIKAN: Load data terbaru dari localStorage
-                const currentStudents = JSON.parse(localStorage.getItem(this.dataKey) || '[]');
+                console.log('🎯 Admin: Menambah points ke semua siswa:', points);
                 
                 let updatedCount = 0;
-                currentStudents.forEach((student, index) => {
+                this.students.forEach((student, index) => {
                     const oldPoints = student.points;
-                    currentStudents[index].points = oldPoints + points;
-                    currentStudents[index].lastActivity = new Date().toISOString();
-                    currentStudents[index].level = this.getLevelFromPoints(currentStudents[index].points);
+                    this.students[index].points = oldPoints + points;
+                    this.students[index].lastActivity = new Date().toISOString();
+                    this.students[index].level = this.getLevelFromPoints(this.students[index].points);
                     updatedCount++;
                     
-                    console.log(`📊 Student ${student.name}: ${oldPoints} -> ${currentStudents[index].points}`);
+                    console.log(`📊 Student ${student.name}: ${oldPoints} -> ${this.students[index].points}`);
                 });
 
-                // PERBAIKAN: Simpan ke localStorage dan update state
-                localStorage.setItem(this.dataKey, JSON.stringify(currentStudents));
-                this.students = currentStudents;
-                
-                this.applyFilters();
+                this.saveChanges();
                 this.closeBulkAddModal();
                 
-                this.logAdminActivity('bulk_add_points', `Added ${points} XP to all ${updatedCount} students`);
-                this.showNotification(`✅ +${points} XP to ${updatedCount} adventurers`, 'success');
-
-                // PERBAIKAN BARU: Trigger real-time sync untuk siswa
-                this.triggerStudentSync();
+                this.logAdminActivity('bulk_add_points', `Menambahkan ${points} XP ke semua ${updatedCount} siswa`);
+                this.showNotification(`✅ +${points} XP ke ${updatedCount} petualang`, 'success');
             }
 
             resetStudent(studentId) {
-                if (confirm('Reset this adventurer\'s XP? All progress will be lost.')) {
-                    // PERBAIKAN: Load data terbaru dari localStorage
-                    const currentStudents = JSON.parse(localStorage.getItem(this.dataKey) || '[]');
-                    
-                    const studentIndex = currentStudents.findIndex(s => s.id === studentId);
+                if (confirm('Reset XP petualang ini? Semua progress akan hilang.')) {
+                    const studentIndex = this.students.findIndex(s => s.id === studentId);
                     if (studentIndex !== -1) {
-                        const studentName = currentStudents[studentIndex].name;
-                        currentStudents[studentIndex].points = 0;
-                        currentStudents[studentIndex].level = 0;
-                        currentStudents[studentIndex].lastActivity = new Date().toISOString();
+                        const studentName = this.students[studentIndex].name;
+                        this.students[studentIndex].points = 0;
+                        this.students[studentIndex].level = 0;
+                        this.students[studentIndex].lastActivity = new Date().toISOString();
+                        this.saveChanges();
                         
-                        // PERBAIKAN: Simpan ke localStorage dan update state
-                        localStorage.setItem(this.dataKey, JSON.stringify(currentStudents));
-                        this.students = currentStudents;
-                        this.applyFilters();
-                        
-                        this.logAdminActivity('reset_student', `Reset XP for ${studentName}`);
-                        this.showNotification(`🔄 ${studentName}'s XP reset`, 'info');
-
-                        // PERBAIKAN BARU: Trigger real-time sync untuk siswa
-                        this.triggerStudentSync();
+                        this.logAdminActivity('reset_student', `Reset XP ${studentName}`);
+                        this.showNotification(`🔄 XP ${studentName} direset`, 'info');
                     }
                 }
             }
 
-            // PERBAIKAN BARU: Method untuk trigger sync ke siswa
-            triggerStudentSync() {
-                const syncTrigger = {
-                    timestamp: Date.now(),
-                    type: 'admin_update',
-                    message: 'Data updated by admin'
-                };
-                localStorage.setItem('admin_sync_trigger', JSON.stringify(syncTrigger));
-                console.log('🔄 Admin: Triggering student sync');
-                
-                // Show sync indicator
-                this.showSyncIndicator();
-            }
-
-            // PERBAIKAN BARU: Show sync indicator
-            showSyncIndicator() {
-                const indicator = document.getElementById('sync-indicator');
-                if (indicator) {
-                    indicator.classList.remove('hidden');
-                    indicator.classList.add('sync-active');
-                    
-                    // Blink effect
-                    setTimeout(() => {
-                        indicator.classList.remove('sync-active');
-                        indicator.classList.add('sync-inactive');
-                    }, 1000);
-                    
-                    setTimeout(() => {
-                        indicator.classList.remove('sync-inactive');
-                        indicator.classList.add('sync-active');
-                    }, 2000);
-                }
-            }
-
-            // FIXED: Save menggunakan key yang sama dengan sistem siswa
+            // FIXED: Enhanced save method with verification
             saveChanges() {
                 try {
-                    console.log('💾 Admin: Saving student data to', this.dataKey + ':', this.students);
-                    localStorage.setItem(this.dataKey, JSON.stringify(this.students));
+                    console.log('💾 Admin: Menyimpan data siswa:', this.students);
+                    localStorage.setItem('perpustakaan_abadi_students', JSON.stringify(this.students));
                     
                     // Verifikasi penyimpanan
-                    const savedData = JSON.parse(localStorage.getItem(this.dataKey) || '[]');
-                    console.log('✅ Data saved to', this.dataKey + ':', savedData);
+                    const savedData = JSON.parse(localStorage.getItem('perpustakaan_abadi_students') || '[]');
+                    console.log('✅ Data tersimpan:', savedData);
                     
                     this.applyFilters();
-
-                    // Trigger sync untuk siswa
-                    this.triggerStudentSync();
                 } catch (error) {
                     console.error('❌ Error saving data:', error);
-                    this.showNotification('Error saving data', 'error');
+                    this.showNotification('Error menyimpan data', 'error');
                 }
             }
 
@@ -1289,12 +1088,12 @@
                 const url = URL.createObjectURL(dataBlob);
                 const link = document.createElement('a');
                 link.href = url;
-                link.download = `forest_adventure_export_${new Date().toISOString().split('T')[0]}.json`;
+                link.download = `perpustakaan_abadi_export_${new Date().toISOString().split('T')[0]}.json`;
                 link.click();
                 URL.revokeObjectURL(url);
 
-                this.logAdminActivity('export_data', 'Exported all system data');
-                this.showNotification('📊 Data successfully exported!', 'success');
+                this.logAdminActivity('export_data', 'Mengekspor semua data sistem');
+                this.showNotification('📊 Data berhasil diekspor!', 'success');
             }
 
             getStatistics() {
@@ -1310,7 +1109,7 @@
             getRankDistribution() {
                 const distribution = {};
                 this.students.forEach(student => {
-                    const rank = this.getRankName(student.points);
+                    const rank = this.getShortRankName(student.points);
                     distribution[rank] = (distribution[rank] || 0) + 1;
                 });
                 return distribution;
@@ -1334,14 +1133,14 @@
                 };
 
                 localStorage.setItem(backup.backupId, JSON.stringify(backup));
-                this.logAdminActivity('create_backup', 'Created system backup');
-                this.showNotification('✅ Backup successfully created!', 'success');
+                this.logAdminActivity('create_backup', 'Membuat backup data sistem');
+                this.showNotification('✅ Backup berhasil dibuat!', 'success');
             }
 
             exportBackup() {
                 const backupKeys = Object.keys(localStorage).filter(key => key.startsWith('backup_'));
                 if (backupKeys.length === 0) {
-                    this.showNotification('No backups available', 'warning');
+                    this.showNotification('Tidak ada backup yang tersedia', 'warning');
                     return;
                 }
 
@@ -1356,8 +1155,8 @@
                 link.click();
                 URL.revokeObjectURL(url);
 
-                this.logAdminActivity('export_backup', 'Exported backup data');
-                this.showNotification('✅ Backup successfully exported!', 'success');
+                this.logAdminActivity('export_backup', 'Mengekspor backup data');
+                this.showNotification('✅ Backup berhasil diekspor!', 'success');
             }
 
             // Utility methods
@@ -1365,15 +1164,15 @@
                 const student = this.students.find(s => s.id === studentId);
                 if (student && student.password) {
                     navigator.clipboard.writeText(student.password);
-                    this.showNotification('Password copied successfully!', 'success');
+                    this.showNotification('Password berhasil disalin!', 'success');
                 } else {
-                    this.showNotification('Password not set', 'error');
+                    this.showNotification('Password belum diatur', 'error');
                 }
             }
 
             refreshData() {
                 this.loadStudents();
-                this.showNotification('Data successfully refreshed', 'success');
+                this.showNotification('Data berhasil diperbarui', 'success');
             }
 
             clearSearch() {
@@ -1404,10 +1203,10 @@
                 
                 if (this.sortDescending) {
                     sortIcon.className = 'fas fa-sort-amount-down mr-2';
-                    sortText.textContent = 'Highest XP';
+                    sortText.textContent = 'XP Tertinggi';
                 } else {
                     sortIcon.className = 'fas fa-sort-amount-up mr-2';
-                    sortText.textContent = 'Lowest XP';
+                    sortText.textContent = 'XP Terendah';
                 }
                 
                 this.applyFilters();
@@ -1445,10 +1244,10 @@
                     
                     let displayText = '';
                     if (this.searchTerm) {
-                        displayText += ` for "${this.searchTerm}"`;
+                        displayText += ` untuk "${this.searchTerm}"`;
                     }
                     if (this.selectedClass) {
-                        displayText += ` in ${this.selectedClass}`;
+                        displayText += ` di ${this.selectedClass}`;
                     }
                     if (this.selectedStatus !== 'all') {
                         displayText += ` (${this.selectedStatus})`;
@@ -1487,17 +1286,29 @@
             }
 
             getRankName(points) {
-                const ranks = ['🌱 Seedling', '🍃 Forest Sprout', '🌿 Leaf Seeker', '🌳 Young Oak', '🌲 Ancient Guardian', '🏆 Forest Legend'];
-                return ranks[this.getLevelFromPoints(points)] || '🌱 Seedling';
+                if (points >= 1000) return '📕 Penguasa Cerita';
+                if (points >= 800) return '📗 Ahli Tinta';
+                if (points >= 600) return '📘 Penjaga Buku';
+                if (points >= 300) return '📜 Pencari Aksara';
+                if (points >= 100) return '📚 Penjelajah Halaman';
+                return '📖 Pemula Naskah';
+            }
+
+            getShortRankName(points) {
+                if (points >= 1000) return '🏆 Master';
+                if (points >= 800) return '📗 Expert';
+                if (points >= 600) return '📘 Advanced';
+                if (points >= 300) return '📜 Intermediate';
+                if (points >= 100) return '📚 Beginner';
+                return '📖 Newbie';
             }
 
             getRankColor(points) {
-                const level = this.getLevelFromPoints(points);
-                if (level >= 5) return 'bg-gradient-to-r from-red-500 to-yellow-500 text-white';
-                if (level >= 4) return 'bg-gradient-to-r from-indigo-500 to-purple-500 text-white';
-                if (level >= 3) return 'bg-gradient-to-r from-purple-500 to-blue-500 text-white';
-                if (level >= 2) return 'bg-gradient-to-r from-blue-500 to-green-500 text-white';
-                if (level >= 1) return 'bg-gradient-to-r from-green-500 to-emerald-500 text-white';
+                if (points >= 1000) return 'bg-gradient-to-r from-red-500 to-yellow-500 text-white';
+                if (points >= 800) return 'bg-gradient-to-r from-indigo-500 to-purple-500 text-white';
+                if (points >= 600) return 'bg-gradient-to-r from-purple-500 to-blue-500 text-white';
+                if (points >= 300) return 'bg-gradient-to-r from-blue-500 to-green-500 text-white';
+                if (points >= 100) return 'bg-gradient-to-r from-green-500 to-emerald-500 text-white';
                 return 'bg-gradient-to-r from-gray-400 to-gray-600 text-white';
             }
 
