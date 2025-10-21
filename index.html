@@ -762,7 +762,6 @@
                 this.adminUpdateCheckInterval = null;
                 this.dataKey = 'pohon_students'; // KEY YANG SAMA DENGAN ADMIN
                 
-                this.checkServerConnection();
                 this.init();
             }
 
@@ -938,102 +937,9 @@
                 }
             }
 
-            async checkServerConnection() {
-                try {
-                    console.log('🔌 Checking server connection...');
-                    const response = await fetch(`${this.API_BASE}/students`);
-                    if (response.ok) {
-                        this.isOnline = true;
-                        console.log('✅ Connected to JSON Server');
-                        this.updateConnectionStatus(true, 'Connected to server');
-                        this.showNotification('🔄 Connected to database server', 'success');
-                    } else {
-                        throw new Error('Server not responding');
-                    }
-                } catch (error) {
-                    console.error('❌ JSON Server connection failed:', error);
-                    this.isOnline = false;
-                    this.updateConnectionStatus(false, 'Offline mode');
-                    this.fallbackToLocalStorage();
-                    this.showNotification('📴 Offline mode - using local storage', 'warning');
-                }
-            }
-
-            updateConnectionStatus(isOnline, message) {
-                const statusElement = document.getElementById('connection-status');
-                const textElement = document.getElementById('connection-text');
-                
-                statusElement.classList.remove('hidden');
-                if (isOnline) {
-                    statusElement.className = 'connection-status connection-online';
-                    textElement.textContent = message;
-                } else {
-                    statusElement.className = 'connection-status connection-offline';
-                    textElement.textContent = message;
-                }
-            }
-
-            async loadStudents() {
-                if (!this.isOnline) {
-                    this.fallbackToLocalStorage();
-                    return;
-                }
-
-                try {
-                    const response = await fetch(`${this.API_BASE}/students`);
-                    if (!response.ok) throw new Error('Network error');
-                    
-                    this.students = await response.json();
-                    console.log('✅ Loaded students from server:', this.students.length);
-                } catch (error) {
-                    console.error('❌ Error loading from server:', error);
-                    this.fallbackToLocalStorage();
-                }
-            }
-
-            fallbackToLocalStorage() {
-                console.log('🔄 Using localStorage fallback');
+            loadStudents() {
+                console.log('🔄 Using localStorage');
                 this.students = JSON.parse(localStorage.getItem(this.dataKey)) || [];
-            }
-
-            async saveStudentToServer(student) {
-                if (!this.isOnline) {
-                    // Fallback to localStorage
-                    this.saveStudentToLocal(student);
-                    return false;
-                }
-
-                try {
-                    // Check if student exists
-                    const checkResponse = await fetch(`${this.API_BASE}/students/${student.id}`);
-                    
-                    let saveResponse;
-                    if (checkResponse.status === 404) {
-                        // Create new student
-                        saveResponse = await fetch(`${this.API_BASE}/students`, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(student)
-                        });
-                    } else {
-                        // Update existing student
-                        saveResponse = await fetch(`${this.API_BASE}/students/${student.id}`, {
-                            method: 'PUT',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(student)
-                        });
-                    }
-
-                    if (!saveResponse.ok) throw new Error('Save failed');
-                    
-                    console.log('✅ Student saved to server:', student.name);
-                    return true;
-                } catch (error) {
-                    console.error('❌ Error saving to server:', error);
-                    // Fallback to localStorage
-                    this.saveStudentToLocal(student);
-                    return false;
-                }
             }
 
             saveStudentToLocal(student) {
@@ -1088,7 +994,7 @@
                 }
 
                 // Load latest data first
-                await this.loadStudents();
+                this.loadStudents();
 
                 // Check if student already exists
                 const existingStudent = this.students.find(s => 
@@ -1118,14 +1024,10 @@
                     achievements: []
                 };
 
-                // Save to server (automatically goes to database)
-                const savedToServer = await this.saveStudentToServer(student);
+                // Save to localStorage
+                this.saveStudentToLocal(student);
                 
-                if (savedToServer) {
-                    this.showNotification('✅ Account created and saved to database!', 'success');
-                } else {
-                    this.showNotification('⚠️ Account created in offline mode', 'warning');
-                }
+                this.showNotification('✅ Account created successfully!', 'success');
 
                 this.currentStudent = { ...student };
                 this.saveCurrentStudent();
@@ -1145,8 +1047,8 @@
                     return;
                 }
 
-                // Load latest data from server first
-                await this.loadStudents();
+                // Load latest data from localStorage first
+                this.loadStudents();
 
                 // Cari student yang sudah terdaftar
                 const student = this.students.find(s => 
@@ -1170,8 +1072,8 @@
                 this.currentStudent.lastActivity = new Date().toISOString();
                 this.currentStudent.isOnline = true;
 
-                // Update student status in server
-                await this.saveStudentToServer(this.currentStudent);
+                // Update student status
+                this.saveStudentToLocal(this.currentStudent);
                 this.saveCurrentStudent();
                 
                 this.showMainInterface();
@@ -1191,13 +1093,13 @@
                 this.showNotification('Until we meet again, adventurer!', 'info');
             }
 
-            async updateStudentStatus(isOnline) {
+            updateStudentStatus(isOnline) {
                 if (!this.currentStudent) return;
 
                 this.currentStudent.isOnline = isOnline;
                 this.currentStudent.lastActivity = new Date().toISOString();
                 
-                await this.saveStudentToServer(this.currentStudent);
+                this.saveStudentToLocal(this.currentStudent);
                 this.updateStatusDisplay();
                 this.saveCurrentStudent();
             }
@@ -1514,7 +1416,7 @@
             }
 
             // NEW FEATURE: Activity Logging
-            async logActivity(type, description) {
+            logActivity(type, description) {
                 if (!this.currentStudent) return;
 
                 const activity = {
@@ -1530,33 +1432,20 @@
                 let activities = JSON.parse(localStorage.getItem('activity_logs') || '[]');
                 activities.push(activity);
                 localStorage.setItem('activity_logs', JSON.stringify(activities));
-
-                // Save to server if online
-                if (!this.isOnline) return;
-
-                try {
-                    await fetch(`${this.API_BASE}/activity_logs`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(activity)
-                    });
-                } catch (error) {
-                    console.error('Error logging activity:', error);
-                }
             }
 
             startAutoSync() {
-                // Real-time sync every 3 seconds when online
-                setInterval(async () => {
-                    if (this.currentStudent && this.isOnline) {
-                        await this.loadStudents();
+                // Real-time sync every 3 seconds
+                setInterval(() => {
+                    if (this.currentStudent) {
+                        this.loadStudents();
                         this.syncWithMainData();
                     }
                 }, 3000);
             }
 
             syncWithMainData() {
-                if (!this.currentStudent || !this.isOnline) return;
+                if (!this.currentStudent) return;
 
                 const latestStudentData = this.students.find(s => s.id === this.currentStudent.id);
                 
