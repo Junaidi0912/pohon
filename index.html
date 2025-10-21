@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perpustakaan Abadi - Siswa</title>
+    <title>Fantasi Langit - Penjelajah</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=MedievalSharp&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
@@ -13,16 +13,17 @@
             theme: {
                 extend: {
                     colors: {
-                        parchment: '#F5E6CA',
-                        oldPaper: '#E8D9B5',
-                        darkBrown: '#8B4513',
-                        gold: '#D4AF37',
-                        silver: '#C0C0C0',
-                        bronze: '#CD7F32',
-                        mysticBlue: '#1E3A5F',
-                        deepRed: '#8B0000',
-                        forestGreen: '#228B22',
-                        black: '#000000'
+                        skyBlue: '#87CEEB',
+                        deepBlue: '#1E3A5F',
+                        twilight: '#4A5F7A',
+                        starGold: '#FFD700',
+                        moonSilver: '#C0C0C0',
+                        cloudWhite: '#F8FAFC',
+                        nightBlue: '#0F172A',
+                        cosmicPurple: '#8B5CF6',
+                        nebulaPink: '#EC4899',
+                        auroraGreen: '#10B981',
+                        cometOrange: '#F59E0B'
                     },
                     fontFamily: {
                         'cinzel': ['Cinzel', 'serif'],
@@ -31,26 +32,37 @@
                     },
                     animation: {
                         'float': 'float 6s ease-in-out infinite',
-                        'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
-                        'grow': 'grow 1s ease-out forwards',
-                        'scroll': 'scroll 10s linear infinite'
+                        'twinkle': 'twinkle 2s ease-in-out infinite',
+                        'glow': 'glow 3s ease-in-out infinite',
+                        'orbit': 'orbit 20s linear infinite',
+                        'pulse-soft': 'pulse-soft 4s ease-in-out infinite',
                     },
                     keyframes: {
                         float: {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-20px)' }
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-20px) rotate(5deg)' }
                         },
-                        'pulse-glow': {
-                            '0%, 100%': { boxShadow: '0 0 20px rgba(212, 175, 55, 0.5)' },
-                            '50%': { boxShadow: '0 0 40px rgba(212, 175, 55, 0.8)' }
+                        twinkle: {
+                            '0%, 100%': { opacity: 0.3, transform: 'scale(1)' },
+                            '50%': { opacity: 1, transform: 'scale(1.2)' }
                         },
-                        grow: {
-                            '0%': { transform: 'scale(0.8)', opacity: '0' },
-                            '100%': { transform: 'scale(1)', opacity: '1' }
+                        glow: {
+                            '0%, 100%': { 
+                                'box-shadow': '0 0 20px rgba(255, 215, 0, 0.5)',
+                                'transform': 'scale(1)'
+                            },
+                            '50%': { 
+                                'box-shadow': '0 0 40px rgba(255, 215, 0, 0.8)',
+                                'transform': 'scale(1.05)'
+                            }
                         },
-                        scroll: {
-                            '0%': { transform: 'translateX(100%)' },
-                            '100%': { transform: 'translateX(-100%)' }
+                        orbit: {
+                            '0%': { transform: 'rotate(0deg) translateX(100px) rotate(0deg)' },
+                            '100%': { transform: 'rotate(360deg) translateX(100px) rotate(-360deg)' }
+                        },
+                        'pulse-soft': {
+                            '0%, 100%': { opacity: 0.7 },
+                            '50%': { opacity: 1 }
                         }
                     }
                 }
@@ -59,33 +71,79 @@
     </script>
     <style>
         body {
-            background: linear-gradient(135deg, #2C1810 0%, #1A0F0A 50%, #0F0805 100%);
+            background: linear-gradient(135deg, #0F172A 0%, #1E3A5F 50%, #2D3748 100%);
             background-image: 
-                radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(139, 69, 19, 0.1) 0%, transparent 50%);
+                radial-gradient(circle at 20% 80%, rgba(135, 206, 235, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
+                url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23FFFFFF' fill-opacity='0.15' fill-rule='evenodd'/%3E%3C/svg%3E");
+            min-height: 100vh;
+            overflow-x: hidden;
         }
         
-        .parchment-bg {
-            background: linear-gradient(135deg, #F5E6CA 0%, #E8D9B5 50%, #DBC9A0 100%);
-            border: 4px double #8B4513;
+        .cosmic-card {
+            background: linear-gradient(135deg, rgba(248, 250, 252, 0.95) 0%, rgba(226, 232, 240, 0.9) 100%);
+            border: 2px solid #87CEEB;
             box-shadow: 
-                0 0 20px rgba(139, 69, 19, 0.3),
-                inset 0 0 30px rgba(139, 69, 19, 0.1);
+                0 8px 32px rgba(31, 41, 55, 0.4),
+                inset 0 0 30px rgba(135, 206, 235, 0.3);
+            backdrop-filter: blur(15px);
         }
         
-        .ancient-border {
-            border: 8px solid transparent;
-            border-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,0 L100,0 L100,100 L0,100 Z' fill='none' stroke='%238B4513' stroke-width='8' stroke-dasharray='20,10'/%3E%3C/svg%3E") 30 round;
+        .star-border {
+            border: 2px solid transparent;
+            border-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%2387CEEB' fill-opacity='0.8' fill-rule='evenodd'/%3E%3C/svg%3E") 30 round;
         }
         
+        .galaxy-bg {
+            background: radial-gradient(ellipse at center, rgba(30, 58, 95, 0.8) 0%, rgba(15, 23, 42, 0.9) 70%);
+        }
+
+        .constellation {
+            position: relative;
+        }
+
+        .constellation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.3) 2px, transparent 2px),
+                radial-gradient(circle at 80% 70%, rgba(135, 206, 235, 0.3) 2px, transparent 2px),
+                radial-gradient(circle at 40% 80%, rgba(139, 92, 246, 0.3) 2px, transparent 2px),
+                radial-gradient(circle at 60% 20%, rgba(236, 72, 153, 0.3) 2px, transparent 2px);
+            background-size: 200px 200px, 300px 300px, 250px 250px, 350px 350px;
+            pointer-events: none;
+        }
+
+        .floating-stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
         .rank-badge {
-            background: linear-gradient(135deg, #D4AF37 0%, #FFD700 50%, #D4AF37 100%);
-            border: 2px solid #8B4513;
-            box-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
+            background: linear-gradient(135deg, #FFD700 0%, #FFED4E 50%, #FFD700 100%);
+            border: 2px solid #8B5CF6;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+            transition: all 0.3s ease;
         }
-        
-        .floating-book {
-            animation: float 4s ease-in-out infinite;
+
+        .rank-badge:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
         }
         
         .progress-ring {
@@ -94,102 +152,30 @@
         
         .progress-ring-circle {
             transition: stroke-dashoffset 0.5s ease-in-out;
-        }
-        
-        .sparkle {
-            animation: sparkle 2s ease-in-out infinite;
-        }
-        
-        @keyframes sparkle {
-            0%, 100% { opacity: 0; transform: scale(0); }
-            50% { opacity: 1; transform: scale(1); }
+            stroke-linecap: round;
         }
 
-        /* Text Colors - FIXED to Black */
         .text-dark {
-            color: #000000 !important;
+            color: #1E293B !important;
         }
 
-        /* Mobile Optimizations */
-        @media (max-width: 768px) {
-            .mobile-padding {
-                padding-left: 1rem;
-                padding-right: 1rem;
-            }
-            
-            .mobile-text-lg {
-                font-size: 1.125rem;
-            }
-            
-            .mobile-text-xl {
-                font-size: 1.25rem;
-            }
-            
-            .mobile-text-2xl {
-                font-size: 1.5rem;
-            }
-            
-            .mobile-py-3 {
-                padding-top: 0.75rem;
-                padding-bottom: 0.75rem;
-            }
+        .mobile-padding {
+            padding-left: 1rem;
+            padding-right: 1rem;
         }
 
-        @keyframes fall {
-            to {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* Custom Profile Icon Styles */
-        .profile-icon {
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .profile-icon:hover {
-            transform: scale(1.1);
-            filter: brightness(1.2);
-        }
-        
-        .profile-icon.selected {
-            border: 3px solid #D4AF37;
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
-        }
-
-        /* Online/Offline Status */
-        .online-status {
-            position: absolute;
-            bottom: 2px;
-            right: 2px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            border: 2px solid white;
-        }
-        
-        .online {
-            background-color: #22c55e;
-        }
-        
-        .offline {
-            background-color: #ef4444;
-        }
-
-        /* Auth Tabs */
         .auth-tab {
             transition: all 0.3s ease;
             border-bottom: 3px solid transparent;
             padding: 1rem 2rem;
             cursor: pointer;
-            color: #000000;
+            color: #1E293B;
         }
 
         .auth-tab.active {
-            border-bottom-color: #D4AF37;
-            color: #D4AF37;
-            background: rgba(212, 175, 55, 0.1);
+            border-bottom-color: #FFD700;
+            color: #FFD700;
+            background: rgba(255, 215, 0, 0.1);
         }
 
         .auth-form {
@@ -201,79 +187,161 @@
             animation: grow 0.5s ease-out forwards;
         }
 
-        /* Password toggle */
+        @keyframes grow {
+            '0%': { transform: 'scale(0.8)', opacity: '0' },
+            '100%': { transform: 'scale(1)', opacity: '1' }
+        }
+
         .password-toggle {
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
         .password-toggle:hover {
-            color: #D4AF37;
+            color: #FFD700;
             transform: scale(1.1);
         }
 
-        /* Leaderboard Styles */
-        .leaderboard-item {
+        .profile-icon {
             transition: all 0.3s ease;
-            border-bottom: 1px solid rgba(139, 69, 19, 0.2);
+            cursor: pointer;
         }
         
-        .leaderboard-item:hover {
-            background: linear-gradient(90deg, rgba(212, 175, 55, 0.08), rgba(139, 69, 19, 0.05));
-            transform: translateX(4px);
+        .profile-icon:hover {
+            transform: scale(1.1);
+            filter: brightness(1.2);
         }
         
-        .top-3 {
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(139, 69, 19, 0.1));
-            border: 2px solid #D4AF37;
+        .profile-icon.selected {
+            border: 3px solid #FFD700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .online-status {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+        
+        .online {
+            background-color: #10B981;
+            box-shadow: 0 0 10px #10B981;
+        }
+        
+        .offline {
+            background-color: #EF4444;
+            box-shadow: 0 0 10px #EF4444;
+        }
+
+        .register-scroll {
+            max-height: 60vh;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #87CEEB #F8FAFC;
+        }
+
+        .register-scroll::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .register-scroll::-webkit-scrollbar-track {
+            background: #F8FAFC;
+            border-radius: 10px;
+        }
+
+        .register-scroll::-webkit-scrollbar-thumb {
+            background: #87CEEB;
+            border-radius: 10px;
+        }
+
+        .register-scroll::-webkit-scrollbar-thumb:hover {
+            background: #4A5F7A;
+        }
+
+        .celestial-object {
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .comet {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: linear-gradient(45deg, transparent, #FFD700, transparent);
+            border-radius: 50%;
+            animation: comet-flight 15s linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes comet-flight {
+            0% {
+                transform: translateX(-100vw) translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(100vw) translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
         }
     </style>
 </head>
-<body class="font-cinzel text-black min-h-screen">
-    <!-- Background Elements -->
-    <div class="fixed inset-0 overflow-hidden pointer-events-none">
-        <div class="absolute top-10 left-4 text-gold text-xl opacity-20 floating-book">
-            <i class="fas fa-book"></i>
+<body class="font-cinzel text-dark min-h-screen constellation">
+    <!-- Floating Stars Background -->
+    <div class="floating-stars" id="stars-container"></div>
+
+    <!-- Celestial Objects -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden">
+        <div class="absolute top-1/4 left-1/4 celestial-object">
+            <i class="fas fa-moon text-moonSilver text-4xl opacity-30 animate-pulse-soft"></i>
         </div>
-        <div class="absolute top-20 right-4 text-silver text-2xl opacity-30 floating-book" style="animation-delay: 1s;">
-            <i class="fas fa-scroll"></i>
+        <div class="absolute top-1/3 right-1/4 celestial-object" style="animation-delay: -2s;">
+            <i class="fas fa-star text-starGold text-2xl opacity-40 animate-twinkle"></i>
         </div>
-        <div class="absolute bottom-20 left-4 text-bronze text-xl opacity-25 floating-book" style="animation-delay: 2s;">
-            <i class="fas fa-feather-alt"></i>
+        <div class="absolute bottom-1/4 left-1/3 celestial-object" style="animation-delay: -4s;">
+            <i class="fas fa-cloud text-cloudWhite text-3xl opacity-20"></i>
         </div>
-        <div class="absolute bottom-10 right-4 text-gold text-2xl opacity-20 floating-book" style="animation-delay: 1.5s;">
-            <i class="fas fa-pen-fancy"></i>
+        <div class="absolute top-2/3 right-1/3 celestial-object" style="animation-delay: -6s;">
+            <i class="fas fa-meteor text-cometOrange text-xl opacity-50"></i>
         </div>
     </div>
 
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 bg-darkBrown/90 backdrop-blur-md shadow-2xl border-b-2 border-gold">
+    <nav class="fixed top-0 w-full z-50 bg-deepBlue/90 backdrop-blur-md shadow-2xl border-b-2 border-starGold">
         <div class="container mx-auto px-4 py-3">
             <div class="flex justify-between items-center">
                 <div class="flex items-center space-x-2">
-                    <div class="w-8 h-8 bg-gradient-to-r from-gold to-bronze rounded-full flex items-center justify-center ancient-border">
-                        <i class="fas fa-crown text-darkBrown text-sm"></i>
+                    <div class="w-8 h-8 bg-gradient-to-r from-starGold to-cosmicPurple rounded-full flex items-center justify-center star-border animate-glow">
+                        <i class="fas fa-crown text-nightBlue text-sm"></i>
                     </div>
                     <div>
-                        <h1 class="text-lg md:text-2xl font-bold text-gold font-maguntia">Perpustakaan Abadi</h1>
-                        <p class="text-silver text-xs md:text-sm font-medieval hidden md:block">Tempat Para Pencari Ilmu</p>
+                        <h1 class="text-lg md:text-2xl font-bold text-starGold font-maguntia">Fantasi Langit</h1>
+                        <p class="text-moonSilver text-xs md:text-sm font-medieval hidden md:block">Petualangan Antar Bintang</p>
                     </div>
                 </div>
                 <div class="flex items-center space-x-2">
                     <div id="user-info" class="hidden items-center space-x-2">
                         <div class="text-right hidden sm:block">
-                            <div class="font-semibold text-gold text-sm" id="user-name">Nama Petualang</div>
-                            <div class="text-xs text-silver font-medieval" id="user-rank">📖 Pemula Naskah</div>
+                            <div class="font-semibold text-starGold text-sm" id="user-name">Nama Penjelajah</div>
+                            <div class="text-xs text-moonSilver font-medieval" id="user-rank">☁️ Awan Pertama</div>
                         </div>
                         <!-- Profile Icon dengan Status Online -->
                         <div class="relative">
-                            <div class="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-r from-gold to-bronze rounded-full flex items-center justify-center text-darkBrown font-bold text-sm md:text-base ancient-border" id="user-profile-icon">
-                                <i class="fas fa-book-reader"></i>
+                            <div class="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-r from-starGold to-cosmicPurple rounded-full flex items-center justify-center text-nightBlue font-bold text-sm md:text-base star-border" id="user-profile-icon">
+                                <i class="fas fa-user-astronaut"></i>
                             </div>
                             <div class="online-status online" id="user-status"></div>
                         </div>
                     </div>
-                    <button id="logout-btn" class="hidden bg-deepRed hover:bg-red-800 text-parchment px-3 py-2 md:px-4 md:py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 border border-gold text-xs md:text-sm">
+                    <button id="logout-btn" class="hidden bg-nebulaPink hover:bg-pink-800 text-cloudWhite px-3 py-2 md:px-4 md:py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 border border-starGold text-xs md:text-sm">
                         <i class="fas fa-door-open mr-1"></i>Keluar
                     </button>
                 </div>
@@ -283,17 +351,17 @@
 
     <!-- Auth Modal -->
     <div id="auth-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
-        <div class="parchment-bg rounded-2xl p-6 max-w-md w-full transform animate-grow ancient-border mobile-padding">
+        <div class="cosmic-card rounded-2xl p-6 max-w-md w-full transform animate-grow star-border mobile-padding">
             <div class="text-center mb-6">
-                <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-gold to-bronze rounded-2xl flex items-center justify-center ancient-border">
-                    <i class="fas fa-scroll text-darkBrown text-2xl"></i>
+                <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-starGold to-cosmicPurple rounded-2xl flex items-center justify-center star-border">
+                    <i class="fas fa-rocket text-nightBlue text-2xl"></i>
                 </div>
-                <h2 class="text-2xl md:text-3xl font-bold text-dark font-maguntia mb-2">Perpustakaan Abadi</h2>
-                <p class="text-dark font-medieval text-sm">Bergabung dalam petualangan literasi!</p>
+                <h2 class="text-2xl md:text-3xl font-bold text-dark font-maguntia mb-2">Fantasi Langit</h2>
+                <p class="text-dark font-medieval text-sm">Mulai petualangan antarbintangmu!</p>
             </div>
 
             <!-- Auth Tabs -->
-            <div class="flex border-b-2 border-darkBrown mb-6">
+            <div class="flex border-b-2 border-deepBlue mb-6">
                 <div class="auth-tab active flex-1 text-center font-medieval font-semibold" onclick="switchAuthTab('login')">
                     <i class="fas fa-sign-in-alt mr-2"></i>Login
                 </div>
@@ -305,120 +373,170 @@
             <!-- Login Form -->
             <form id="login-form" class="auth-form active space-y-4">
                 <div>
-                    <label class="block text-dark font-semibold mb-2 font-medieval text-sm">Nama Petualang</label>
+                    <label class="block text-dark font-semibold mb-2 font-medieval text-sm">Nama Penjelajah</label>
                     <input type="text" id="login-name" required 
-                           class="w-full px-3 py-2 bg-oldPaper border-2 border-darkBrown rounded-lg focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all duration-300 outline-none font-medieval text-sm text-dark"
-                           placeholder="Masukkan nama petualang">
+                           class="w-full px-3 py-2 bg-cloudWhite border-2 border-deepBlue rounded-lg focus:border-starGold focus:ring-2 focus:ring-starGold/30 transition-all duration-300 outline-none font-medieval text-sm text-dark"
+                           placeholder="Masukkan nama penjelajah">
                 </div>
                 <div>
                     <label class="block text-dark font-semibold mb-2 font-medieval text-sm">Kelas</label>
                     <select id="login-class" required 
-                            class="w-full px-3 py-2 bg-oldPaper border-2 border-darkBrown rounded-lg focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all duration-300 outline-none font-medieval text-sm text-dark">
+                            class="w-full px-3 py-2 bg-cloudWhite border-2 border-deepBlue rounded-lg focus:border-starGold focus:ring-2 focus:ring-starGold/30 transition-all duration-300 outline-none font-medieval text-sm text-dark">
                         <option value="">Pilih Kelas</option>
-                        <option value="7A">Kelas 7A</option>
-                        <option value="7B">Kelas 7B</option>
-                        <option value="7C">Kelas 7C</option>
-                        <option value="8A">Kelas 8A</option>
-                        <option value="8B">Kelas 8B</option>
-                        <option value="8C">Kelas 8C</option>
-                        <option value="9A">Kelas 9A</option>
-                        <option value="9B">Kelas 9B</option>
-                        <option value="9C">Kelas 9C</option>
+                        <!-- Kelas X -->
+                        <option value="X1">Kelas X1</option>
+                        <option value="X2">Kelas X2</option>
+                        <option value="X3">Kelas X3</option>
+                        <option value="X4">Kelas X4</option>
+                        <option value="X5">Kelas X5</option>
+                        <option value="X6">Kelas X6</option>
+                        <option value="X7">Kelas X7</option>
+                        <option value="X8">Kelas X8</option>
+                        <option value="X9">Kelas X9</option>
+                        <!-- Kelas XI MIPA -->
+                        <option value="XI MIPA 1">Kelas XI MIPA 1</option>
+                        <option value="XI MIPA 2">Kelas XI MIPA 2</option>
+                        <option value="XI MIPA 3">Kelas XI MIPA 3</option>
+                        <option value="XI MIPA 4">Kelas XI MIPA 4</option>
+                        <option value="XI MIPA 5">Kelas XI MIPA 5</option>
+                        <!-- Kelas XI IPS -->
+                        <option value="XI IPS 1">Kelas XI IPS 1</option>
+                        <option value="XI IPS 2">Kelas XI IPS 2</option>
+                        <option value="XI IPS 3">Kelas XI IPS 3</option>
+                        <option value="XI IPS 4">Kelas XI IPS 4</option>
+                        <!-- Kelas XII MIPA -->
+                        <option value="XII MIPA 1">Kelas XII MIPA 1</option>
+                        <option value="XII MIPA 2">Kelas XII MIPA 2</option>
+                        <option value="XII MIPA 3">Kelas XII MIPA 3</option>
+                        <option value="XII MIPA 4">Kelas XII MIPA 4</option>
+                        <option value="XII MIPA 5">Kelas XII MIPA 5</option>
+                        <!-- Kelas XII IPS -->
+                        <option value="XII IPS 1">Kelas XII IPS 1</option>
+                        <option value="XII IPS 2">Kelas XII IPS 2</option>
+                        <option value="XII IPS 3">Kelas XII IPS 3</option>
+                        <!-- Kelas XII Bahasa -->
+                        <option value="XII BAHASA">Kelas XII BAHASA</option>
                     </select>
                 </div>
                 <div class="relative">
                     <label class="block text-dark font-semibold mb-2 font-medieval text-sm">Password</label>
                     <input type="password" id="login-password" required 
-                           class="w-full px-3 py-2 bg-oldPaper border-2 border-darkBrown rounded-lg focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all duration-300 outline-none font-medieval text-sm text-dark pr-10"
+                           class="w-full px-3 py-2 bg-cloudWhite border-2 border-deepBlue rounded-lg focus:border-starGold focus:ring-2 focus:ring-starGold/30 transition-all duration-300 outline-none font-medieval text-sm text-dark pr-10"
                            placeholder="Masukkan password">
                     <div class="absolute right-3 top-9 transform -translate-y-1/2 password-toggle" onclick="togglePassword('login-password')">
-                        <i class="fas fa-eye text-darkBrown"></i>
+                        <i class="fas fa-eye text-deepBlue"></i>
                     </div>
                 </div>
 
-                <button type="submit" class="w-full bg-gradient-to-r from-gold to-bronze text-darkBrown py-3 rounded-lg font-bold text-base transition-all duration-300 transform hover:scale-105 hover:shadow-lg border-2 border-darkBrown font-medieval">
-                    <i class="fas fa-dragon mr-2"></i>Masuk Petualangan
+                <button type="submit" class="w-full bg-gradient-to-r from-starGold to-cosmicPurple text-nightBlue py-3 rounded-lg font-bold text-base transition-all duration-300 transform hover:scale-105 hover:shadow-lg border-2 border-deepBlue font-medieval">
+                    <i class="fas fa-rocket mr-2"></i>Mulai Petualangan
                 </button>
             </form>
 
-            <!-- Register Form -->
+            <!-- Register Form dengan Scroll -->
             <form id="register-form" class="auth-form space-y-4">
-                <div>
-                    <label class="block text-dark font-semibold mb-2 font-medieval text-sm">Nama Petualang Baru</label>
-                    <input type="text" id="register-name" required 
-                           class="w-full px-3 py-2 bg-oldPaper border-2 border-darkBrown rounded-lg focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all duration-300 outline-none font-medieval text-sm text-dark"
-                           placeholder="Buat nama petualang baru">
-                </div>
-                <div>
-                    <label class="block text-dark font-semibold mb-2 font-medieval text-sm">Kelas</label>
-                    <select id="register-class" required 
-                            class="w-full px-3 py-2 bg-oldPaper border-2 border-darkBrown rounded-lg focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all duration-300 outline-none font-medieval text-sm text-dark">
-                        <option value="">Pilih Kelas</option>
-                        <option value="7A">Kelas 7A</option>
-                        <option value="7B">Kelas 7B</option>
-                        <option value="7C">Kelas 7C</option>
-                        <option value="8A">Kelas 8A</option>
-                        <option value="8B">Kelas 8B</option>
-                        <option value="8C">Kelas 8C</option>
-                        <option value="9A">Kelas 9A</option>
-                        <option value="9B">Kelas 9B</option>
-                        <option value="9C">Kelas 9C</option>
-                    </select>
-                </div>
-                <div class="relative">
-                    <label class="block text-dark font-semibold mb-2 font-medieval text-sm">Password</label>
-                    <input type="password" id="register-password" required 
-                           class="w-full px-3 py-2 bg-oldPaper border-2 border-darkBrown rounded-lg focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all duration-300 outline-none font-medieval text-sm text-dark pr-10"
-                           placeholder="Buat password (min. 4 karakter)"
-                           minlength="4">
-                    <div class="absolute right-3 top-9 transform -translate-y-1/2 password-toggle" onclick="togglePassword('register-password')">
-                        <i class="fas fa-eye text-darkBrown"></i>
+                <div class="register-scroll space-y-4 pr-2">
+                    <div>
+                        <label class="block text-dark font-semibold mb-2 font-medieval text-sm">Nama Penjelajah Baru</label>
+                        <input type="text" id="register-name" required 
+                               class="w-full px-3 py-2 bg-cloudWhite border-2 border-deepBlue rounded-lg focus:border-starGold focus:ring-2 focus:ring-starGold/30 transition-all duration-300 outline-none font-medieval text-sm text-dark"
+                               placeholder="Buat nama penjelajah baru">
                     </div>
-                </div>
-                <div class="relative">
-                    <label class="block text-dark font-semibold mb-2 font-medieval text-sm">Konfirmasi Password</label>
-                    <input type="password" id="register-confirm-password" required 
-                           class="w-full px-3 py-2 bg-oldPaper border-2 border-darkBrown rounded-lg focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all duration-300 outline-none font-medieval text-sm text-dark pr-10"
-                           placeholder="Ulangi password"
-                           minlength="4">
-                    <div class="absolute right-3 top-9 transform -translate-y-1/2 password-toggle" onclick="togglePassword('register-confirm-password')">
-                        <i class="fas fa-eye text-darkBrown"></i>
+                    <div>
+                        <label class="block text-dark font-semibold mb-2 font-medieval text-sm">Kelas</label>
+                        <select id="register-class" required 
+                                class="w-full px-3 py-2 bg-cloudWhite border-2 border-deepBlue rounded-lg focus:border-starGold focus:ring-2 focus:ring-starGold/30 transition-all duration-300 outline-none font-medieval text-sm text-dark">
+                            <option value="">Pilih Kelas</option>
+                            <!-- Kelas X -->
+                            <option value="X1">Kelas X1</option>
+                            <option value="X2">Kelas X2</option>
+                            <option value="X3">Kelas X3</option>
+                            <option value="X4">Kelas X4</option>
+                            <option value="X5">Kelas X5</option>
+                            <option value="X6">Kelas X6</option>
+                            <option value="X7">Kelas X7</option>
+                            <option value="X8">Kelas X8</option>
+                            <option value="X9">Kelas X9</option>
+                            <!-- Kelas XI MIPA -->
+                            <option value="XI MIPA 1">Kelas XI MIPA 1</option>
+                            <option value="XI MIPA 2">Kelas XI MIPA 2</option>
+                            <option value="XI MIPA 3">Kelas XI MIPA 3</option>
+                            <option value="XI MIPA 4">Kelas XI MIPA 4</option>
+                            <option value="XI MIPA 5">Kelas XI MIPA 5</option>
+                            <!-- Kelas XI IPS -->
+                            <option value="XI IPS 1">Kelas XI IPS 1</option>
+                            <option value="XI IPS 2">Kelas XI IPS 2</option>
+                            <option value="XI IPS 3">Kelas XI IPS 3</option>
+                            <option value="XI IPS 4">Kelas XI IPS 4</option>
+                            <!-- Kelas XII MIPA -->
+                            <option value="XII MIPA 1">Kelas XII MIPA 1</option>
+                            <option value="XII MIPA 2">Kelas XII MIPA 2</option>
+                            <option value="XII MIPA 3">Kelas XII MIPA 3</option>
+                            <option value="XII MIPA 4">Kelas XII MIPA 4</option>
+                            <option value="XII MIPA 5">Kelas XII MIPA 5</option>
+                            <!-- Kelas XII IPS -->
+                            <option value="XII IPS 1">Kelas XII IPS 1</option>
+                            <option value="XII IPS 2">Kelas XII IPS 2</option>
+                            <option value="XII IPS 3">Kelas XII IPS 3</option>
+                            <!-- Kelas XII Bahasa -->
+                            <option value="XII BAHASA">Kelas XII BAHASA</option>
+                        </select>
+                    </div>
+                    <div class="relative">
+                        <label class="block text-dark font-semibold mb-2 font-medieval text-sm">Password</label>
+                        <input type="password" id="register-password" required 
+                               class="w-full px-3 py-2 bg-cloudWhite border-2 border-deepBlue rounded-lg focus:border-starGold focus:ring-2 focus:ring-starGold/30 transition-all duration-300 outline-none font-medieval text-sm text-dark pr-10"
+                               placeholder="Buat password (min. 4 karakter)"
+                               minlength="4">
+                        <div class="absolute right-3 top-9 transform -translate-y-1/2 password-toggle" onclick="togglePassword('register-password')">
+                            <i class="fas fa-eye text-deepBlue"></i>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <label class="block text-dark font-semibold mb-2 font-medieval text-sm">Konfirmasi Password</label>
+                        <input type="password" id="register-confirm-password" required 
+                               class="w-full px-3 py-2 bg-cloudWhite border-2 border-deepBlue rounded-lg focus:border-starGold focus:ring-2 focus:ring-starGold/30 transition-all duration-300 outline-none font-medieval text-sm text-dark pr-10"
+                               placeholder="Ulangi password"
+                               minlength="4">
+                        <div class="absolute right-3 top-9 transform -translate-y-1/2 password-toggle" onclick="togglePassword('register-confirm-password')">
+                            <i class="fas fa-eye text-deepBlue"></i>
+                        </div>
+                    </div>
+
+                    <!-- Custom Profile Icon Selection -->
+                    <div>
+                        <label class="block text-dark font-semibold mb-2 font-medieval text-sm">Pilih Avatar Kosmik</label>
+                        <div class="grid grid-cols-4 gap-2">
+                            <div class="profile-icon w-12 h-12 bg-gradient-to-r from-starGold to-cosmicPurple rounded-full flex items-center justify-center star-border text-nightBlue" data-icon="user-astronaut" onclick="selectProfileIcon('user-astronaut')">
+                                <i class="fas fa-user-astronaut"></i>
+                            </div>
+                            <div class="profile-icon w-12 h-12 bg-gradient-to-r from-starGold to-cosmicPurple rounded-full flex items-center justify-center star-border text-nightBlue" data-icon="rocket" onclick="selectProfileIcon('rocket')">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <div class="profile-icon w-12 h-12 bg-gradient-to-r from-starGold to-cosmicPurple rounded-full flex items-center justify-center star-border text-nightBlue" data-icon="meteor" onclick="selectProfileIcon('meteor')">
+                                <i class="fas fa-meteor"></i>
+                            </div>
+                            <div class="profile-icon w-12 h-12 bg-gradient-to-r from-starGold to-cosmicPurple rounded-full flex items-center justify-center star-border text-nightBlue" data-icon="moon" onclick="selectProfileIcon('moon')">
+                                <i class="fas fa-moon"></i>
+                            </div>
+                            <div class="profile-icon w-12 h-12 bg-gradient-to-r from-starGold to-cosmicPurple rounded-full flex items-center justify-center star-border text-nightBlue" data-icon="sun" onclick="selectProfileIcon('sun')">
+                                <i class="fas fa-sun"></i>
+                            </div>
+                            <div class="profile-icon w-12 h-12 bg-gradient-to-r from-starGold to-cosmicPurple rounded-full flex items-center justify-center star-border text-nightBlue" data-icon="satellite" onclick="selectProfileIcon('satellite')">
+                                <i class="fas fa-satellite"></i>
+                            </div>
+                            <div class="profile-icon w-12 h-12 bg-gradient-to-r from-starGold to-cosmicPurple rounded-full flex items-center justify-center star-border text-nightBlue" data-icon="shuttle-space" onclick="selectProfileIcon('shuttle-space')">
+                                <i class="fas fa-space-shuttle"></i>
+                            </div>
+                            <div class="profile-icon w-12 h-12 bg-gradient-to-r from-starGold to-cosmicPurple rounded-full flex items-center justify-center star-border text-nightBlue" data-icon="user-alien" onclick="selectProfileIcon('user-alien')">
+                                <i class="fas fa-user-alien"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Custom Profile Icon Selection -->
-                <div>
-                    <label class="block text-dark font-semibold mb-2 font-medieval text-sm">Pilih Ikon Profil</label>
-                    <div class="grid grid-cols-4 gap-2">
-                        <div class="profile-icon w-12 h-12 bg-gradient-to-r from-gold to-bronze rounded-full flex items-center justify-center ancient-border text-darkBrown" data-icon="book-reader" onclick="selectProfileIcon('book-reader')">
-                            <i class="fas fa-book-reader"></i>
-                        </div>
-                        <div class="profile-icon w-12 h-12 bg-gradient-to-r from-gold to-bronze rounded-full flex items-center justify-center ancient-border text-darkBrown" data-icon="dragon" onclick="selectProfileIcon('dragon')">
-                            <i class="fas fa-dragon"></i>
-                        </div>
-                        <div class="profile-icon w-12 h-12 bg-gradient-to-r from-gold to-bronze rounded-full flex items-center justify-center ancient-border text-darkBrown" data-icon="hat-wizard" onclick="selectProfileIcon('hat-wizard')">
-                            <i class="fas fa-hat-wizard"></i>
-                        </div>
-                        <div class="profile-icon w-12 h-12 bg-gradient-to-r from-gold to-bronze rounded-full flex items-center justify-center ancient-border text-darkBrown" data-icon="scroll" onclick="selectProfileIcon('scroll')">
-                            <i class="fas fa-scroll"></i>
-                        </div>
-                        <div class="profile-icon w-12 h-12 bg-gradient-to-r from-gold to-bronze rounded-full flex items-center justify-center ancient-border text-darkBrown" data-icon="shield-alt" onclick="selectProfileIcon('shield-alt')">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <div class="profile-icon w-12 h-12 bg-gradient-to-r from-gold to-bronze rounded-full flex items-center justify-center ancient-border text-darkBrown" data-icon="crown" onclick="selectProfileIcon('crown')">
-                            <i class="fas fa-crown"></i>
-                        </div>
-                        <div class="profile-icon w-12 h-12 bg-gradient-to-r from-gold to-bronze rounded-full flex items-center justify-center ancient-border text-darkBrown" data-icon="feather-alt" onclick="selectProfileIcon('feather-alt')">
-                            <i class="fas fa-feather-alt"></i>
-                        </div>
-                        <div class="profile-icon w-12 h-12 bg-gradient-to-r from-gold to-bronze rounded-full flex items-center justify-center ancient-border text-darkBrown" data-icon="gem" onclick="selectProfileIcon('gem')">
-                            <i class="fas fa-gem"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <button type="submit" class="w-full bg-gradient-to-r from-forestGreen to-green-700 text-parchment py-3 rounded-lg font-bold text-base transition-all duration-300 transform hover:scale-105 hover:shadow-lg border-2 border-gold font-medieval">
-                    <i class="fas fa-shield-alt mr-2"></i>Daftar Petualangan
+                <button type="submit" class="w-full bg-gradient-to-r from-auroraGreen to-green-700 text-cloudWhite py-3 rounded-lg font-bold text-base transition-all duration-300 transform hover:scale-105 hover:shadow-lg border-2 border-starGold font-medieval mt-4">
+                    <i class="fas fa-shield-alt mr-2"></i>Gabung Petualangan
                 </button>
             </form>
         </div>
@@ -429,53 +547,45 @@
         <div class="container mx-auto px-4">
             <!-- Progress Section -->
             <div id="progress-section" class="hidden max-w-6xl mx-auto mb-6">
-                <div class="parchment-bg rounded-2xl p-4 md:p-6 ancient-border">
+                <div class="cosmic-card rounded-2xl p-4 md:p-6 star-border galaxy-bg">
                     <div class="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0 mb-4 md:mb-6">
                         <div class="text-center md:text-left">
-                            <h3 class="text-xl md:text-2xl font-bold text-dark font-maguntia mb-1">Progress Literasi</h3>
-                            <p class="text-dark font-medieval text-sm" id="progress-text">Tingkatkan rank-mu dengan membaca!</p>
-                        </div>
-                        <div class="flex space-x-3">
-                            <button onclick="studentSystem.showLeaderboard()" class="bg-mysticBlue hover:bg-blue-800 text-parchment px-4 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 border-2 border-gold font-medieval text-sm">
-                                <i class="fas fa-trophy mr-2"></i>Papan Peringkat
-                            </button>
-                            <button onclick="studentSystem.exportData()" class="bg-forestGreen hover:bg-green-800 text-parchment px-4 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 border-2 border-gold font-medieval text-sm">
-                                <i class="fas fa-download mr-2"></i>Ekspor Data
-                            </button>
+                            <h3 class="text-xl md:text-2xl font-bold text-starGold font-maguntia mb-1">Progress Kosmik</h3>
+                            <p class="text-moonSilver font-medieval text-sm" id="progress-text">Kumpulkan bintang untuk naik rank!</p>
                         </div>
                     </div>
                     
                     <!-- Rank Badges - Mobile Optimized -->
                     <div class="grid grid-cols-3 gap-2 md:grid-cols-6 md:gap-3">
-                        <div class="text-center p-2 bg-oldPaper rounded-lg transition-all duration-300 rank-badge border border-darkBrown" data-level="0">
-                            <div class="text-lg md:text-xl mb-1">📖</div>
-                            <div class="font-semibold text-dark font-medieval text-xs">Pemula</div>
-                            <div class="text-xs text-dark">0 XP</div>
+                        <div class="text-center p-2 bg-nightBlue/50 rounded-lg transition-all duration-300 rank-badge border border-starGold" data-level="0">
+                            <div class="text-lg md:text-xl mb-1">☁️</div>
+                            <div class="font-semibold text-starGold font-medieval text-xs">Awan</div>
+                            <div class="text-xs text-moonSilver">0 Bintang</div>
                         </div>
-                        <div class="text-center p-2 bg-oldPaper rounded-lg transition-all duration-300 rank-badge" data-level="1">
-                            <div class="text-lg md:text-xl mb-1">📚</div>
-                            <div class="font-semibold text-dark font-medieval text-xs">Penjelajah</div>
-                            <div class="text-xs text-dark">100 XP</div>
+                        <div class="text-center p-2 bg-nightBlue/50 rounded-lg transition-all duration-300 rank-badge" data-level="1">
+                            <div class="text-lg md:text-xl mb-1">💫</div>
+                            <div class="font-semibold text-starGold font-medieval text-xs">Bintang Kecil</div>
+                            <div class="text-xs text-moonSilver">100 Bintang</div>
                         </div>
-                        <div class="text-center p-2 bg-oldPaper rounded-lg transition-all duration-300 rank-badge" data-level="2">
-                            <div class="text-lg md:text-xl mb-1">📜</div>
-                            <div class="font-semibold text-dark font-medieval text-xs">Pencari</div>
-                            <div class="text-xs text-dark">300 XP</div>
+                        <div class="text-center p-2 bg-nightBlue/50 rounded-lg transition-all duration-300 rank-badge" data-level="2">
+                            <div class="text-lg md:text-xl mb-1">🌟</div>
+                            <div class="font-semibold text-starGold font-medieval text-xs">Bintang Bersinar</div>
+                            <div class="text-xs text-moonSilver">300 Bintang</div>
                         </div>
-                        <div class="text-center p-2 bg-oldPaper rounded-lg transition-all duration-300 rank-badge" data-level="3">
-                            <div class="text-lg md:text-xl mb-1">📘</div>
-                            <div class="font-semibold text-dark font-medieval text-xs">Penjaga</div>
-                            <div class="text-xs text-dark">600 XP</div>
+                        <div class="text-center p-2 bg-nightBlue/50 rounded-lg transition-all duration-300 rank-badge" data-level="3">
+                            <div class="text-lg md:text-xl mb-1">✨</div>
+                            <div class="font-semibold text-starGold font-medieval text-xs">Bintang Gemerlap</div>
+                            <div class="text-xs text-moonSilver">600 Bintang</div>
                         </div>
-                        <div class="text-center p-2 bg-oldPaper rounded-lg transition-all duration-300 rank-badge" data-level="4">
-                            <div class="text-lg md:text-xl mb-1">📗</div>
-                            <div class="font-semibold text-dark font-medieval text-xs">Ahli</div>
-                            <div class="text-xs text-dark">800 XP</div>
+                        <div class="text-center p-2 bg-nightBlue/50 rounded-lg transition-all duration-300 rank-badge" data-level="4">
+                            <div class="text-lg md:text-xl mb-1">⭐</div>
+                            <div class="font-semibold text-starGold font-medieval text-xs">Bintang Kejora</div>
+                            <div class="text-xs text-moonSilver">800 Bintang</div>
                         </div>
-                        <div class="text-center p-2 bg-oldPaper rounded-lg transition-all duration-300 rank-badge" data-level="5">
-                            <div class="text-lg md:text-xl mb-1">📕</div>
-                            <div class="font-semibold text-dark font-medieval text-xs">Penguasa</div>
-                            <div class="text-xs text-dark">1000 XP</div>
+                        <div class="text-center p-2 bg-nightBlue/50 rounded-lg transition-all duration-300 rank-badge" data-level="5">
+                            <div class="text-lg md:text-xl mb-1">🌠</div>
+                            <div class="font-semibold text-starGold font-medieval text-xs">Bintang Maha Raya</div>
+                            <div class="text-xs text-moonSilver">1000 Bintang</div>
                         </div>
                     </div>
                 </div>
@@ -483,105 +593,114 @@
 
             <!-- Character Display Section -->
             <div id="character-section" class="hidden max-w-6xl mx-auto">
-                <div class="parchment-bg rounded-2xl p-4 md:p-6 ancient-border text-center">
-                    <h3 class="text-xl md:text-2xl font-bold text-dark font-maguntia mb-4 md:mb-6" id="character-title">Petualang Literasi</h3>
+                <div class="cosmic-card rounded-2xl p-4 md:p-6 star-border text-center galaxy-bg">
+                    <h3 class="text-xl md:text-2xl font-bold text-starGold font-maguntia mb-4 md:mb-6" id="character-title">Penjelajah Kosmik</h3>
                     
-                    <div class="flex flex-col lg:flex-row items-center justify-between space-y-4 lg:space-y-0">
+                    <div class="flex flex-col lg:flex-row items-center justify-between space-y-6 lg:space-y-0">
                         <!-- Character Avatar -->
                         <div class="relative" id="character-display">
-                            <div class="w-48 h-48 md:w-64 md:h-64 bg-gradient-to-br from-gold to-bronze rounded-full flex items-center justify-center ancient-border animate-pulse-glow">
-                                <i class="fas fa-book-reader text-darkBrown text-4xl md:text-5xl" id="character-icon"></i>
+                            <div class="w-48 h-48 md:w-64 md:h-64 bg-gradient-to-br from-starGold to-cosmicPurple rounded-full flex items-center justify-center star-border animate-glow relative">
+                                <i class="fas fa-user-astronaut text-nightBlue text-4xl md:text-5xl" id="character-icon"></i>
+                                
+                                <!-- Orbiting Stars -->
+                                <div class="absolute inset-0">
+                                    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animate-orbit">
+                                        <i class="fas fa-star text-starGold text-lg animate-twinkle"></i>
+                                    </div>
+                                    <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 animate-orbit" style="animation-delay: -5s;">
+                                        <i class="fas fa-star text-moonSilver text-sm animate-twinkle"></i>
+                                    </div>
+                                    <div class="absolute left-0 top-1/2 transform -translate-x-1/2 -translate-y-1/2 animate-orbit" style="animation-delay: -10s;">
+                                        <i class="fas fa-star text-cometOrange text-md animate-twinkle"></i>
+                                    </div>
+                                    <div class="absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/2 animate-orbit" style="animation-delay: -15s;">
+                                        <i class="fas fa-star text-auroraGreen text-xs animate-twinkle"></i>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
                         <!-- Character Stats -->
-                        <div class="text-left space-y-3 w-full lg:w-1/2">
-                            <div class="bg-oldPaper p-3 rounded-lg border-2 border-darkBrown">
-                                <h4 class="font-bold text-dark font-medieval mb-2 text-sm md:text-base">Status Petualang</h4>
-                                <div class="space-y-2">
-                                    <div class="flex justify-between">
-                                        <span class="text-dark text-sm">Rank:</span>
-                                        <span class="font-semibold text-gold text-sm" id="current-rank">📖 Pemula Naskah</span>
+                        <div class="text-left space-y-4 w-full lg:w-1/2">
+                            <div class="bg-nightBlue/50 p-4 rounded-lg border-2 border-starGold">
+                                <h4 class="font-bold text-starGold font-medieval mb-3 text-sm md:text-base">Status Penjelajah</h4>
+                                <div class="space-y-3">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-moonSilver text-sm">Rank:</span>
+                                        <span class="font-semibold text-starGold text-sm md:text-base" id="current-rank">☁️ Awan Pertama</span>
                                     </div>
-                                    <div class="flex justify-between">
-                                        <span class="text-dark text-sm">Total XP:</span>
-                                        <span class="font-semibold text-bronze text-sm" id="total-xp">0</span>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-moonSilver text-sm">Total Bintang:</span>
+                                        <span class="font-semibold text-cometOrange text-sm md:text-base flex items-center" id="total-xp">
+                                            <i class="fas fa-star mr-1"></i>0
+                                        </span>
                                     </div>
-                                    <div class="flex justify-between">
-                                        <span class="text-dark text-sm">Status:</span>
-                                        <span class="font-semibold text-forestGreen text-sm" id="current-status">🟢 Online</span>
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <span class="text-dark text-sm">Peringkat:</span>
-                                        <span class="font-semibold text-mysticBlue text-sm" id="global-rank">-</span>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-moonSilver text-sm">Status:</span>
+                                        <span class="font-semibold text-auroraGreen text-sm md:text-base flex items-center" id="current-status">
+                                            <div class="online-status online mr-2"></div>Online
+                                        </span>
                                     </div>
                                 </div>
                             </div>
                             
                             <!-- Next Rank Progress -->
-                            <div class="bg-oldPaper p-3 rounded-lg border-2 border-darkBrown">
-                                <h4 class="font-bold text-dark font-medieval mb-2 text-sm md:text-base">Menuju Rank Berikutnya</h4>
-                                <div class="w-full bg-darkBrown rounded-full h-3">
-                                    <div id="next-rank-progress" class="bg-gradient-to-r from-gold to-bronze h-3 rounded-full transition-all duration-1000" style="width: 0%"></div>
+                            <div class="bg-nightBlue/50 p-4 rounded-lg border-2 border-starGold">
+                                <h4 class="font-bold text-starGold font-medieval mb-3 text-sm md:text-base">Menuju Rank Berikutnya</h4>
+                                <div class="w-full bg-deepBlue rounded-full h-3 mb-2">
+                                    <div id="next-rank-progress" class="bg-gradient-to-r from-starGold to-cosmicPurple h-3 rounded-full transition-all duration-1000" style="width: 0%"></div>
                                 </div>
-                                <div class="flex justify-between mt-1 text-xs text-dark">
+                                <div class="flex justify-between text-xs text-moonSilver mb-1">
                                     <span id="current-rank-xp">0</span>
                                     <span id="next-rank-xp">100</span>
                                 </div>
-                                <div class="text-center mt-1">
-                                    <span class="text-xs text-dark font-medieval" id="next-rank-name">📚 Penjelajah Halaman</span>
+                                <div class="text-center">
+                                    <span class="text-sm text-starGold font-medieval" id="next-rank-name">💫 Bintang Kecil</span>
+                                </div>
+                            </div>
+
+                            <!-- Special Achievement -->
+                            <div id="max-points-notification" class="hidden bg-gradient-to-r from-starGold to-cometOrange p-4 rounded-lg border-2 border-starGold animate-pulse">
+                                <div class="text-center">
+                                    <h4 class="font-bold text-nightBlue font-medieval mb-2 text-lg">🎉 Pencapaian Maksimal! 🎉</h4>
+                                    <p class="text-nightBlue text-sm mb-3">Kamu telah mencapai 1000 Bintang! Hubungi admin untuk mendapatkan hadiah spesial!</p>
+                                    <button onclick="notifyAdmin()" class="bg-nightBlue text-starGold px-4 py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105 border border-starGold font-medieval text-sm">
+                                        <i class="fas fa-bell mr-2"></i>Beritahu Admin
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Achievement Notification -->
-                    <div id="achievement-notification" class="hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 parchment-bg rounded-2xl p-6 ancient-border animate-pulse-glow max-w-xs md:max-w-sm mx-4">
+                    <div id="achievement-notification" class="hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 cosmic-card rounded-2xl p-6 star-border animate-glow max-w-xs md:max-w-sm mx-4">
                         <div class="text-center">
-                            <div class="w-16 h-16 mx-auto mb-3 bg-gradient-to-r from-gold to-bronze rounded-full flex items-center justify-center ancient-border">
-                                <i class="fas fa-trophy text-darkBrown text-xl"></i>
+                            <div class="w-16 h-16 mx-auto mb-3 bg-gradient-to-r from-starGold to-cosmicPurple rounded-full flex items-center justify-center star-border">
+                                <i class="fas fa-trophy text-nightBlue text-xl"></i>
                             </div>
                             <h4 class="text-lg md:text-xl font-bold text-dark font-maguntia mb-2" id="achievement-title">Rank Up!</h4>
-                            <p class="text-dark font-medieval mb-3 text-sm" id="achievement-desc">Petualanganmu semakin maju!</p>
-                            <button onclick="closeAchievement()" class="bg-gold text-darkBrown px-4 py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105 border-2 border-darkBrown font-medieval text-sm">
+                            <p class="text-dark font-medieval mb-3 text-sm" id="achievement-desc">Petualangan kosmikmu semakin maju!</p>
+                            <button onclick="closeAchievement()" class="bg-starGold text-nightBlue px-4 py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105 border-2 border-deepBlue font-medieval text-sm">
                                 Lanjutkan!
                             </button>
                         </div>
                     </div>
 
-                    <!-- Leaderboard Modal -->
-                    <div id="leaderboard-modal" class="hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
-                        <div class="parchment-bg rounded-2xl p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto ancient-border">
-                            <div class="text-center mb-6">
-                                <h3 class="text-2xl md:text-3xl font-bold text-dark font-maguntia">Papan Peringkat</h3>
-                                <p class="text-dark font-medieval">Petualang Terhebat Perpustakaan Abadi</p>
-                            </div>
-                            <div id="leaderboard-content" class="space-y-3">
-                                <!-- Leaderboard items will be populated here -->
-                            </div>
-                            <div class="text-center mt-6">
-                                <button onclick="studentSystem.closeLeaderboard()" class="bg-gold text-darkBrown px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 border-2 border-darkBrown font-medieval">
-                                    Tutup
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- Completion Screen -->
                     <div id="completion-screen" class="hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
-                        <div class="parchment-bg rounded-2xl p-6 max-w-md w-full text-center transform animate-grow ancient-border mx-4">
-                            <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-r from-gold to-bronze rounded-full flex items-center justify-center ancient-border">
-                                <i class="fas fa-crown text-darkBrown text-2xl"></i>
+                        <div class="cosmic-card rounded-2xl p-6 max-w-md w-full text-center transform animate-grow star-border mx-4">
+                            <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-r from-starGold to-cosmicPurple rounded-full flex items-center justify-center star-border">
+                                <i class="fas fa-crown text-nightBlue text-2xl"></i>
                             </div>
-                            <h3 class="text-2xl md:text-3xl font-bold text-dark font-maguntia mb-3">Legenda Terbentuk! 🏆</h3>
-                            <p class="text-dark font-medieval mb-2 text-sm">Kamu telah menjadi Penguasa Cerita!</p>
-                            <p class="text-dark font-medieval mb-4 text-sm">Perpustakaan Abadi mengenang namamu!</p>
+                            <h3 class="text-2xl md:text-3xl font-bold text-dark font-maguntia mb-3">Legenda Kosmik Terbentuk! 🏆</h3>
+                            <p class="text-dark font-medieval mb-2 text-sm">Kamu telah menjadi Bintang Maha Raya!</p>
+                            <p class="text-dark font-medieval mb-4 text-sm">Alam semesta mengenang namamu!</p>
                             <div class="space-y-2">
-                                <button onclick="restartJourney()" class="w-full bg-gradient-to-r from-gold to-bronze text-darkBrown py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105 border-2 border-darkBrown font-medieval text-sm">
+                                <button onclick="restartJourney()" class="w-full bg-gradient-to-r from-starGold to-cosmicPurple text-nightBlue py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105 border-2 border-deepBlue font-medieval text-sm">
                                     <i class="fas fa-redo mr-2"></i>Mulai Petualangan Baru
                                 </button>
-                                <button onclick="shareAchievement()" class="w-full bg-gradient-to-r from-forestGreen to-green-800 text-parchment py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105 border-2 border-gold font-medieval text-sm">
-                                    <i class="fas fa-shield-alt mr-2"></i>Bagikan Legenda
+                                <button onclick="shareAchievement()" class="w-full bg-gradient-to-r from-auroraGreen to-green-800 text-cloudWhite py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105 border-2 border-starGold font-medieval text-sm">
+                                    <i class="fas fa-share-alt mr-2"></i>Bagikan Pencapaian
                                 </button>
                             </div>
                         </div>
@@ -592,42 +711,56 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-darkBrown/90 text-silver py-4 border-t-2 border-gold">
+    <footer class="bg-deepBlue/90 text-moonSilver py-4 border-t-2 border-starGold">
         <div class="container mx-auto px-4 text-center font-medieval text-xs">
-            <p>© 2024 Perpustakaan Abadi. Tempat para legenda literasi tercipta.</p>
+            <p>© 2024 Fantasi Langit. Tempat para penjelajah bintang bertemu.</p>
         </div>
     </footer>
 
     <script>
-        // Enhanced Student Management System - FIXED ALL SYNC ISSUES
+        // Student Management System - PERMANENT POINT STORAGE
         class StudentSystem {
             constructor() {
                 this.currentStudent = null;
-                this.students = JSON.parse(localStorage.getItem('perpustakaan_abadi_students')) || [];
-                this.selectedProfileIcon = 'book-reader';
+                // PENYIMPANAN PERMANEN: Gunakan localStorage yang sama dengan admin
+                this.students = JSON.parse(localStorage.getItem('fantasi_langit_students')) || [];
+                this.selectedProfileIcon = 'user-astronaut';
                 this.init();
             }
 
             init() {
+                this.createStars();
+                this.createComets();
                 this.setupEventListeners();
                 this.checkExistingSession();
                 this.startAutoSync();
                 this.setupBeforeUnload();
-                this.initializeData();
             }
 
-            initializeData() {
-                // Initialize activity logs if not exists
-                if (!localStorage.getItem('activity_logs')) {
-                    localStorage.setItem('activity_logs', JSON.stringify([]));
+            createStars() {
+                const container = document.getElementById('stars-container');
+                for (let i = 0; i < 50; i++) {
+                    const star = document.createElement('div');
+                    star.className = 'star';
+                    star.style.width = Math.random() * 3 + 'px';
+                    star.style.height = star.style.width;
+                    star.style.left = Math.random() * 100 + 'vw';
+                    star.style.top = Math.random() * 100 + 'vh';
+                    star.style.animationDelay = Math.random() * 5 + 's';
+                    star.style.opacity = Math.random() * 0.7 + 0.3;
+                    container.appendChild(star);
                 }
-                
-                // Initialize admin settings if not exists
-                if (!localStorage.getItem('admin_settings')) {
-                    localStorage.setItem('admin_settings', JSON.stringify({
-                        autoBackup: true,
-                        backupInterval: 24 // hours
-                    }));
+            }
+
+            createComets() {
+                const container = document.getElementById('stars-container');
+                for (let i = 0; i < 3; i++) {
+                    const comet = document.createElement('div');
+                    comet.className = 'comet';
+                    comet.style.left = Math.random() * 100 + 'vw';
+                    comet.style.top = Math.random() * 100 + 'vh';
+                    comet.style.animationDelay = Math.random() * 10 + 's';
+                    container.appendChild(comet);
                 }
             }
 
@@ -665,42 +798,40 @@
             }
 
             startAutoSync() {
-                // Enhanced sync with better error handling
+                // SINKRONISASI REAL-TIME: Sync setiap 1 detik untuk update point
                 setInterval(() => {
                     this.syncWithMainData();
-                }, 2000);
-
-                // Auto-backup every hour
-                setInterval(() => {
-                    this.createBackup();
-                }, 60 * 60 * 1000);
+                }, 1000);
             }
 
+            // SISTEM PENYIMPANAN PERMANEN: Sync data dengan admin
             syncWithMainData() {
                 if (!this.currentStudent) return;
 
                 try {
-                    const mainStudents = JSON.parse(localStorage.getItem('perpustakaan_abadi_students') || '[]');
+                    // Baca data terbaru dari localStorage
+                    const mainStudents = JSON.parse(localStorage.getItem('fantasi_langit_students') || '[]');
                     const latestStudentData = mainStudents.find(s => s.id === this.currentStudent.id);
                     
                     if (latestStudentData) {
-                        // Check if points changed
+                        // POINT PERMANEN: Update point jika ada perubahan dari admin
                         if (latestStudentData.points !== this.currentStudent.points) {
-                            console.log('🔁 Sync: Points berubah:', this.currentStudent.points, '->', latestStudentData.points);
+                            console.log('Bintang berubah:', this.currentStudent.points, '->', latestStudentData.points);
                             this.currentStudent.points = latestStudentData.points;
                             this.currentStudent.level = this.getLevelFromPoints(latestStudentData.points);
                             this.updateDisplay();
-                            this.logActivity('points_updated', `XP diperbarui menjadi ${latestStudentData.points}`);
+                            
+                            // Tampilkan notifikasi jika mencapai 1000 point
+                            if (this.currentStudent.points >= 1000) {
+                                this.showMaxPointsNotification();
+                            }
                         }
 
-                        // Sync other important fields
+                        // Sync field penting lainnya
                         if (latestStudentData.profileIcon !== this.currentStudent.profileIcon) {
                             this.currentStudent.profileIcon = latestStudentData.profileIcon;
                             this.updateProfileIcon();
                         }
-
-                        // Update global rank
-                        this.updateGlobalRank();
 
                         // Update session storage
                         this.saveCurrentStudent();
@@ -715,11 +846,10 @@
                 if (savedStudent) {
                     try {
                         this.currentStudent = JSON.parse(savedStudent);
-                        this.selectedProfileIcon = this.currentStudent.profileIcon || 'book-reader';
+                        this.selectedProfileIcon = this.currentStudent.profileIcon || 'user-astronaut';
                         this.showMainInterface();
                         this.updateStudentStatus(true);
-                        this.syncWithMainData();
-                        this.updateGlobalRank();
+                        this.syncWithMainData(); // Sync immediately
                     } catch (error) {
                         console.error('Error loading session:', error);
                         localStorage.removeItem('current_student');
@@ -754,14 +884,13 @@
                     return;
                 }
 
-                this.currentStudent = { ...student };
+                this.currentStudent = { ...student }; // Create copy untuk menghindari reference issues
                 this.currentStudent.lastLogin = new Date().toISOString();
                 this.currentStudent.lastActivity = new Date().toISOString();
                 this.currentStudent.isOnline = true;
 
                 this.saveCurrentStudent();
                 this.showMainInterface();
-                this.logActivity('login', 'Berhasil login ke sistem');
                 this.showNotification(`Selamat datang kembali, ${name}!`, 'success');
             }
 
@@ -810,17 +939,15 @@
                     isOnline: true,
                     createdAt: new Date().toISOString(),
                     lastLogin: new Date().toISOString(),
-                    lastActivity: new Date().toISOString(),
-                    achievements: []
+                    lastActivity: new Date().toISOString()
                 };
 
                 this.students.push(student);
-                this.currentStudent = { ...student };
+                this.currentStudent = { ...student }; // Create copy
 
                 this.saveToStorage();
                 this.showMainInterface();
-                this.logActivity('register', 'Bergabung dengan Perpustakaan Abadi');
-                this.showNotification(`Selamat datang, ${name}! Petualangan menantimu!`, 'success');
+                this.showNotification(`Selamat datang, ${name}! Petualangan kosmik menantimu!`, 'success');
             }
 
             generateStudentId() {
@@ -830,12 +957,11 @@
             handleLogout() {
                 if (this.currentStudent) {
                     this.updateStudentStatus(false);
-                    this.logActivity('logout', 'Keluar dari sistem');
                 }
                 this.currentStudent = null;
                 localStorage.removeItem('current_student');
                 this.showAuthInterface();
-                this.showNotification('Sampai bertemu lagi, petualang!', 'info');
+                this.showNotification('Sampai bertemu lagi, penjelajah bintang!', 'info');
             }
 
             updateStudentStatus(isOnline) {
@@ -844,7 +970,7 @@
                 this.currentStudent.isOnline = isOnline;
                 this.currentStudent.lastActivity = new Date().toISOString();
                 
-                // Update di storage utama
+                // Update di storage utama - PENYIMPANAN PERMANEN
                 const studentIndex = this.students.findIndex(s => s.id === this.currentStudent.id);
                 if (studentIndex !== -1) {
                     this.students[studentIndex].isOnline = isOnline;
@@ -863,12 +989,12 @@
                 const statusDot = document.getElementById('user-status');
                 
                 if (this.currentStudent.isOnline) {
-                    statusElement.textContent = '🟢 Online';
-                    statusElement.className = 'font-semibold text-forestGreen text-sm';
+                    statusElement.innerHTML = '<div class="online-status online mr-2"></div>Online';
+                    statusElement.className = 'font-semibold text-auroraGreen text-sm md:text-base flex items-center';
                     statusDot.className = 'online-status online';
                 } else {
-                    statusElement.textContent = '🔴 Offline';
-                    statusElement.className = 'font-semibold text-deepRed text-sm';
+                    statusElement.innerHTML = '<div class="online-status offline mr-2"></div>Offline';
+                    statusElement.className = 'font-semibold text-nebulaPink text-sm md:text-base flex items-center';
                     statusDot.className = 'online-status offline';
                 }
             }
@@ -892,7 +1018,6 @@
                 this.updateProfileIcon();
                 this.updateStatusDisplay();
                 this.updateDisplay();
-                this.updateGlobalRank();
             }
 
             updateProfileIcon() {
@@ -901,7 +1026,7 @@
                 const iconClass = `fas fa-${this.currentStudent.profileIcon}`;
                 
                 profileIcon.innerHTML = `<i class="${iconClass}"></i>`;
-                characterIcon.className = iconClass + ' text-darkBrown text-4xl md:text-5xl';
+                characterIcon.className = iconClass + ' text-nightBlue text-4xl md:text-5xl';
             }
 
             updateDisplay() {
@@ -911,21 +1036,21 @@
                 const level = this.getLevelFromPoints(points);
                 const rankName = this.getRankName(level);
 
-                document.getElementById('total-xp').textContent = points;
+                document.getElementById('total-xp').innerHTML = `<i class="fas fa-star mr-1"></i>${points}`;
                 document.getElementById('current-rank').textContent = rankName;
                 document.getElementById('user-rank').textContent = rankName;
 
-                document.getElementById('progress-text').textContent = `${points} XP - ${rankName}`;
+                document.getElementById('progress-text').textContent = `${points} Bintang - ${rankName}`;
 
                 // Update rank badges
                 document.querySelectorAll('.rank-badge').forEach((badge, index) => {
                     if (index <= level) {
-                        badge.classList.remove('bg-oldPaper');
-                        badge.classList.add('bg-gradient-to-r', 'from-gold', 'to-bronze', 'shadow-lg');
+                        badge.classList.remove('bg-nightBlue/50');
+                        badge.classList.add('bg-gradient-to-r', 'from-starGold', 'to-cosmicPurple', 'shadow-lg');
                         badge.style.transform = 'scale(1.05)';
                     } else {
-                        badge.classList.remove('bg-gradient-to-r', 'from-gold', 'to-bronze', 'shadow-lg');
-                        badge.classList.add('bg-oldPaper');
+                        badge.classList.remove('bg-gradient-to-r', 'from-starGold', 'to-cosmicPurple', 'shadow-lg');
+                        badge.classList.add('bg-nightBlue/50');
                         badge.style.transform = 'scale(1)';
                     }
                 });
@@ -942,19 +1067,10 @@
                 // Check for completion
                 if (points >= 1000) {
                     this.showCompletion();
+                    this.showMaxPointsNotification();
                 }
 
                 this.saveCurrentStudent();
-            }
-
-            updateGlobalRank() {
-                if (!this.currentStudent) return;
-
-                const sortedStudents = [...this.students].sort((a, b) => b.points - a.points);
-                const rank = sortedStudents.findIndex(s => s.id === this.currentStudent.id) + 1;
-                const totalStudents = sortedStudents.length;
-
-                document.getElementById('global-rank').textContent = `#${rank} dari ${totalStudents}`;
             }
 
             getLevelFromPoints(points) {
@@ -968,34 +1084,47 @@
 
             getRankName(level) {
                 const ranks = [
-                    '📖 Pemula Naskah',
-                    '📚 Penjelajah Halaman',
-                    '📜 Pencari Aksara',
-                    '📘 Penjaga Buku',
-                    '📗 Ahli Tinta',
-                    '📕 Penguasa Cerita'
+                    '☁️ Awan Pertama',
+                    '💫 Bintang Kecil',
+                    '🌟 Bintang Bersinar',
+                    '✨ Bintang Gemerlap',
+                    '⭐ Bintang Kejora',
+                    '🌠 Bintang Maha Raya'
                 ];
-                return ranks[level] || '📖 Pemula Naskah';
+                return ranks[level] || '☁️ Awan Pertama';
             }
 
             updateCharacter(level) {
                 const characterDisplay = document.getElementById('character-display');
                 const characterConfigs = [
-                    { color: 'from-gray-400 to-gray-600', title: 'Pemula Naskah' },
-                    { color: 'from-green-400 to-green-600', title: 'Penjelajah Halaman' },
-                    { color: 'from-blue-400 to-blue-600', title: 'Pencari Aksara' },
-                    { color: 'from-purple-400 to-purple-600', title: 'Penjaga Buku' },
-                    { color: 'from-indigo-400 to-indigo-600', title: 'Ahli Tinta' },
-                    { color: 'from-yellow-400 to-red-600', title: 'Penguasa Cerita' }
+                    { color: 'from-gray-400 to-gray-600', title: 'Awan Pertama' },
+                    { color: 'from-blue-400 to-blue-600', title: 'Bintang Kecil' },
+                    { color: 'from-green-400 to-green-600', title: 'Bintang Bersinar' },
+                    { color: 'from-purple-400 to-purple-600', title: 'Bintang Gemerlap' },
+                    { color: 'from-yellow-400 to-orange-600', title: 'Bintang Kejora' },
+                    { color: 'from-yellow-400 to-red-600', title: 'Bintang Maha Raya' }
                 ];
 
                 const config = characterConfigs[level];
                 characterDisplay.innerHTML = `
-                    <div class="w-48 h-48 md:w-64 md:h-64 bg-gradient-to-br ${config.color} rounded-full flex items-center justify-center ancient-border animate-pulse-glow">
+                    <div class="w-48 h-48 md:w-64 md:h-64 bg-gradient-to-br ${config.color} rounded-full flex items-center justify-center star-border animate-glow relative">
                         <i class="fas fa-${this.currentStudent.profileIcon} text-white text-4xl md:text-5xl" id="character-icon"></i>
-                    </div>
-                    <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-darkBrown/90 text-gold px-3 py-1 rounded-lg border border-gold font-medieval whitespace-nowrap text-xs md:text-sm">
-                        ${config.title}
+                        
+                        <!-- Orbiting Stars -->
+                        <div class="absolute inset-0">
+                            <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animate-orbit">
+                                <i class="fas fa-star text-starGold text-lg animate-twinkle"></i>
+                            </div>
+                            <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 animate-orbit" style="animation-delay: -5s;">
+                                <i class="fas fa-star text-moonSilver text-sm animate-twinkle"></i>
+                            </div>
+                            <div class="absolute left-0 top-1/2 transform -translate-x-1/2 -translate-y-1/2 animate-orbit" style="animation-delay: -10s;">
+                                <i class="fas fa-star text-cometOrange text-md animate-twinkle"></i>
+                            </div>
+                            <div class="absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/2 animate-orbit" style="animation-delay: -15s;">
+                                <i class="fas fa-star text-auroraGreen text-xs animate-twinkle"></i>
+                            </div>
+                        </div>
                     </div>
                 `;
 
@@ -1034,7 +1163,7 @@
                     effect.className = `magic-effect absolute w-3 h-3 rounded-full sparkle`;
                     effect.style.left = `${Math.random() * 100}%`;
                     effect.style.top = `${Math.random() * 100}%`;
-                    effect.style.background = `radial-gradient(circle, ${level >= 4 ? '#FFD700' : '#D4AF37'}, transparent)`;
+                    effect.style.background = `radial-gradient(circle, ${level >= 4 ? '#FFD700' : '#87CEEB'}, transparent)`;
                     effect.style.animationDelay = `${Math.random() * 2}s`;
                     
                     characterDisplay.appendChild(effect);
@@ -1046,31 +1175,33 @@
                 const title = document.getElementById('achievement-title');
                 const desc = document.getElementById('achievement-desc');
 
-                const rankNames = ['Pemula Naskah', 'Penjelajah Halaman', 'Pencari Aksara', 'Penjaga Buku', 'Ahli Tinta', 'Penguasa Cerita'];
+                const rankNames = ['Awan Pertama', 'Bintang Kecil', 'Bintang Bersinar', 'Bintang Gemerlap', 'Bintang Kejora', 'Bintang Maha Raya'];
                 const messages = [
-                    'Perjalanan literasimu dimulai!',
-                    'Kamu menjelajahi halaman-halaman baru!',
-                    'Aksara-aksara mulai membuka rahasianya!',
-                    'Kamu menjadi penjaga pengetahuan!',
-                    'Tinta mengalir dalam jiwamu!',
-                    'Kamu menguasai cerita-cerita legenda!'
+                    'Perjalanan kosmikmu dimulai!',
+                    'Bintang pertamamu bersinar terang!',
+                    'Cahayamu semakin terang benderang!',
+                    'Gemerlapmu memancar ke seluruh angkasa!',
+                    'Kamu menjadi bintang kejora yang bersinar!',
+                    'Kamu mencapai puncak kosmik sebagai Bintang Maha Raya!'
                 ];
 
                 title.textContent = `${rankNames[level]}!`;
                 desc.textContent = messages[level];
                 achievement.classList.remove('hidden');
 
-                this.logActivity('level_up', `Naik ke level ${level + 1} - ${rankNames[level]}`);
                 this.createCelebration();
             }
 
             showCompletion() {
                 document.getElementById('completion-screen').classList.remove('hidden');
-                this.logActivity('completion', 'Mencapai level maksimum - Penguasa Cerita!');
+            }
+
+            showMaxPointsNotification() {
+                document.getElementById('max-points-notification').classList.remove('hidden');
             }
 
             createCelebration() {
-                for (let i = 0; i < 20; i++) {
+                for (let i = 0; i < 25; i++) {
                     setTimeout(() => {
                         const confetti = document.createElement('div');
                         confetti.className = 'fixed text-xl pointer-events-none z-50';
@@ -1086,122 +1217,11 @@
                 }
             }
 
-            // NEW FEATURE: Leaderboard
-            showLeaderboard() {
-                const leaderboardModal = document.getElementById('leaderboard-modal');
-                const leaderboardContent = document.getElementById('leaderboard-content');
-
-                const sortedStudents = [...this.students]
-                    .sort((a, b) => b.points - a.points)
-                    .slice(0, 20); // Top 20
-
-                leaderboardContent.innerHTML = sortedStudents.map((student, index) => `
-                    <div class="leaderboard-item ${index < 3 ? 'top-3' : ''} p-4 rounded-xl border-2 border-darkBrown">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-4">
-                                <div class="w-10 h-10 flex items-center justify-center bg-gradient-to-r from-gold to-bronze rounded-xl ancient-border font-bold text-darkBrown">
-                                    ${index + 1}
-                                </div>
-                                <div class="w-12 h-12 bg-gradient-to-r from-gold to-bronze rounded-2xl flex items-center justify-center ancient-border text-darkBrown">
-                                    <i class="fas fa-${student.profileIcon || 'book-reader'}"></i>
-                                </div>
-                                <div>
-                                    <div class="font-semibold text-dark text-lg">${student.name}</div>
-                                    <div class="text-dark font-medieval text-sm">${student.class} • ${this.getRankName(this.getLevelFromPoints(student.points))}</div>
-                                </div>
-                            </div>
-                            <div class="text-right">
-                                <div class="font-bold text-gold text-xl">${student.points} XP</div>
-                                <div class="text-dark font-medieval text-sm">${student.isOnline ? '🟢 Online' : '🔴 Offline'}</div>
-                            </div>
-                        </div>
-                    </div>
-                `).join('');
-
-                leaderboardModal.classList.remove('hidden');
-            }
-
-            closeLeaderboard() {
-                document.getElementById('leaderboard-modal').classList.add('hidden');
-            }
-
-            // NEW FEATURE: Export Data
-            exportData() {
-                if (!this.currentStudent) return;
-
-                const data = {
-                    student: this.currentStudent,
-                    exportDate: new Date().toISOString(),
-                    totalStudents: this.students.length,
-                    globalRank: this.getGlobalRank()
-                };
-
-                const dataStr = JSON.stringify(data, null, 2);
-                const dataBlob = new Blob([dataStr], { type: 'application/json' });
-                const url = URL.createObjectURL(dataBlob);
-                const link = document.createElement('a');
-                link.href = url;
-                link.download = `progress_${this.currentStudent.name}_${new Date().toISOString().split('T')[0]}.json`;
-                link.click();
-                URL.revokeObjectURL(url);
-
-                this.logActivity('export_data', 'Mengekspor data progress');
-                this.showNotification('Data berhasil diekspor!', 'success');
-            }
-
-            getGlobalRank() {
-                const sortedStudents = [...this.students].sort((a, b) => b.points - a.points);
-                return sortedStudents.findIndex(s => s.id === this.currentStudent.id) + 1;
-            }
-
-            // NEW FEATURE: Activity Logging
-            logActivity(type, description) {
-                try {
-                    const logs = JSON.parse(localStorage.getItem('activity_logs') || '[]');
-                    logs.push({
-                        studentId: this.currentStudent?.id,
-                        studentName: this.currentStudent?.name,
-                        type: type,
-                        description: description,
-                        timestamp: new Date().toISOString(),
-                        ip: 'local' // In real app, this would be actual IP
-                    });
-
-                    // Keep only last 1000 logs
-                    if (logs.length > 1000) {
-                        logs.splice(0, logs.length - 1000);
-                    }
-
-                    localStorage.setItem('activity_logs', JSON.stringify(logs));
-                } catch (error) {
-                    console.error('Error logging activity:', error);
-                }
-            }
-
-            // NEW FEATURE: Auto Backup
-            createBackup() {
-                try {
-                    const settings = JSON.parse(localStorage.getItem('admin_settings') || '{}');
-                    if (!settings.autoBackup) return;
-
-                    const backup = {
-                        students: this.students,
-                        timestamp: new Date().toISOString(),
-                        version: '1.0'
-                    };
-
-                    localStorage.setItem('backup_' + new Date().toISOString(), JSON.stringify(backup));
-                    console.log('Backup created successfully');
-                } catch (error) {
-                    console.error('Error creating backup:', error);
-                }
-            }
-
             showNotification(message, type = 'info') {
                 const notification = document.createElement('div');
                 notification.className = `fixed top-4 right-4 z-50 px-4 py-2 rounded-lg font-semibold text-white transition-all duration-300 transform translate-x-full border ${
-                    type === 'error' ? 'bg-deepRed border-red-300' : 
-                    type === 'success' ? 'bg-forestGreen border-green-300' : 'bg-mysticBlue border-blue-300'
+                    type === 'error' ? 'bg-nebulaPink border-pink-300' : 
+                    type === 'success' ? 'bg-auroraGreen border-green-300' : 'bg-cosmicPurple border-purple-300'
                 } text-sm max-w-xs`;
                 notification.textContent = message;
 
@@ -1215,10 +1235,11 @@
                 }, 3000);
             }
 
+            // PENYIMPANAN PERMANEN: Simpan ke localStorage yang sama dengan admin
             saveToStorage() {
                 try {
-                    localStorage.setItem('perpustakaan_abadi_students', JSON.stringify(this.students));
-                    console.log('✅ Data tersimpan:', this.students);
+                    localStorage.setItem('fantasi_langit_students', JSON.stringify(this.students));
+                    console.log('Data tersimpan permanen:', this.students);
                 } catch (error) {
                     console.error('Error saving to storage:', error);
                 }
@@ -1229,7 +1250,7 @@
                     try {
                         localStorage.setItem('current_student', JSON.stringify(this.currentStudent));
                         
-                        // Update student di array utama
+                        // Update student di array utama - PENYIMPANAN PERMANEN
                         const studentIndex = this.students.findIndex(s => s.id === this.currentStudent.id);
                         if (studentIndex !== -1) {
                             this.students[studentIndex] = { ...this.currentStudent };
@@ -1255,6 +1276,14 @@
                 form.classList.remove('active');
             });
             document.getElementById(`${tab}-form`).classList.add('active');
+
+            // Auto scroll ke atas untuk register form
+            if (tab === 'register') {
+                const registerScroll = document.querySelector('.register-scroll');
+                if (registerScroll) {
+                    registerScroll.scrollTop = 0;
+                }
+            }
         }
 
         function selectProfileIcon(iconName) {
@@ -1273,10 +1302,10 @@
             
             if (input.type === 'password') {
                 input.type = 'text';
-                icon.className = 'fas fa-eye-slash text-darkBrown';
+                icon.className = 'fas fa-eye-slash text-deepBlue';
             } else {
                 input.type = 'password';
-                icon.className = 'fas fa-eye text-darkBrown';
+                icon.className = 'fas fa-eye text-deepBlue';
             }
         }
 
@@ -1291,25 +1320,31 @@
                 studentSystem.updateDisplay();
                 studentSystem.saveCurrentStudent();
                 document.getElementById('completion-screen').classList.add('hidden');
-                studentSystem.showNotification('Petualangan baru dimulai!', 'success');
+                document.getElementById('max-points-notification').classList.add('hidden');
+                studentSystem.showNotification('Petualangan kosmik baru dimulai!', 'success');
             }
         }
 
         function shareAchievement() {
             const student = studentSystem.currentStudent;
             if (student) {
-                const shareText = `Aku telah menjadi ${studentSystem.getRankName(studentSystem.getLevelFromPoints(student.points))} di Perpustakaan Abadi! 🏆\nTotal XP: ${student.points}`;
+                const shareText = `Aku telah menjadi ${studentSystem.getRankName(studentSystem.getLevelFromPoints(student.points))} di Fantasi Langit! 🌌\nTotal Bintang: ${student.points}`;
                 
                 if (navigator.share) {
                     navigator.share({
-                        title: 'Pencapaian Perpustakaan Abadi',
+                        title: 'Pencapaian Fantasi Langit',
                         text: shareText
                     });
                 } else {
                     navigator.clipboard.writeText(shareText);
-                    studentSystem.showNotification('Legenda disalin ke clipboard!', 'success');
+                    studentSystem.showNotification('Pencapaian disalin ke clipboard!', 'success');
                 }
             }
+        }
+
+        function notifyAdmin() {
+            studentSystem.showNotification('Admin telah diberitahu tentang pencapaianmu! 🎉', 'success');
+            // Di sini bisa ditambahkan fungsi untuk mengirim notifikasi ke admin
         }
 
         // Initialize the system
