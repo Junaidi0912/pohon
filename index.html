@@ -293,6 +293,11 @@
         .admin-update-notification.show {
             transform: translateX(0);
         }
+
+        /* PERBAIKAN: Progress Bar Animation */
+        .progress-bar-animated {
+            transition: width 1s ease-in-out;
+        }
     </style>
 </head>
 <body class="font-cinzel text-black min-h-screen">
@@ -636,7 +641,7 @@
                             <div class="bg-oldPaper p-3 rounded-lg border-2 border-darkBrown">
                                 <h4 class="font-bold text-dark font-medieval mb-2 text-sm md:text-base">Next Rank Progress</h4>
                                 <div class="w-full bg-darkBrown rounded-full h-3">
-                                    <div id="next-rank-progress" class="bg-gradient-to-r from-forestGreen to-green-600 h-3 rounded-full transition-all duration-1000" style="width: 0%"></div>
+                                    <div id="next-rank-progress" class="bg-gradient-to-r from-forestGreen to-green-600 h-3 rounded-full progress-bar-animated" style="width: 0%"></div>
                                 </div>
                                 <div class="flex justify-between mt-1 text-xs text-dark">
                                     <span id="current-rank-xp">0</span>
@@ -738,7 +743,7 @@
                 this.checkExistingSession();
                 this.startAutoSync();
                 this.setupBeforeUnload();
-                this.startAdminUpdateChecker(); // PERBAIKAN: Start admin update checker
+                this.startAdminUpdateChecker();
             }
 
             setupEventListeners() {
@@ -765,14 +770,14 @@
                     if (this.currentStudent) {
                         this.updateStudentStatus(false);
                     }
-                    this.stopAdminUpdateChecker(); // PERBAIKAN: Stop checker saat unload
+                    this.stopAdminUpdateChecker();
                 });
 
                 window.addEventListener('pageshow', () => {
                     if (this.currentStudent) {
                         this.updateStudentStatus(true);
                     }
-                    this.startAdminUpdateChecker(); // PERBAIKAN: Restart checker
+                    this.startAdminUpdateChecker();
                 });
             }
 
@@ -784,7 +789,7 @@
                 
                 this.adminUpdateCheckInterval = setInterval(() => {
                     this.checkForAdminUpdates();
-                }, 2000); // Check every 2 seconds
+                }, 2000);
             }
 
             stopAdminUpdateChecker() {
@@ -1171,7 +1176,7 @@
                 document.getElementById('character-section').classList.add('hidden');
                 document.getElementById('user-info').classList.add('hidden');
                 document.getElementById('logout-btn').classList.add('hidden');
-                this.stopAdminUpdateChecker(); // PERBAIKAN: Stop checker saat logout
+                this.stopAdminUpdateChecker();
             }
 
             showMainInterface() {
@@ -1186,7 +1191,7 @@
                 this.updateStatusDisplay();
                 this.updateDisplay();
                 this.updateGlobalRank();
-                this.startAdminUpdateChecker(); // PERBAIKAN: Start checker saat login
+                this.startAdminUpdateChecker();
             }
 
             updateProfileIcon() {
@@ -1293,20 +1298,38 @@
                 }
             }
 
+            // PERBAIKAN BESAR: Method updateNextRankProgress yang benar
             updateNextRankProgress(points, level) {
                 const rankThresholds = [0, 100, 300, 600, 800, 1000];
+                
+                // Jika sudah mencapai level maksimum (Forest Legend)
+                if (level >= 5) {
+                    document.getElementById('next-rank-progress').style.width = '100%';
+                    document.getElementById('current-rank-xp').textContent = '1000';
+                    document.getElementById('next-rank-xp').textContent = 'MAX';
+                    document.getElementById('next-rank-name').textContent = '🏆 MAX LEVEL';
+                    return;
+                }
+
                 const currentThreshold = rankThresholds[level];
-                const nextThreshold = rankThresholds[level + 1] || 1000;
+                const nextThreshold = rankThresholds[level + 1];
                 
                 const progressInRank = points - currentThreshold;
                 const rankRange = nextThreshold - currentThreshold;
                 const progressPercent = rankRange > 0 ? (progressInRank / rankRange) * 100 : 100;
 
-                document.getElementById('next-rank-progress').style.width = `${Math.min(100, Math.max(0, progressPercent))}%`;
+                console.log(`📊 Progress Calculation: ${points} XP, Level ${level}`);
+                console.log(`📊 Current: ${currentThreshold}, Next: ${nextThreshold}`);
+                console.log(`📊 Progress: ${progressInRank}/${rankRange} = ${progressPercent}%`);
+
+                // PERBAIKAN: Gunakan class progress-bar-animated untuk smooth animation
+                const progressBar = document.getElementById('next-rank-progress');
+                progressBar.style.width = `${Math.min(100, Math.max(0, progressPercent))}%`;
+                
                 document.getElementById('current-rank-xp').textContent = currentThreshold;
                 document.getElementById('next-rank-xp').textContent = nextThreshold;
                 
-                const nextRankName = this.getRankName(level + 1) || this.getRankName(level);
+                const nextRankName = this.getRankName(level + 1);
                 document.getElementById('next-rank-name').textContent = nextRankName;
             }
 
