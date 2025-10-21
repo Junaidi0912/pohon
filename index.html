@@ -718,12 +718,12 @@
     </footer>
 
     <script>
-        // Student Management System - PERMANENT POINT STORAGE
+        // Student Management System - SISTEM BARU DENGAN SINKRONISASI
         class StudentSystem {
             constructor() {
                 this.currentStudent = null;
-                // PENYIMPANAN PERMANEN: Gunakan localStorage yang sama dengan admin
-                this.students = JSON.parse(localStorage.getItem('fantasi_langit_students')) || [];
+                // PERUBAHAN: Gunakan localStorage khusus siswa
+                this.students = JSON.parse(localStorage.getItem('fantasi_langit_siswa') || '[]');
                 this.selectedProfileIcon = 'user-astronaut';
                 this.init();
             }
@@ -735,6 +735,7 @@
                 this.checkExistingSession();
                 this.startAutoSync();
                 this.setupBeforeUnload();
+                this.syncWithAdminData(); // Sinkronisasi awal
             }
 
             createStars() {
@@ -798,25 +799,25 @@
             }
 
             startAutoSync() {
-                // SINKRONISASI REAL-TIME: Sync setiap 1 detik untuk update point
+                // SINKRONISASI REAL-TIME: Sync setiap 2 detik untuk update point dari admin
                 setInterval(() => {
-                    this.syncWithMainData();
-                }, 1000);
+                    this.syncWithAdminData();
+                }, 2000);
             }
 
-            // SISTEM PENYIMPANAN PERMANEN: Sync data dengan admin
-            syncWithMainData() {
+            // FUNGSI BARU: Sinkronisasi data dengan admin
+            syncWithAdminData() {
                 if (!this.currentStudent) return;
 
                 try {
-                    // Baca data terbaru dari localStorage
-                    const mainStudents = JSON.parse(localStorage.getItem('fantasi_langit_students') || '[]');
-                    const latestStudentData = mainStudents.find(s => s.id === this.currentStudent.id);
+                    // Baca data terbaru dari localStorage admin
+                    const adminData = JSON.parse(localStorage.getItem('fantasi_langit_admin') || '[]');
+                    const latestStudentData = adminData.find(s => s.id === this.currentStudent.id);
                     
                     if (latestStudentData) {
                         // POINT PERMANEN: Update point jika ada perubahan dari admin
                         if (latestStudentData.points !== this.currentStudent.points) {
-                            console.log('Bintang berubah:', this.currentStudent.points, '->', latestStudentData.points);
+                            console.log('Bintang berubah dari admin:', this.currentStudent.points, '->', latestStudentData.points);
                             this.currentStudent.points = latestStudentData.points;
                             this.currentStudent.level = this.getLevelFromPoints(latestStudentData.points);
                             this.updateDisplay();
@@ -827,17 +828,32 @@
                             }
                         }
 
-                        // Sync field penting lainnya
+                        // Sync field penting lainnya dari admin
                         if (latestStudentData.profileIcon !== this.currentStudent.profileIcon) {
                             this.currentStudent.profileIcon = latestStudentData.profileIcon;
                             this.updateProfileIcon();
                         }
 
-                        // Update session storage
-                        this.saveCurrentStudent();
+                        // Update data di localStorage siswa juga
+                        this.updateStudentInLocalStorage();
                     }
                 } catch (error) {
-                    console.error('Error syncing data:', error);
+                    console.error('Error syncing with admin data:', error);
+                }
+            }
+
+            // FUNGSI BARU: Update data siswa di localStorage
+            updateStudentInLocalStorage() {
+                try {
+                    const siswaData = JSON.parse(localStorage.getItem('fantasi_langit_siswa') || '[]');
+                    const studentIndex = siswaData.findIndex(s => s.id === this.currentStudent.id);
+                    
+                    if (studentIndex !== -1) {
+                        siswaData[studentIndex] = { ...this.currentStudent };
+                        localStorage.setItem('fantasi_langit_siswa', JSON.stringify(siswaData));
+                    }
+                } catch (error) {
+                    console.error('Error updating student in localStorage:', error);
                 }
             }
 
@@ -849,7 +865,7 @@
                         this.selectedProfileIcon = this.currentStudent.profileIcon || 'user-astronaut';
                         this.showMainInterface();
                         this.updateStudentStatus(true);
-                        this.syncWithMainData(); // Sync immediately
+                        this.syncWithAdminData(); // Sync immediately
                     } catch (error) {
                         console.error('Error loading session:', error);
                         localStorage.removeItem('current_student');
@@ -867,7 +883,7 @@
                     return;
                 }
 
-                // Cari student yang sudah terdaftar
+                // Cari student yang sudah terdaftar di data siswa
                 const student = this.students.find(s => 
                     s.name.toLowerCase() === name.toLowerCase() && 
                     s.class === studentClass
@@ -889,9 +905,34 @@
                 this.currentStudent.lastActivity = new Date().toISOString();
                 this.currentStudent.isOnline = true;
 
+                // Sinkronkan dengan data admin terbaru
+                this.syncStudentWithAdmin();
+
                 this.saveCurrentStudent();
                 this.showMainInterface();
                 this.showNotification(`Selamat datang kembali, ${name}!`, 'success');
+            }
+
+            // FUNGSI BARU: Sinkronkan data siswa dengan data admin
+            syncStudentWithAdmin() {
+                try {
+                    const adminData = JSON.parse(localStorage.getItem('fantasi_langit_admin') || '[]');
+                    const adminStudent = adminData.find(s => s.id === this.currentStudent.id);
+                    
+                    if (adminStudent) {
+                        // Update point dan data lainnya dari admin
+                        this.currentStudent.points = adminStudent.points;
+                        this.currentStudent.level = adminStudent.level;
+                        this.currentStudent.profileIcon = adminStudent.profileIcon;
+                    } else {
+                        // Jika belum ada di admin, tambahkan ke admin
+                        adminData.push(this.currentStudent);
+                        localStorage.setItem('fantasi_langit_admin', JSON.stringify(adminData));
+                        console.log('Student ditambahkan ke admin data');
+                    }
+                } catch (error) {
+                    console.error('Error syncing student with admin:', error);
+                }
             }
 
             handleRegister() {
@@ -945,9 +986,29 @@
                 this.students.push(student);
                 this.currentStudent = { ...student }; // Create copy
 
+                // Simpan ke localStorage siswa dan admin
                 this.saveToStorage();
+                this.addToAdminStorage(student);
+
                 this.showMainInterface();
                 this.showNotification(`Selamat datang, ${name}! Petualangan kosmik menantimu!`, 'success');
+            }
+
+            // FUNGSI BARU: Tambahkan student baru ke admin storage
+            addToAdminStorage(student) {
+                try {
+                    const adminData = JSON.parse(localStorage.getItem('fantasi_langit_admin') || '[]');
+                    
+                    // Cek apakah sudah ada di admin
+                    const existingInAdmin = adminData.find(s => s.id === student.id);
+                    if (!existingInAdmin) {
+                        adminData.push(student);
+                        localStorage.setItem('fantasi_langit_admin', JSON.stringify(adminData));
+                        console.log('Student baru ditambahkan ke admin storage');
+                    }
+                } catch (error) {
+                    console.error('Error adding to admin storage:', error);
+                }
             }
 
             generateStudentId() {
@@ -970,7 +1031,7 @@
                 this.currentStudent.isOnline = isOnline;
                 this.currentStudent.lastActivity = new Date().toISOString();
                 
-                // Update di storage utama - PENYIMPANAN PERMANEN
+                // Update di storage siswa
                 const studentIndex = this.students.findIndex(s => s.id === this.currentStudent.id);
                 if (studentIndex !== -1) {
                     this.students[studentIndex].isOnline = isOnline;
@@ -978,8 +1039,27 @@
                     this.saveToStorage();
                 }
                 
+                // Juga update di admin storage
+                this.updateAdminStorage();
+                
                 this.updateStatusDisplay();
                 this.saveCurrentStudent();
+            }
+
+            // FUNGSI BARU: Update status di admin storage
+            updateAdminStorage() {
+                try {
+                    const adminData = JSON.parse(localStorage.getItem('fantasi_langit_admin') || '[]');
+                    const adminIndex = adminData.findIndex(s => s.id === this.currentStudent.id);
+                    
+                    if (adminIndex !== -1) {
+                        adminData[adminIndex].isOnline = this.currentStudent.isOnline;
+                        adminData[adminIndex].lastActivity = this.currentStudent.lastActivity;
+                        localStorage.setItem('fantasi_langit_admin', JSON.stringify(adminData));
+                    }
+                } catch (error) {
+                    console.error('Error updating admin storage:', error);
+                }
             }
 
             updateStatusDisplay() {
@@ -1235,11 +1315,11 @@
                 }, 3000);
             }
 
-            // PENYIMPANAN PERMANEN: Simpan ke localStorage yang sama dengan admin
+            // PENYIMPANAN PERMANEN: Simpan ke localStorage siswa
             saveToStorage() {
                 try {
-                    localStorage.setItem('fantasi_langit_students', JSON.stringify(this.students));
-                    console.log('Data tersimpan permanen:', this.students);
+                    localStorage.setItem('fantasi_langit_siswa', JSON.stringify(this.students));
+                    console.log('Data tersimpan di siswa:', this.students);
                 } catch (error) {
                     console.error('Error saving to storage:', error);
                 }
@@ -1250,15 +1330,34 @@
                     try {
                         localStorage.setItem('current_student', JSON.stringify(this.currentStudent));
                         
-                        // Update student di array utama - PENYIMPANAN PERMANEN
+                        // Update student di array utama siswa
                         const studentIndex = this.students.findIndex(s => s.id === this.currentStudent.id);
                         if (studentIndex !== -1) {
                             this.students[studentIndex] = { ...this.currentStudent };
                             this.saveToStorage();
                         }
+
+                        // Juga update di admin storage
+                        this.updateStudentInAdminStorage();
                     } catch (error) {
                         console.error('Error saving current student:', error);
                     }
+                }
+            }
+
+            // FUNGSI BARU: Update student di admin storage
+            updateStudentInAdminStorage() {
+                try {
+                    const adminData = JSON.parse(localStorage.getItem('fantasi_langit_admin') || '[]');
+                    const adminIndex = adminData.findIndex(s => s.id === this.currentStudent.id);
+                    
+                    if (adminIndex !== -1) {
+                        adminData[adminIndex] = { ...this.currentStudent };
+                        localStorage.setItem('fantasi_langit_admin', JSON.stringify(adminData));
+                        console.log('Student updated in admin storage');
+                    }
+                } catch (error) {
+                    console.error('Error updating student in admin storage:', error);
                 }
             }
         }
