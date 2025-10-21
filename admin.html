@@ -680,12 +680,14 @@
                 this.loadStudents();
                 this.setupEventListeners();
                 this.startAutoRefresh();
+                this.checkForNewAccounts();
             }
 
             loadStudents() {
                 try {
-                    const studentData = JSON.parse(localStorage.getItem('fantasi_langit_students') || '[]');
-                    console.log('Data siswa yang diload:', studentData);
+                    // PERUBAHAN: Gunakan localStorage yang baru
+                    const studentData = JSON.parse(localStorage.getItem('fantasi_langit_admin') || '[]');
+                    console.log('Data siswa yang diload dari admin:', studentData);
                     
                     const updatedStudents = studentData.map(student => {
                         const lastActivity = new Date(student.lastActivity || student.lastLogin || student.createdAt);
@@ -705,6 +707,40 @@
                 }
             }
 
+            // FUNGSI BARU: Cek dan sinkronisasi data dari halaman siswa
+            checkForNewAccounts() {
+                try {
+                    // Baca data dari localStorage siswa
+                    const siswaData = JSON.parse(localStorage.getItem('fantasi_langit_siswa') || '[]');
+                    const adminData = JSON.parse(localStorage.getItem('fantasi_langit_admin') || '[]');
+                    
+                    console.log('Data dari siswa:', siswaData);
+                    console.log('Data dari admin:', adminData);
+
+                    // Cari akun baru yang belum ada di admin
+                    const newAccounts = siswaData.filter(siswa => 
+                        !adminData.some(admin => admin.id === siswa.id)
+                    );
+
+                    if (newAccounts.length > 0) {
+                        console.log('Menemukan akun baru dari siswa:', newAccounts);
+                        
+                        // Gabungkan data
+                        const mergedData = [...adminData, ...newAccounts];
+                        
+                        // Simpan ke localStorage admin
+                        localStorage.setItem('fantasi_langit_admin', JSON.stringify(mergedData));
+                        
+                        // Reload data
+                        this.loadStudents();
+                        
+                        this.showNotification(`Ditemukan ${newAccounts.length} akun baru dari siswa!`, 'success');
+                    }
+                } catch (error) {
+                    console.error('Error checking new accounts:', error);
+                }
+            }
+
             setupEventListeners() {
                 document.getElementById('search-input').addEventListener('input', (e) => {
                     this.searchTerm = e.target.value.toLowerCase().trim();
@@ -719,6 +755,7 @@
             startAutoRefresh() {
                 setInterval(() => {
                     this.loadStudents();
+                    this.checkForNewAccounts(); // Cek akun baru secara berkala
                 }, 3000);
             }
 
@@ -1062,16 +1099,53 @@
             saveChanges() {
                 try {
                     console.log('Menyimpan data siswa:', this.students);
-                    localStorage.setItem('fantasi_langit_students', JSON.stringify(this.students));
+                    // PERUBAHAN: Simpan ke localStorage admin
+                    localStorage.setItem('fantasi_langit_admin', JSON.stringify(this.students));
+                    
+                    // Juga sinkronkan ke localStorage siswa
+                    this.syncToSiswaStorage();
                     
                     // Verifikasi penyimpanan
-                    const savedData = JSON.parse(localStorage.getItem('fantasi_langit_students') || '[]');
-                    console.log('Data tersimpan:', savedData);
+                    const savedData = JSON.parse(localStorage.getItem('fantasi_langit_admin') || '[]');
+                    console.log('Data tersimpan di admin:', savedData);
                     
                     this.applyFilters();
                 } catch (error) {
                     console.error('Error saving data:', error);
                     this.showNotification('Error menyimpan data', 'error');
+                }
+            }
+
+            // FUNGSI BARU: Sinkronisasi data ke localStorage siswa
+            syncToSiswaStorage() {
+                try {
+                    const siswaData = JSON.parse(localStorage.getItem('fantasi_langit_siswa') || '[]');
+                    
+                    // Update data siswa dengan data terbaru dari admin
+                    const updatedSiswaData = siswaData.map(siswa => {
+                        const adminStudent = this.students.find(admin => admin.id === siswa.id);
+                        if (adminStudent) {
+                            return {
+                                ...siswa,
+                                points: adminStudent.points,
+                                level: adminStudent.level,
+                                lastActivity: adminStudent.lastActivity
+                            };
+                        }
+                        return siswa;
+                    });
+
+                    // Tambahkan siswa baru dari admin yang belum ada di siswa
+                    this.students.forEach(adminStudent => {
+                        if (!updatedSiswaData.some(siswa => siswa.id === adminStudent.id)) {
+                            updatedSiswaData.push(adminStudent);
+                        }
+                    });
+
+                    localStorage.setItem('fantasi_langit_siswa', JSON.stringify(updatedSiswaData));
+                    console.log('Data berhasil disinkronisasi ke siswa');
+                } catch (error) {
+                    console.error('Error syncing to siswa storage:', error);
                 }
             }
 
@@ -1154,6 +1228,7 @@
 
         function refreshData() {
             adminSystem.loadStudents();
+            adminSystem.checkForNewAccounts();
             adminSystem.showNotification('Data berhasil diperbarui', 'success');
         }
 
