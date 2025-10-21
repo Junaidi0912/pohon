@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pohon - Siswa</title>
+    <title>Perpustakaan Abadi - Siswa</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=MedievalSharp&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
@@ -58,11 +58,10 @@
         }
     </script>
     <style>
-        /* KEEP ALL YOUR EXISTING CSS STYLES */
         body {
-            background: linear-gradient(135deg, #1a2f1a 0%, #0f200f 50%, #081508 100%);
+            background: linear-gradient(135deg, #2C1810 0%, #1A0F0A 50%, #0F0805 100%);
             background-image: 
-                radial-gradient(circle at 20% 80%, rgba(34, 139, 34, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
                 radial-gradient(circle at 80% 20%, rgba(139, 69, 19, 0.1) 0%, transparent 50%);
         }
         
@@ -85,7 +84,7 @@
             box-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
         }
         
-        .floating-leaf {
+        .floating-book {
             animation: float 4s ease-in-out infinite;
         }
         
@@ -106,10 +105,12 @@
             50% { opacity: 1; transform: scale(1); }
         }
 
+        /* Text Colors - FIXED to Black */
         .text-dark {
             color: #000000 !important;
         }
 
+        /* Mobile Optimizations */
         @media (max-width: 768px) {
             .mobile-padding {
                 padding-left: 1rem;
@@ -141,6 +142,7 @@
             }
         }
 
+        /* Custom Profile Icon Styles */
         .profile-icon {
             transition: all 0.3s ease;
             cursor: pointer;
@@ -156,6 +158,7 @@
             box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
         }
 
+        /* Online/Offline Status */
         .online-status {
             position: absolute;
             bottom: 2px;
@@ -174,6 +177,7 @@
             background-color: #ef4444;
         }
 
+        /* Auth Tabs */
         .auth-tab {
             transition: all 0.3s ease;
             border-bottom: 3px solid transparent;
@@ -197,6 +201,7 @@
             animation: grow 0.5s ease-out forwards;
         }
 
+        /* Password toggle */
         .password-toggle {
             cursor: pointer;
             transition: all 0.3s ease;
@@ -207,6 +212,7 @@
             transform: scale(1.1);
         }
 
+        /* Leaderboard Styles */
         .leaderboard-item {
             transition: all 0.3s ease;
             border-bottom: 1px solid rgba(139, 69, 19, 0.2);
@@ -221,173 +227,53 @@
             background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(139, 69, 19, 0.1));
             border: 2px solid #D4AF37;
         }
-
-        /* Connection Status */
-        .connection-status {
-            position: fixed;
-            top: 80px;
-            right: 20px;
-            z-index: 100;
-            padding: 8px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-        
-        .connection-online {
-            background: rgba(34, 197, 94, 0.2);
-            border: 1px solid #22c55e;
-            color: #22c55e;
-        }
-        
-        .connection-offline {
-            background: rgba(239, 68, 68, 0.2);
-            border: 1px solid #ef4444;
-            color: #ef4444;
-        }
-        
-        /* Custom Scrollbar untuk Form Register */
-        .scrollable-form {
-            max-height: 60vh;
-            overflow-y: auto;
-            padding-right: 8px;
-        }
-        
-        .scrollable-form::-webkit-scrollbar {
-            width: 6px;
-        }
-        
-        .scrollable-form::-webkit-scrollbar-track {
-            background: rgba(139, 69, 19, 0.1);
-            border-radius: 10px;
-        }
-        
-        .scrollable-form::-webkit-scrollbar-thumb {
-            background: rgba(139, 69, 19, 0.3);
-            border-radius: 10px;
-        }
-        
-        .scrollable-form::-webkit-scrollbar-thumb:hover {
-            background: rgba(139, 69, 19, 0.5);
-        }
-
-        /* PERBAIKAN: Admin Update Notification */
-        .admin-update-notification {
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            z-index: 100;
-            padding: 12px 16px;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: bold;
-            background: rgba(212, 175, 55, 0.9);
-            border: 2px solid #8B4513;
-            color: #000000;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
-            transform: translateX(120%);
-            transition: transform 0.3s ease;
-        }
-
-        .admin-update-notification.show {
-            transform: translateX(0);
-        }
-
-        /* PERBAIKAN: Progress Bar Animation */
-        .progress-bar-animated {
-            transition: width 1s ease-in-out;
-        }
-        
-        /* NEW: Real-time sync indicator */
-        .sync-indicator {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            z-index: 100;
-            padding: 8px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-        
-        .sync-active {
-            background: rgba(34, 197, 94, 0.2);
-            border: 1px solid #22c55e;
-            color: #22c55e;
-        }
-        
-        .sync-inactive {
-            background: rgba(239, 68, 68, 0.2);
-            border: 1px solid #ef4444;
-            color: #ef4444;
-        }
     </style>
 </head>
 <body class="font-cinzel text-black min-h-screen">
-    <!-- Sync Indicator -->
-    <div id="sync-indicator" class="sync-indicator sync-active hidden">
-        <i class="fas fa-sync-alt mr-1"></i>
-        <span>Real-time Sync</span>
-    </div>
-
-    <!-- Connection Status Indicator -->
-    <div id="connection-status" class="connection-status hidden">
-        <i class="fas fa-wifi mr-1"></i>
-        <span id="connection-text">Connecting...</span>
-    </div>
-
-    <!-- Admin Update Notification -->
-    <div id="admin-update-notification" class="admin-update-notification hidden">
-        <i class="fas fa-bell mr-2"></i>
-        <span id="admin-update-message">Admin updated your points!</span>
-    </div>
-
-    <!-- Background Elements - Tree Theme -->
+    <!-- Background Elements -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none">
-        <div class="absolute top-10 left-4 text-forestGreen text-xl opacity-20 floating-leaf">
-            <i class="fas fa-leaf"></i>
+        <div class="absolute top-10 left-4 text-gold text-xl opacity-20 floating-book">
+            <i class="fas fa-book"></i>
         </div>
-        <div class="absolute top-20 right-4 text-forestGreen text-2xl opacity-30 floating-leaf" style="animation-delay: 1s;">
-            <i class="fas fa-seedling"></i>
+        <div class="absolute top-20 right-4 text-silver text-2xl opacity-30 floating-book" style="animation-delay: 1s;">
+            <i class="fas fa-scroll"></i>
         </div>
-        <div class="absolute bottom-20 left-4 text-forestGreen text-xl opacity-25 floating-leaf" style="animation-delay: 2s;">
-            <i class="fas fa-tree"></i>
+        <div class="absolute bottom-20 left-4 text-bronze text-xl opacity-25 floating-book" style="animation-delay: 2s;">
+            <i class="fas fa-feather-alt"></i>
         </div>
-        <div class="absolute bottom-10 right-4 text-forestGreen text-2xl opacity-20 floating-leaf" style="animation-delay: 1.5s;">
-            <i class="fas fa-mountain"></i>
+        <div class="absolute bottom-10 right-4 text-gold text-2xl opacity-20 floating-book" style="animation-delay: 1.5s;">
+            <i class="fas fa-pen-fancy"></i>
         </div>
     </div>
 
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 bg-darkBrown/90 backdrop-blur-md shadow-2xl border-b-2 border-forestGreen">
+    <nav class="fixed top-0 w-full z-50 bg-darkBrown/90 backdrop-blur-md shadow-2xl border-b-2 border-gold">
         <div class="container mx-auto px-4 py-3">
             <div class="flex justify-between items-center">
                 <div class="flex items-center space-x-2">
-                    <div class="w-8 h-8 bg-gradient-to-r from-forestGreen to-green-600 rounded-full flex items-center justify-center ancient-border">
-                        <i class="fas fa-tree text-white text-sm"></i>
+                    <div class="w-8 h-8 bg-gradient-to-r from-gold to-bronze rounded-full flex items-center justify-center ancient-border">
+                        <i class="fas fa-crown text-darkBrown text-sm"></i>
                     </div>
                     <div>
-                        <h1 class="text-lg md:text-2xl font-bold text-forestGreen font-maguntia">Pohon</h1>
-                        <p class="text-silver text-xs md:text-sm font-medieval hidden md:block">Tumbuh Bersama Ilmu</p>
+                        <h1 class="text-lg md:text-2xl font-bold text-gold font-maguntia">Perpustakaan Abadi</h1>
+                        <p class="text-silver text-xs md:text-sm font-medieval hidden md:block">Tempat Para Pencari Ilmu</p>
                     </div>
                 </div>
                 <div class="flex items-center space-x-2">
                     <div id="user-info" class="hidden items-center space-x-2">
                         <div class="text-right hidden sm:block">
-                            <div class="font-semibold text-forestGreen text-sm" id="user-name">Nama Petualang</div>
-                            <div class="text-xs text-silver font-medieval" id="user-rank">🌱 Seedling</div>
+                            <div class="font-semibold text-gold text-sm" id="user-name">Nama Petualang</div>
+                            <div class="text-xs text-silver font-medieval" id="user-rank">📖 Pemula Naskah</div>
                         </div>
                         <!-- Profile Icon dengan Status Online -->
                         <div class="relative">
-                            <div class="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-r from-forestGreen to-green-600 rounded-full flex items-center justify-center text-white font-bold text-sm md:text-base ancient-border" id="user-profile-icon">
-                                <i class="fas fa-tree"></i>
+                            <div class="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-r from-gold to-bronze rounded-full flex items-center justify-center text-darkBrown font-bold text-sm md:text-base ancient-border" id="user-profile-icon">
+                                <i class="fas fa-book-reader"></i>
                             </div>
                             <div class="online-status online" id="user-status"></div>
                         </div>
                     </div>
-                    <button id="logout-btn" class="hidden bg-deepRed hover:bg-red-800 text-parchment px-3 py-2 md:px-4 md:py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 border border-forestGreen text-xs md:text-sm">
+                    <button id="logout-btn" class="hidden bg-deepRed hover:bg-red-800 text-parchment px-3 py-2 md:px-4 md:py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 border border-gold text-xs md:text-sm">
                         <i class="fas fa-door-open mr-1"></i>Keluar
                     </button>
                 </div>
@@ -399,11 +285,11 @@
     <div id="auth-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
         <div class="parchment-bg rounded-2xl p-6 max-w-md w-full transform animate-grow ancient-border mobile-padding">
             <div class="text-center mb-6">
-                <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-forestGreen to-green-600 rounded-2xl flex items-center justify-center ancient-border">
-                    <i class="fas fa-tree text-white text-2xl"></i>
+                <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-gold to-bronze rounded-2xl flex items-center justify-center ancient-border">
+                    <i class="fas fa-scroll text-darkBrown text-2xl"></i>
                 </div>
-                <h2 class="text-2xl md:text-3xl font-bold text-dark font-maguntia mb-2">Pohon</h2>
-                <p class="text-dark font-medieval text-sm">Tumbuhlah bersama ilmu pengetahuan!</p>
+                <h2 class="text-2xl md:text-3xl font-bold text-dark font-maguntia mb-2">Perpustakaan Abadi</h2>
+                <p class="text-dark font-medieval text-sm">Bergabung dalam petualangan literasi!</p>
             </div>
 
             <!-- Auth Tabs -->
@@ -421,104 +307,68 @@
                 <div>
                     <label class="block text-dark font-semibold mb-2 font-medieval text-sm">Nama Petualang</label>
                     <input type="text" id="login-name" required 
-                           class="w-full px-3 py-2 bg-oldPaper border-2 border-darkBrown rounded-lg focus:border-forestGreen focus:ring-2 focus:ring-forestGreen/30 transition-all duration-300 outline-none font-medieval text-sm text-dark"
+                           class="w-full px-3 py-2 bg-oldPaper border-2 border-darkBrown rounded-lg focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all duration-300 outline-none font-medieval text-sm text-dark"
                            placeholder="Masukkan nama petualang">
                 </div>
                 <div>
                     <label class="block text-dark font-semibold mb-2 font-medieval text-sm">Kelas</label>
                     <select id="login-class" required 
-                            class="w-full px-3 py-2 bg-oldPaper border-2 border-darkBrown rounded-lg focus:border-forestGreen focus:ring-2 focus:ring-forestGreen/30 transition-all duration-300 outline-none font-medieval text-sm text-dark">
+                            class="w-full px-3 py-2 bg-oldPaper border-2 border-darkBrown rounded-lg focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all duration-300 outline-none font-medieval text-sm text-dark">
                         <option value="">Pilih Kelas</option>
-                        <option value="X1">X1</option>
-                        <option value="X2">X2</option>
-                        <option value="X3">X3</option>
-                        <option value="X4">X4</option>
-                        <option value="X5">X5</option>
-                        <option value="X6">X6</option>
-                        <option value="X7">X7</option>
-                        <option value="X8">X8</option>
-                        <option value="X9">X9</option>
-                        <option value="XI MIPA 1">XI MIPA 1</option>
-                        <option value="XI MIPA 2">XI MIPA 2</option>
-                        <option value="XI MIPA 3">XI MIPA 3</option>
-                        <option value="XI MIPA 4">XI MIPA 4</option>
-                        <option value="XI MIPA 5">XI MIPA 5</option>
-                        <option value="XI IPS 1">XI IPS 1</option>
-                        <option value="XI IPS 2">XI IPS 2</option>
-                        <option value="XI IPS 3">XI IPS 3</option>
-                        <option value="XI IPS 4">XI IPS 4</option>
-                        <option value="XII MIPA 1">XII MIPA 1</option>
-                        <option value="XII MIPA 2">XII MIPA 2</option>
-                        <option value="XII MIPA 3">XII MIPA 3</option>
-                        <option value="XII MIPA 4">XII MIPA 4</option>
-                        <option value="XII MIPA 5">XII MIPA 5</option>
-                        <option value="XII IPS 1">XII IPS 1</option>
-                        <option value="XII IPS 2">XII IPS 2</option>
-                        <option value="XII IPS 3">XII IPS 3</option>
-                        <option value="XII BAHASA">XII BAHASA</option>
+                        <option value="7A">Kelas 7A</option>
+                        <option value="7B">Kelas 7B</option>
+                        <option value="7C">Kelas 7C</option>
+                        <option value="8A">Kelas 8A</option>
+                        <option value="8B">Kelas 8B</option>
+                        <option value="8C">Kelas 8C</option>
+                        <option value="9A">Kelas 9A</option>
+                        <option value="9B">Kelas 9B</option>
+                        <option value="9C">Kelas 9C</option>
                     </select>
                 </div>
                 <div class="relative">
                     <label class="block text-dark font-semibold mb-2 font-medieval text-sm">Password</label>
                     <input type="password" id="login-password" required 
-                           class="w-full px-3 py-2 bg-oldPaper border-2 border-darkBrown rounded-lg focus:border-forestGreen focus:ring-2 focus:ring-forestGreen/30 transition-all duration-300 outline-none font-medieval text-sm text-dark pr-10"
+                           class="w-full px-3 py-2 bg-oldPaper border-2 border-darkBrown rounded-lg focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all duration-300 outline-none font-medieval text-sm text-dark pr-10"
                            placeholder="Masukkan password">
                     <div class="absolute right-3 top-9 transform -translate-y-1/2 password-toggle" onclick="togglePassword('login-password')">
                         <i class="fas fa-eye text-darkBrown"></i>
                     </div>
                 </div>
 
-                <button type="submit" class="w-full bg-gradient-to-r from-forestGreen to-green-700 text-parchment py-3 rounded-lg font-bold text-base transition-all duration-300 transform hover:scale-105 hover:shadow-lg border-2 border-forestGreen font-medieval">
-                    <i class="fas fa-seedling mr-2"></i>Masuk Petualangan
+                <button type="submit" class="w-full bg-gradient-to-r from-gold to-bronze text-darkBrown py-3 rounded-lg font-bold text-base transition-all duration-300 transform hover:scale-105 hover:shadow-lg border-2 border-darkBrown font-medieval">
+                    <i class="fas fa-dragon mr-2"></i>Masuk Petualangan
                 </button>
             </form>
 
             <!-- Register Form -->
-            <form id="register-form" class="auth-form space-y-4 scrollable-form">
+            <form id="register-form" class="auth-form space-y-4">
                 <div>
                     <label class="block text-dark font-semibold mb-2 font-medieval text-sm">Nama Petualang Baru</label>
                     <input type="text" id="register-name" required 
-                           class="w-full px-3 py-2 bg-oldPaper border-2 border-darkBrown rounded-lg focus:border-forestGreen focus:ring-2 focus:ring-forestGreen/30 transition-all duration-300 outline-none font-medieval text-sm text-dark"
+                           class="w-full px-3 py-2 bg-oldPaper border-2 border-darkBrown rounded-lg focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all duration-300 outline-none font-medieval text-sm text-dark"
                            placeholder="Buat nama petualang baru">
                 </div>
                 <div>
                     <label class="block text-dark font-semibold mb-2 font-medieval text-sm">Kelas</label>
                     <select id="register-class" required 
-                            class="w-full px-3 py-2 bg-oldPaper border-2 border-darkBrown rounded-lg focus:border-forestGreen focus:ring-2 focus:ring-forestGreen/30 transition-all duration-300 outline-none font-medieval text-sm text-dark">
+                            class="w-full px-3 py-2 bg-oldPaper border-2 border-darkBrown rounded-lg focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all duration-300 outline-none font-medieval text-sm text-dark">
                         <option value="">Pilih Kelas</option>
-                        <option value="X1">X1</option>
-                        <option value="X2">X2</option>
-                        <option value="X3">X3</option>
-                        <option value="X4">X4</option>
-                        <option value="X5">X5</option>
-                        <option value="X6">X6</option>
-                        <option value="X7">X7</option>
-                        <option value="X8">X8</option>
-                        <option value="X9">X9</option>
-                        <option value="XI MIPA 1">XI MIPA 1</option>
-                        <option value="XI MIPA 2">XI MIPA 2</option>
-                        <option value="XI MIPA 3">XI MIPA 3</option>
-                        <option value="XI MIPA 4">XI MIPA 4</option>
-                        <option value="XI MIPA 5">XI MIPA 5</option>
-                        <option value="XI IPS 1">XI IPS 1</option>
-                        <option value="XI IPS 2">XI IPS 2</option>
-                        <option value="XI IPS 3">XI IPS 3</option>
-                        <option value="XI IPS 4">XI IPS 4</option>
-                        <option value="XII MIPA 1">XII MIPA 1</option>
-                        <option value="XII MIPA 2">XII MIPA 2</option>
-                        <option value="XII MIPA 3">XII MIPA 3</option>
-                        <option value="XII MIPA 4">XII MIPA 4</option>
-                        <option value="XII MIPA 5">XII MIPA 5</option>
-                        <option value="XII IPS 1">XII IPS 1</option>
-                        <option value="XII IPS 2">XII IPS 2</option>
-                        <option value="XII IPS 3">XII IPS 3</option>
-                        <option value="XII BAHASA">XII BAHASA</option>
+                        <option value="7A">Kelas 7A</option>
+                        <option value="7B">Kelas 7B</option>
+                        <option value="7C">Kelas 7C</option>
+                        <option value="8A">Kelas 8A</option>
+                        <option value="8B">Kelas 8B</option>
+                        <option value="8C">Kelas 8C</option>
+                        <option value="9A">Kelas 9A</option>
+                        <option value="9B">Kelas 9B</option>
+                        <option value="9C">Kelas 9C</option>
                     </select>
                 </div>
                 <div class="relative">
                     <label class="block text-dark font-semibold mb-2 font-medieval text-sm">Password</label>
                     <input type="password" id="register-password" required 
-                           class="w-full px-3 py-2 bg-oldPaper border-2 border-darkBrown rounded-lg focus:border-forestGreen focus:ring-2 focus:ring-forestGreen/30 transition-all duration-300 outline-none font-medieval text-sm text-dark pr-10"
+                           class="w-full px-3 py-2 bg-oldPaper border-2 border-darkBrown rounded-lg focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all duration-300 outline-none font-medieval text-sm text-dark pr-10"
                            placeholder="Buat password (min. 4 karakter)"
                            minlength="4">
                     <div class="absolute right-3 top-9 transform -translate-y-1/2 password-toggle" onclick="togglePassword('register-password')">
@@ -528,7 +378,7 @@
                 <div class="relative">
                     <label class="block text-dark font-semibold mb-2 font-medieval text-sm">Konfirmasi Password</label>
                     <input type="password" id="register-confirm-password" required 
-                           class="w-full px-3 py-2 bg-oldPaper border-2 border-darkBrown rounded-lg focus:border-forestGreen focus:ring-2 focus:ring-forestGreen/30 transition-all duration-300 outline-none font-medieval text-sm text-dark pr-10"
+                           class="w-full px-3 py-2 bg-oldPaper border-2 border-darkBrown rounded-lg focus:border-gold focus:ring-2 focus:ring-gold/30 transition-all duration-300 outline-none font-medieval text-sm text-dark pr-10"
                            placeholder="Ulangi password"
                            minlength="4">
                     <div class="absolute right-3 top-9 transform -translate-y-1/2 password-toggle" onclick="togglePassword('register-confirm-password')">
@@ -540,35 +390,35 @@
                 <div>
                     <label class="block text-dark font-semibold mb-2 font-medieval text-sm">Pilih Ikon Profil</label>
                     <div class="grid grid-cols-4 gap-2">
-                        <div class="profile-icon w-12 h-12 bg-gradient-to-r from-forestGreen to-green-600 rounded-full flex items-center justify-center ancient-border text-white" data-icon="tree" onclick="selectProfileIcon('tree')">
-                            <i class="fas fa-tree"></i>
-                        </div>
-                        <div class="profile-icon w-12 h-12 bg-gradient-to-r from-forestGreen to-green-600 rounded-full flex items-center justify-center ancient-border text-white" data-icon="leaf" onclick="selectProfileIcon('leaf')">
-                            <i class="fas fa-leaf"></i>
-                        </div>
-                        <div class="profile-icon w-12 h-12 bg-gradient-to-r from-forestGreen to-green-600 rounded-full flex items-center justify-center ancient-border text-white" data-icon="seedling" onclick="selectProfileIcon('seedling')">
-                            <i class="fas fa-seedling"></i>
-                        </div>
-                        <div class="profile-icon w-12 h-12 bg-gradient-to-r from-forestGreen to-green-600 rounded-full flex items-center justify-center ancient-border text-white" data-icon="mountain" onclick="selectProfileIcon('mountain')">
-                            <i class="fas fa-mountain"></i>
-                        </div>
-                        <div class="profile-icon w-12 h-12 bg-gradient-to-r from-forestGreen to-green-600 rounded-full flex items-center justify-center ancient-border text-white" data-icon="book-reader" onclick="selectProfileIcon('book-reader')">
+                        <div class="profile-icon w-12 h-12 bg-gradient-to-r from-gold to-bronze rounded-full flex items-center justify-center ancient-border text-darkBrown" data-icon="book-reader" onclick="selectProfileIcon('book-reader')">
                             <i class="fas fa-book-reader"></i>
                         </div>
-                        <div class="profile-icon w-12 h-12 bg-gradient-to-r from-forestGreen to-green-600 rounded-full flex items-center justify-center ancient-border text-white" data-icon="feather-alt" onclick="selectProfileIcon('feather-alt')">
+                        <div class="profile-icon w-12 h-12 bg-gradient-to-r from-gold to-bronze rounded-full flex items-center justify-center ancient-border text-darkBrown" data-icon="dragon" onclick="selectProfileIcon('dragon')">
+                            <i class="fas fa-dragon"></i>
+                        </div>
+                        <div class="profile-icon w-12 h-12 bg-gradient-to-r from-gold to-bronze rounded-full flex items-center justify-center ancient-border text-darkBrown" data-icon="hat-wizard" onclick="selectProfileIcon('hat-wizard')">
+                            <i class="fas fa-hat-wizard"></i>
+                        </div>
+                        <div class="profile-icon w-12 h-12 bg-gradient-to-r from-gold to-bronze rounded-full flex items-center justify-center ancient-border text-darkBrown" data-icon="scroll" onclick="selectProfileIcon('scroll')">
+                            <i class="fas fa-scroll"></i>
+                        </div>
+                        <div class="profile-icon w-12 h-12 bg-gradient-to-r from-gold to-bronze rounded-full flex items-center justify-center ancient-border text-darkBrown" data-icon="shield-alt" onclick="selectProfileIcon('shield-alt')">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="profile-icon w-12 h-12 bg-gradient-to-r from-gold to-bronze rounded-full flex items-center justify-center ancient-border text-darkBrown" data-icon="crown" onclick="selectProfileIcon('crown')">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <div class="profile-icon w-12 h-12 bg-gradient-to-r from-gold to-bronze rounded-full flex items-center justify-center ancient-border text-darkBrown" data-icon="feather-alt" onclick="selectProfileIcon('feather-alt')">
                             <i class="fas fa-feather-alt"></i>
                         </div>
-                        <div class="profile-icon w-12 h-12 bg-gradient-to-r from-forestGreen to-green-600 rounded-full flex items-center justify-center ancient-border text-white" data-icon="gem" onclick="selectProfileIcon('gem')">
+                        <div class="profile-icon w-12 h-12 bg-gradient-to-r from-gold to-bronze rounded-full flex items-center justify-center ancient-border text-darkBrown" data-icon="gem" onclick="selectProfileIcon('gem')">
                             <i class="fas fa-gem"></i>
-                        </div>
-                        <div class="profile-icon w-12 h-12 bg-gradient-to-r from-forestGreen to-green-600 rounded-full flex items-center justify-center ancient-border text-white" data-icon="crown" onclick="selectProfileIcon('crown')">
-                            <i class="fas fa-crown"></i>
                         </div>
                     </div>
                 </div>
 
-                <button type="submit" class="w-full bg-gradient-to-r from-gold to-bronze text-darkBrown py-3 rounded-lg font-bold text-base transition-all duration-300 transform hover:scale-105 hover:shadow-lg border-2 border-darkBrown font-medieval">
-                    <i class="fas fa-seedling mr-2"></i>Daftar Petualangan
+                <button type="submit" class="w-full bg-gradient-to-r from-forestGreen to-green-700 text-parchment py-3 rounded-lg font-bold text-base transition-all duration-300 transform hover:scale-105 hover:shadow-lg border-2 border-gold font-medieval">
+                    <i class="fas fa-shield-alt mr-2"></i>Daftar Petualangan
                 </button>
             </form>
         </div>
@@ -582,49 +432,49 @@
                 <div class="parchment-bg rounded-2xl p-4 md:p-6 ancient-border">
                     <div class="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0 mb-4 md:mb-6">
                         <div class="text-center md:text-left">
-                            <h3 class="text-xl md:text-2xl font-bold text-dark font-maguntia mb-1">Progress Pohon</h3>
-                            <p class="text-dark font-medieval text-sm" id="progress-text">Tumbuhkan pohonmu dengan membaca!</p>
+                            <h3 class="text-xl md:text-2xl font-bold text-dark font-maguntia mb-1">Progress Literasi</h3>
+                            <p class="text-dark font-medieval text-sm" id="progress-text">Tingkatkan rank-mu dengan membaca!</p>
                         </div>
                         <div class="flex space-x-3">
-                            <button onclick="studentSystem.showLeaderboard()" class="bg-mysticBlue hover:bg-blue-800 text-parchment px-4 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 border-2 border-forestGreen font-medieval text-sm">
+                            <button onclick="studentSystem.showLeaderboard()" class="bg-mysticBlue hover:bg-blue-800 text-parchment px-4 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 border-2 border-gold font-medieval text-sm">
                                 <i class="fas fa-trophy mr-2"></i>Papan Peringkat
                             </button>
-                            <button onclick="studentSystem.exportData()" class="bg-forestGreen hover:bg-green-800 text-parchment px-4 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 border-2 border-forestGreen font-medieval text-sm">
+                            <button onclick="studentSystem.exportData()" class="bg-forestGreen hover:bg-green-800 text-parchment px-4 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 border-2 border-gold font-medieval text-sm">
                                 <i class="fas fa-download mr-2"></i>Ekspor Data
                             </button>
                         </div>
                     </div>
                     
-                    <!-- Rank Badges - Tree Theme -->
+                    <!-- Rank Badges - Mobile Optimized -->
                     <div class="grid grid-cols-3 gap-2 md:grid-cols-6 md:gap-3">
                         <div class="text-center p-2 bg-oldPaper rounded-lg transition-all duration-300 rank-badge border border-darkBrown" data-level="0">
-                            <div class="text-lg md:text-xl mb-1">🌱</div>
-                            <div class="font-semibold text-dark font-medieval text-xs">Seedling</div>
+                            <div class="text-lg md:text-xl mb-1">📖</div>
+                            <div class="font-semibold text-dark font-medieval text-xs">Pemula</div>
                             <div class="text-xs text-dark">0 XP</div>
                         </div>
                         <div class="text-center p-2 bg-oldPaper rounded-lg transition-all duration-300 rank-badge" data-level="1">
-                            <div class="text-lg md:text-xl mb-1">🍃</div>
-                            <div class="font-semibold text-dark font-medieval text-xs">Forest Sprout</div>
+                            <div class="text-lg md:text-xl mb-1">📚</div>
+                            <div class="font-semibold text-dark font-medieval text-xs">Penjelajah</div>
                             <div class="text-xs text-dark">100 XP</div>
                         </div>
                         <div class="text-center p-2 bg-oldPaper rounded-lg transition-all duration-300 rank-badge" data-level="2">
-                            <div class="text-lg md:text-xl mb-1">🌿</div>
-                            <div class="font-semibold text-dark font-medieval text-xs">Leaf Seeker</div>
+                            <div class="text-lg md:text-xl mb-1">📜</div>
+                            <div class="font-semibold text-dark font-medieval text-xs">Pencari</div>
                             <div class="text-xs text-dark">300 XP</div>
                         </div>
                         <div class="text-center p-2 bg-oldPaper rounded-lg transition-all duration-300 rank-badge" data-level="3">
-                            <div class="text-lg md:text-xl mb-1">🌳</div>
-                            <div class="font-semibold text-dark font-medieval text-xs">Young Oak</div>
+                            <div class="text-lg md:text-xl mb-1">📘</div>
+                            <div class="font-semibold text-dark font-medieval text-xs">Penjaga</div>
                             <div class="text-xs text-dark">600 XP</div>
                         </div>
                         <div class="text-center p-2 bg-oldPaper rounded-lg transition-all duration-300 rank-badge" data-level="4">
-                            <div class="text-lg md:text-xl mb-1">🌲</div>
-                            <div class="font-semibold text-dark font-medieval text-xs">Ancient Guardian</div>
+                            <div class="text-lg md:text-xl mb-1">📗</div>
+                            <div class="font-semibold text-dark font-medieval text-xs">Ahli</div>
                             <div class="text-xs text-dark">800 XP</div>
                         </div>
                         <div class="text-center p-2 bg-oldPaper rounded-lg transition-all duration-300 rank-badge" data-level="5">
-                            <div class="text-lg md:text-xl mb-1">🏆</div>
-                            <div class="font-semibold text-dark font-medieval text-xs">Forest Legend</div>
+                            <div class="text-lg md:text-xl mb-1">📕</div>
+                            <div class="font-semibold text-dark font-medieval text-xs">Penguasa</div>
                             <div class="text-xs text-dark">1000 XP</div>
                         </div>
                     </div>
@@ -634,24 +484,24 @@
             <!-- Character Display Section -->
             <div id="character-section" class="hidden max-w-6xl mx-auto">
                 <div class="parchment-bg rounded-2xl p-4 md:p-6 ancient-border text-center">
-                    <h3 class="text-xl md:text-2xl font-bold text-dark font-maguntia mb-4 md:mb-6" id="character-title">Forest Adventurer</h3>
+                    <h3 class="text-xl md:text-2xl font-bold text-dark font-maguntia mb-4 md:mb-6" id="character-title">Petualang Literasi</h3>
                     
                     <div class="flex flex-col lg:flex-row items-center justify-between space-y-4 lg:space-y-0">
                         <!-- Character Avatar -->
                         <div class="relative" id="character-display">
-                            <div class="w-48 h-48 md:w-64 md:h-64 bg-gradient-to-br from-forestGreen to-green-600 rounded-full flex items-center justify-center ancient-border animate-pulse-glow">
-                                <i class="fas fa-tree text-white text-4xl md:text-5xl" id="character-icon"></i>
+                            <div class="w-48 h-48 md:w-64 md:h-64 bg-gradient-to-br from-gold to-bronze rounded-full flex items-center justify-center ancient-border animate-pulse-glow">
+                                <i class="fas fa-book-reader text-darkBrown text-4xl md:text-5xl" id="character-icon"></i>
                             </div>
                         </div>
 
                         <!-- Character Stats -->
                         <div class="text-left space-y-3 w-full lg:w-1/2">
                             <div class="bg-oldPaper p-3 rounded-lg border-2 border-darkBrown">
-                                <h4 class="font-bold text-dark font-medieval mb-2 text-sm md:text-base">Adventurer Status</h4>
+                                <h4 class="font-bold text-dark font-medieval mb-2 text-sm md:text-base">Status Petualang</h4>
                                 <div class="space-y-2">
                                     <div class="flex justify-between">
                                         <span class="text-dark text-sm">Rank:</span>
-                                        <span class="font-semibold text-forestGreen text-sm" id="current-rank">🌱 Seedling</span>
+                                        <span class="font-semibold text-gold text-sm" id="current-rank">📖 Pemula Naskah</span>
                                     </div>
                                     <div class="flex justify-between">
                                         <span class="text-dark text-sm">Total XP:</span>
@@ -662,7 +512,7 @@
                                         <span class="font-semibold text-forestGreen text-sm" id="current-status">🟢 Online</span>
                                     </div>
                                     <div class="flex justify-between">
-                                        <span class="text-dark text-sm">Global Rank:</span>
+                                        <span class="text-dark text-sm">Peringkat:</span>
                                         <span class="font-semibold text-mysticBlue text-sm" id="global-rank">-</span>
                                     </div>
                                 </div>
@@ -670,16 +520,16 @@
                             
                             <!-- Next Rank Progress -->
                             <div class="bg-oldPaper p-3 rounded-lg border-2 border-darkBrown">
-                                <h4 class="font-bold text-dark font-medieval mb-2 text-sm md:text-base">Next Rank Progress</h4>
+                                <h4 class="font-bold text-dark font-medieval mb-2 text-sm md:text-base">Menuju Rank Berikutnya</h4>
                                 <div class="w-full bg-darkBrown rounded-full h-3">
-                                    <div id="next-rank-progress" class="bg-gradient-to-r from-forestGreen to-green-600 h-3 rounded-full progress-bar-animated" style="width: 0%"></div>
+                                    <div id="next-rank-progress" class="bg-gradient-to-r from-gold to-bronze h-3 rounded-full transition-all duration-1000" style="width: 0%"></div>
                                 </div>
                                 <div class="flex justify-between mt-1 text-xs text-dark">
                                     <span id="current-rank-xp">0</span>
                                     <span id="next-rank-xp">100</span>
                                 </div>
                                 <div class="text-center mt-1">
-                                    <span class="text-xs text-dark font-medieval" id="next-rank-name">🍃 Forest Sprout</span>
+                                    <span class="text-xs text-dark font-medieval" id="next-rank-name">📚 Penjelajah Halaman</span>
                                 </div>
                             </div>
                         </div>
@@ -692,9 +542,9 @@
                                 <i class="fas fa-trophy text-darkBrown text-xl"></i>
                             </div>
                             <h4 class="text-lg md:text-xl font-bold text-dark font-maguntia mb-2" id="achievement-title">Rank Up!</h4>
-                            <p class="text-dark font-medieval mb-3 text-sm" id="achievement-desc">Your adventure progresses!</p>
+                            <p class="text-dark font-medieval mb-3 text-sm" id="achievement-desc">Petualanganmu semakin maju!</p>
                             <button onclick="closeAchievement()" class="bg-gold text-darkBrown px-4 py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105 border-2 border-darkBrown font-medieval text-sm">
-                                Continue!
+                                Lanjutkan!
                             </button>
                         </div>
                     </div>
@@ -703,15 +553,15 @@
                     <div id="leaderboard-modal" class="hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
                         <div class="parchment-bg rounded-2xl p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto ancient-border">
                             <div class="text-center mb-6">
-                                <h3 class="text-2xl md:text-3xl font-bold text-dark font-maguntia">Leaderboard</h3>
-                                <p class="text-dark font-medieval">Greatest Forest Adventurers</p>
+                                <h3 class="text-2xl md:text-3xl font-bold text-dark font-maguntia">Papan Peringkat</h3>
+                                <p class="text-dark font-medieval">Petualang Terhebat Perpustakaan Abadi</p>
                             </div>
                             <div id="leaderboard-content" class="space-y-3">
                                 <!-- Leaderboard items will be populated here -->
                             </div>
                             <div class="text-center mt-6">
                                 <button onclick="studentSystem.closeLeaderboard()" class="bg-gold text-darkBrown px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 border-2 border-darkBrown font-medieval">
-                                    Close
+                                    Tutup
                                 </button>
                             </div>
                         </div>
@@ -723,15 +573,15 @@
                             <div class="w-20 h-20 mx-auto mb-4 bg-gradient-to-r from-gold to-bronze rounded-full flex items-center justify-center ancient-border">
                                 <i class="fas fa-crown text-darkBrown text-2xl"></i>
                             </div>
-                            <h3 class="text-2xl md:text-3xl font-bold text-dark font-maguntia mb-3">Legend Forged! 🏆</h3>
-                            <p class="text-dark font-medieval mb-2 text-sm">You have become a Forest Legend!</p>
-                            <p class="text-dark font-medieval mb-4 text-sm">The forest remembers your name!</p>
+                            <h3 class="text-2xl md:text-3xl font-bold text-dark font-maguntia mb-3">Legenda Terbentuk! 🏆</h3>
+                            <p class="text-dark font-medieval mb-2 text-sm">Kamu telah menjadi Penguasa Cerita!</p>
+                            <p class="text-dark font-medieval mb-4 text-sm">Perpustakaan Abadi mengenang namamu!</p>
                             <div class="space-y-2">
                                 <button onclick="restartJourney()" class="w-full bg-gradient-to-r from-gold to-bronze text-darkBrown py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105 border-2 border-darkBrown font-medieval text-sm">
-                                    <i class="fas fa-redo mr-2"></i>Start New Adventure
+                                    <i class="fas fa-redo mr-2"></i>Mulai Petualangan Baru
                                 </button>
-                                <button onclick="shareAchievement()" class="w-full bg-gradient-to-r from-forestGreen to-green-800 text-parchment py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105 border-2 border-forestGreen font-medieval text-sm">
-                                    <i class="fas fa-share-alt mr-2"></i>Share Legend
+                                <button onclick="shareAchievement()" class="w-full bg-gradient-to-r from-forestGreen to-green-800 text-parchment py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105 border-2 border-gold font-medieval text-sm">
+                                    <i class="fas fa-shield-alt mr-2"></i>Bagikan Legenda
                                 </button>
                             </div>
                         </div>
@@ -742,26 +592,19 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-darkBrown/90 text-silver py-4 border-t-2 border-forestGreen">
+    <footer class="bg-darkBrown/90 text-silver py-4 border-t-2 border-gold">
         <div class="container mx-auto px-4 text-center font-medieval text-xs">
-            <p>© 2024 Pohon. Where knowledge legends are born.</p>
+            <p>© 2024 Perpustakaan Abadi. Tempat para legenda literasi tercipta.</p>
         </div>
     </footer>
 
     <script>
-        // =============================================
-        // COMPLETE STUDENT SYSTEM WITH REAL-TIME SYNC
-        // =============================================
+        // Enhanced Student Management System - FIXED ALL SYNC ISSUES
         class StudentSystem {
             constructor() {
                 this.currentStudent = null;
-                this.students = [];
-                this.selectedProfileIcon = 'tree';
-                this.isOnline = false;
-                this.lastAdminUpdate = null;
-                this.adminUpdateCheckInterval = null;
-                this.dataKey = 'pohon_students'; // KEY YANG SAMA DENGAN ADMIN
-                
+                this.students = JSON.parse(localStorage.getItem('perpustakaan_abadi_students')) || [];
+                this.selectedProfileIcon = 'book-reader';
                 this.init();
             }
 
@@ -770,7 +613,22 @@
                 this.checkExistingSession();
                 this.startAutoSync();
                 this.setupBeforeUnload();
-                this.startAdminUpdateChecker();
+                this.initializeData();
+            }
+
+            initializeData() {
+                // Initialize activity logs if not exists
+                if (!localStorage.getItem('activity_logs')) {
+                    localStorage.setItem('activity_logs', JSON.stringify([]));
+                }
+                
+                // Initialize admin settings if not exists
+                if (!localStorage.getItem('admin_settings')) {
+                    localStorage.setItem('admin_settings', JSON.stringify({
+                        autoBackup: true,
+                        backupInterval: 24 // hours
+                    }));
+                }
             }
 
             setupEventListeners() {
@@ -797,159 +655,59 @@
                     if (this.currentStudent) {
                         this.updateStudentStatus(false);
                     }
-                    this.stopAdminUpdateChecker();
                 });
 
                 window.addEventListener('pageshow', () => {
                     if (this.currentStudent) {
                         this.updateStudentStatus(true);
                     }
-                    this.startAdminUpdateChecker();
                 });
             }
 
-            // PERBAIKAN BARU: Admin Update Checker dengan real-time sync
-            startAdminUpdateChecker() {
-                if (this.adminUpdateCheckInterval) {
-                    clearInterval(this.adminUpdateCheckInterval);
-                }
-                
-                this.adminUpdateCheckInterval = setInterval(() => {
-                    this.checkForAdminUpdates();
-                }, 1000); // Check every second for real-time updates
+            startAutoSync() {
+                // Enhanced sync with better error handling
+                setInterval(() => {
+                    this.syncWithMainData();
+                }, 2000);
+
+                // Auto-backup every hour
+                setInterval(() => {
+                    this.createBackup();
+                }, 60 * 60 * 1000);
             }
 
-            stopAdminUpdateChecker() {
-                if (this.adminUpdateCheckInterval) {
-                    clearInterval(this.adminUpdateCheckInterval);
-                    this.adminUpdateCheckInterval = null;
-                }
-            }
-
-            // PERBAIKAN BESAR: Check for admin updates dengan real-time sync
-            checkForAdminUpdates() {
+            syncWithMainData() {
                 if (!this.currentStudent) return;
 
                 try {
-                    // Check admin sync trigger
-                    const syncTrigger = JSON.parse(localStorage.getItem('admin_sync_trigger') || 'null');
-                    if (syncTrigger && syncTrigger.timestamp !== this.lastAdminUpdate) {
-                        console.log('🔄 Student: Detected admin sync trigger');
-                        this.lastAdminUpdate = syncTrigger.timestamp;
-                        this.loadStudentData();
-                        this.showSyncIndicator();
-                    }
-
-                    // Check for direct data changes
-                    const currentData = JSON.parse(localStorage.getItem(this.dataKey) || '[]');
-                    const currentStudentData = currentData.find(s => s.id === this.currentStudent.id);
+                    const mainStudents = JSON.parse(localStorage.getItem('perpustakaan_abadi_students') || '[]');
+                    const latestStudentData = mainStudents.find(s => s.id === this.currentStudent.id);
                     
-                    if (currentStudentData && currentStudentData.points !== this.currentStudent.points) {
-                        const pointsDiff = currentStudentData.points - this.currentStudent.points;
-                        console.log('🎯 Student: Points updated by admin:', pointsDiff);
-                        
-                        // Update current student data
-                        this.currentStudent.points = currentStudentData.points;
-                        this.currentStudent.level = currentStudentData.level;
-                        this.currentStudent.lastActivity = currentStudentData.lastActivity;
-                        
-                        this.updateDisplay();
-                        this.saveCurrentStudent();
-                        
-                        // Show notification
-                        if (pointsDiff > 0) {
-                            this.showAdminUpdateNotification(`+${pointsDiff} XP from Admin!`);
+                    if (latestStudentData) {
+                        // Check if points changed
+                        if (latestStudentData.points !== this.currentStudent.points) {
+                            console.log('🔁 Sync: Points berubah:', this.currentStudent.points, '->', latestStudentData.points);
+                            this.currentStudent.points = latestStudentData.points;
+                            this.currentStudent.level = this.getLevelFromPoints(latestStudentData.points);
+                            this.updateDisplay();
+                            this.logActivity('points_updated', `XP diperbarui menjadi ${latestStudentData.points}`);
                         }
+
+                        // Sync other important fields
+                        if (latestStudentData.profileIcon !== this.currentStudent.profileIcon) {
+                            this.currentStudent.profileIcon = latestStudentData.profileIcon;
+                            this.updateProfileIcon();
+                        }
+
+                        // Update global rank
+                        this.updateGlobalRank();
+
+                        // Update session storage
+                        this.saveCurrentStudent();
                     }
                 } catch (error) {
-                    console.error('Error checking admin updates:', error);
+                    console.error('Error syncing data:', error);
                 }
-            }
-
-            // PERBAIKAN BARU: Load student data from localStorage
-            loadStudentData() {
-                if (!this.currentStudent) return;
-
-                try {
-                    const currentData = JSON.parse(localStorage.getItem(this.dataKey) || '[]');
-                    const currentStudentData = currentData.find(s => s.id === this.currentStudent.id);
-                    
-                    if (currentStudentData) {
-                        const oldPoints = this.currentStudent.points;
-                        this.currentStudent.points = currentStudentData.points;
-                        this.currentStudent.level = currentStudentData.level;
-                        this.currentStudent.lastActivity = currentStudentData.lastActivity;
-                        
-                        this.updateDisplay();
-                        this.saveCurrentStudent();
-
-                        // Show notification if points increased
-                        if (currentStudentData.points > oldPoints) {
-                            const pointsDiff = currentStudentData.points - oldPoints;
-                            this.showAdminUpdateNotification(`+${pointsDiff} XP from Admin!`);
-                        }
-                    }
-                } catch (error) {
-                    console.error('Error loading student data:', error);
-                }
-            }
-
-            // PERBAIKAN BARU: Show admin update notification
-            showAdminUpdateNotification(message) {
-                const notification = document.getElementById('admin-update-notification');
-                const messageElement = document.getElementById('admin-update-message');
-                
-                if (notification && messageElement) {
-                    messageElement.textContent = message;
-                    notification.classList.remove('hidden');
-                    notification.classList.add('show');
-                    
-                    // Auto hide after 5 seconds
-                    setTimeout(() => {
-                        notification.classList.remove('show');
-                        setTimeout(() => {
-                            notification.classList.add('hidden');
-                        }, 300);
-                    }, 5000);
-                }
-                
-                // Also show regular notification
-                this.showNotification(`🎁 ${message}`, 'success');
-            }
-
-            // PERBAIKAN BARU: Show sync indicator
-            showSyncIndicator() {
-                const indicator = document.getElementById('sync-indicator');
-                if (indicator) {
-                    indicator.classList.remove('hidden');
-                    indicator.classList.add('sync-active');
-                    
-                    // Blink effect
-                    setTimeout(() => {
-                        indicator.classList.remove('sync-active');
-                        indicator.classList.add('sync-inactive');
-                    }, 1000);
-                    
-                    setTimeout(() => {
-                        indicator.classList.remove('sync-inactive');
-                        indicator.classList.add('sync-active');
-                    }, 2000);
-                }
-            }
-
-            loadStudents() {
-                console.log('🔄 Using localStorage');
-                this.students = JSON.parse(localStorage.getItem(this.dataKey)) || [];
-            }
-
-            saveStudentToLocal(student) {
-                const index = this.students.findIndex(s => s.id === student.id);
-                if (index !== -1) {
-                    this.students[index] = student;
-                } else {
-                    this.students.push(student);
-                }
-                localStorage.setItem(this.dataKey, JSON.stringify(this.students));
             }
 
             checkExistingSession() {
@@ -957,14 +715,11 @@
                 if (savedStudent) {
                     try {
                         this.currentStudent = JSON.parse(savedStudent);
-                        this.selectedProfileIcon = this.currentStudent.profileIcon || 'tree';
+                        this.selectedProfileIcon = this.currentStudent.profileIcon || 'book-reader';
                         this.showMainInterface();
                         this.updateStudentStatus(true);
-                        this.startAutoSync();
+                        this.syncWithMainData();
                         this.updateGlobalRank();
-                        
-                        // PERBAIKAN: Load latest data saat session dimulai
-                        this.loadStudentData();
                     } catch (error) {
                         console.error('Error loading session:', error);
                         localStorage.removeItem('current_student');
@@ -972,45 +727,80 @@
                 }
             }
 
-            async handleRegister() {
+            handleLogin() {
+                const name = document.getElementById('login-name').value.trim();
+                const studentClass = document.getElementById('login-class').value;
+                const password = document.getElementById('login-password').value;
+
+                if (!name || !studentClass || !password) {
+                    this.showNotification('Harap isi semua field!', 'error');
+                    return;
+                }
+
+                // Cari student yang sudah terdaftar
+                const student = this.students.find(s => 
+                    s.name.toLowerCase() === name.toLowerCase() && 
+                    s.class === studentClass
+                );
+                
+                if (!student) {
+                    this.showNotification('Akun tidak ditemukan! Silakan daftar terlebih dahulu.', 'error');
+                    return;
+                }
+
+                // Check password
+                if (student.password !== password) {
+                    this.showNotification('Password salah! Silakan coba lagi.', 'error');
+                    return;
+                }
+
+                this.currentStudent = { ...student };
+                this.currentStudent.lastLogin = new Date().toISOString();
+                this.currentStudent.lastActivity = new Date().toISOString();
+                this.currentStudent.isOnline = true;
+
+                this.saveCurrentStudent();
+                this.showMainInterface();
+                this.logActivity('login', 'Berhasil login ke sistem');
+                this.showNotification(`Selamat datang kembali, ${name}!`, 'success');
+            }
+
+            handleRegister() {
                 const name = document.getElementById('register-name').value.trim();
                 const studentClass = document.getElementById('register-class').value;
                 const password = document.getElementById('register-password').value;
                 const confirmPassword = document.getElementById('register-confirm-password').value;
 
                 if (!name || !studentClass || !password || !confirmPassword) {
-                    this.showNotification('Please fill all fields!', 'error');
+                    this.showNotification('Harap isi semua field!', 'error');
                     return;
                 }
 
                 if (password.length < 4) {
-                    this.showNotification('Password minimum 4 characters!', 'error');
+                    this.showNotification('Password minimal 4 karakter!', 'error');
                     return;
                 }
 
                 if (password !== confirmPassword) {
-                    this.showNotification('Password and confirmation do not match!', 'error');
+                    this.showNotification('Password dan konfirmasi password tidak cocok!', 'error');
                     return;
                 }
 
-                // Load latest data first
-                this.loadStudents();
-
-                // Check if student already exists
+                // Cek apakah nama sudah terdaftar di kelas yang sama
                 const existingStudent = this.students.find(s => 
                     s.name.toLowerCase() === name.toLowerCase() && 
                     s.class === studentClass
                 );
                 
                 if (existingStudent) {
-                    this.showNotification('Name already registered in this class! Please login.', 'error');
+                    this.showNotification('Nama sudah terdaftar di kelas ini! Silakan login.', 'error');
                     switchAuthTab('login');
                     return;
                 }
 
-                // Create new student
+                // Buat student baru
                 const student = {
-                    id: 'STU_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
+                    id: this.generateStudentId(),
                     name: name,
                     class: studentClass,
                     password: password,
@@ -1024,73 +814,28 @@
                     achievements: []
                 };
 
-                // Save to localStorage
-                this.saveStudentToLocal(student);
-                
-                this.showNotification('✅ Account created successfully!', 'success');
-
+                this.students.push(student);
                 this.currentStudent = { ...student };
-                this.saveCurrentStudent();
 
+                this.saveToStorage();
                 this.showMainInterface();
-                this.logActivity('register', 'Joined the Forest');
-                this.showNotification(`🎉 Welcome, ${name}! Adventure awaits!`, 'success');
+                this.logActivity('register', 'Bergabung dengan Perpustakaan Abadi');
+                this.showNotification(`Selamat datang, ${name}! Petualangan menantimu!`, 'success');
             }
 
-            async handleLogin() {
-                const name = document.getElementById('login-name').value.trim();
-                const studentClass = document.getElementById('login-class').value;
-                const password = document.getElementById('login-password').value;
-
-                if (!name || !studentClass || !password) {
-                    this.showNotification('Please fill all fields!', 'error');
-                    return;
-                }
-
-                // Load latest data from localStorage first
-                this.loadStudents();
-
-                // Cari student yang sudah terdaftar
-                const student = this.students.find(s => 
-                    s.name.toLowerCase() === name.toLowerCase() && 
-                    s.class === studentClass
-                );
-                
-                if (!student) {
-                    this.showNotification('Account not found! Please register first.', 'error');
-                    return;
-                }
-
-                // Check password
-                if (student.password !== password) {
-                    this.showNotification('Wrong password! Please try again.', 'error');
-                    return;
-                }
-
-                this.currentStudent = { ...student };
-                this.currentStudent.lastLogin = new Date().toISOString();
-                this.currentStudent.lastActivity = new Date().toISOString();
-                this.currentStudent.isOnline = true;
-
-                // Update student status
-                this.saveStudentToLocal(this.currentStudent);
-                this.saveCurrentStudent();
-                
-                this.showMainInterface();
-                this.startAutoSync();
-                this.logActivity('login', 'Successfully logged in');
-                this.showNotification(`👋 Welcome back, ${name}!`, 'success');
+            generateStudentId() {
+                return 'STU_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
             }
 
             handleLogout() {
                 if (this.currentStudent) {
                     this.updateStudentStatus(false);
-                    this.logActivity('logout', 'Logged out from system');
+                    this.logActivity('logout', 'Keluar dari sistem');
                 }
                 this.currentStudent = null;
                 localStorage.removeItem('current_student');
                 this.showAuthInterface();
-                this.showNotification('Until we meet again, adventurer!', 'info');
+                this.showNotification('Sampai bertemu lagi, petualang!', 'info');
             }
 
             updateStudentStatus(isOnline) {
@@ -1099,7 +844,14 @@
                 this.currentStudent.isOnline = isOnline;
                 this.currentStudent.lastActivity = new Date().toISOString();
                 
-                this.saveStudentToLocal(this.currentStudent);
+                // Update di storage utama
+                const studentIndex = this.students.findIndex(s => s.id === this.currentStudent.id);
+                if (studentIndex !== -1) {
+                    this.students[studentIndex].isOnline = isOnline;
+                    this.students[studentIndex].lastActivity = this.currentStudent.lastActivity;
+                    this.saveToStorage();
+                }
+                
                 this.updateStatusDisplay();
                 this.saveCurrentStudent();
             }
@@ -1127,7 +879,6 @@
                 document.getElementById('character-section').classList.add('hidden');
                 document.getElementById('user-info').classList.add('hidden');
                 document.getElementById('logout-btn').classList.add('hidden');
-                this.stopAdminUpdateChecker();
             }
 
             showMainInterface() {
@@ -1142,7 +893,6 @@
                 this.updateStatusDisplay();
                 this.updateDisplay();
                 this.updateGlobalRank();
-                this.startAdminUpdateChecker();
             }
 
             updateProfileIcon() {
@@ -1151,7 +901,7 @@
                 const iconClass = `fas fa-${this.currentStudent.profileIcon}`;
                 
                 profileIcon.innerHTML = `<i class="${iconClass}"></i>`;
-                characterIcon.className = iconClass + ' text-white text-4xl md:text-5xl';
+                characterIcon.className = iconClass + ' text-darkBrown text-4xl md:text-5xl';
             }
 
             updateDisplay() {
@@ -1171,10 +921,10 @@
                 document.querySelectorAll('.rank-badge').forEach((badge, index) => {
                     if (index <= level) {
                         badge.classList.remove('bg-oldPaper');
-                        badge.classList.add('bg-gradient-to-r', 'from-forestGreen', 'to-green-600', 'shadow-lg');
+                        badge.classList.add('bg-gradient-to-r', 'from-gold', 'to-bronze', 'shadow-lg');
                         badge.style.transform = 'scale(1.05)';
                     } else {
-                        badge.classList.remove('bg-gradient-to-r', 'from-forestGreen', 'to-green-600', 'shadow-lg');
+                        badge.classList.remove('bg-gradient-to-r', 'from-gold', 'to-bronze', 'shadow-lg');
                         badge.classList.add('bg-oldPaper');
                         badge.style.transform = 'scale(1)';
                     }
@@ -1204,7 +954,7 @@
                 const rank = sortedStudents.findIndex(s => s.id === this.currentStudent.id) + 1;
                 const totalStudents = sortedStudents.length;
 
-                document.getElementById('global-rank').textContent = `#${rank} of ${totalStudents}`;
+                document.getElementById('global-rank').textContent = `#${rank} dari ${totalStudents}`;
             }
 
             getLevelFromPoints(points) {
@@ -1217,19 +967,26 @@
             }
 
             getRankName(level) {
-                const ranks = ['🌱 Seedling', '🍃 Forest Sprout', '🌿 Leaf Seeker', '🌳 Young Oak', '🌲 Ancient Guardian', '🏆 Forest Legend'];
-                return ranks[level] || '🌱 Seedling';
+                const ranks = [
+                    '📖 Pemula Naskah',
+                    '📚 Penjelajah Halaman',
+                    '📜 Pencari Aksara',
+                    '📘 Penjaga Buku',
+                    '📗 Ahli Tinta',
+                    '📕 Penguasa Cerita'
+                ];
+                return ranks[level] || '📖 Pemula Naskah';
             }
 
             updateCharacter(level) {
                 const characterDisplay = document.getElementById('character-display');
                 const characterConfigs = [
-                    { color: 'from-gray-400 to-gray-600', title: 'Seedling' },
-                    { color: 'from-green-400 to-green-600', title: 'Forest Sprout' },
-                    { color: 'from-emerald-400 to-emerald-600', title: 'Leaf Seeker' },
-                    { color: 'from-teal-400 to-teal-600', title: 'Young Oak' },
-                    { color: 'from-forestGreen to-green-600', title: 'Ancient Guardian' },
-                    { color: 'from-yellow-400 to-red-600', title: 'Forest Legend' }
+                    { color: 'from-gray-400 to-gray-600', title: 'Pemula Naskah' },
+                    { color: 'from-green-400 to-green-600', title: 'Penjelajah Halaman' },
+                    { color: 'from-blue-400 to-blue-600', title: 'Pencari Aksara' },
+                    { color: 'from-purple-400 to-purple-600', title: 'Penjaga Buku' },
+                    { color: 'from-indigo-400 to-indigo-600', title: 'Ahli Tinta' },
+                    { color: 'from-yellow-400 to-red-600', title: 'Penguasa Cerita' }
                 ];
 
                 const config = characterConfigs[level];
@@ -1249,38 +1006,20 @@
                 }
             }
 
-            // PERBAIKAN BESAR: Method updateNextRankProgress yang benar
             updateNextRankProgress(points, level) {
                 const rankThresholds = [0, 100, 300, 600, 800, 1000];
-                
-                // Jika sudah mencapai level maksimum (Forest Legend)
-                if (level >= 5) {
-                    document.getElementById('next-rank-progress').style.width = '100%';
-                    document.getElementById('current-rank-xp').textContent = '1000';
-                    document.getElementById('next-rank-xp').textContent = 'MAX';
-                    document.getElementById('next-rank-name').textContent = '🏆 MAX LEVEL';
-                    return;
-                }
-
                 const currentThreshold = rankThresholds[level];
-                const nextThreshold = rankThresholds[level + 1];
+                const nextThreshold = rankThresholds[level + 1] || 1000;
                 
                 const progressInRank = points - currentThreshold;
                 const rankRange = nextThreshold - currentThreshold;
                 const progressPercent = rankRange > 0 ? (progressInRank / rankRange) * 100 : 100;
 
-                console.log(`📊 Progress Calculation: ${points} XP, Level ${level}`);
-                console.log(`📊 Current: ${currentThreshold}, Next: ${nextThreshold}`);
-                console.log(`📊 Progress: ${progressInRank}/${rankRange} = ${progressPercent}%`);
-
-                // PERBAIKAN: Gunakan class progress-bar-animated untuk smooth animation
-                const progressBar = document.getElementById('next-rank-progress');
-                progressBar.style.width = `${Math.min(100, Math.max(0, progressPercent))}%`;
-                
+                document.getElementById('next-rank-progress').style.width = `${Math.min(100, Math.max(0, progressPercent))}%`;
                 document.getElementById('current-rank-xp').textContent = currentThreshold;
                 document.getElementById('next-rank-xp').textContent = nextThreshold;
                 
-                const nextRankName = this.getRankName(level + 1);
+                const nextRankName = this.getRankName(level + 1) || this.getRankName(level);
                 document.getElementById('next-rank-name').textContent = nextRankName;
             }
 
@@ -1307,27 +1046,27 @@
                 const title = document.getElementById('achievement-title');
                 const desc = document.getElementById('achievement-desc');
 
-                const rankNames = ['Seedling', 'Forest Sprout', 'Leaf Seeker', 'Young Oak', 'Ancient Guardian', 'Forest Legend'];
+                const rankNames = ['Pemula Naskah', 'Penjelajah Halaman', 'Pencari Aksara', 'Penjaga Buku', 'Ahli Tinta', 'Penguasa Cerita'];
                 const messages = [
-                    'Your forest journey begins!',
-                    'You start to sprout and grow!',
-                    'Leaves of knowledge begin to appear!',
-                    'You become a strong young oak!',
-                    'Your tree grows mature and lush!',
-                    'You become a legend of the knowledge forest!'
+                    'Perjalanan literasimu dimulai!',
+                    'Kamu menjelajahi halaman-halaman baru!',
+                    'Aksara-aksara mulai membuka rahasianya!',
+                    'Kamu menjadi penjaga pengetahuan!',
+                    'Tinta mengalir dalam jiwamu!',
+                    'Kamu menguasai cerita-cerita legenda!'
                 ];
 
                 title.textContent = `${rankNames[level]}!`;
                 desc.textContent = messages[level];
                 achievement.classList.remove('hidden');
 
-                this.logActivity('level_up', `Level up to ${level + 1} - ${rankNames[level]}`);
+                this.logActivity('level_up', `Naik ke level ${level + 1} - ${rankNames[level]}`);
                 this.createCelebration();
             }
 
             showCompletion() {
                 document.getElementById('completion-screen').classList.remove('hidden');
-                this.logActivity('completion', 'Reached maximum level - Forest Legend!');
+                this.logActivity('completion', 'Mencapai level maksimum - Penguasa Cerita!');
             }
 
             createCelebration() {
@@ -1338,7 +1077,7 @@
                         confetti.style.left = `${Math.random() * 100}vw`;
                         confetti.style.top = '-50px';
                         confetti.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
-                        confetti.innerHTML = `<i class="fas fa-leaf text-forestGreen"></i>`;
+                        confetti.innerHTML = `<i class="fas fa-star text-yellow-400"></i>`;
                         
                         document.body.appendChild(confetti);
 
@@ -1360,11 +1099,11 @@
                     <div class="leaderboard-item ${index < 3 ? 'top-3' : ''} p-4 rounded-xl border-2 border-darkBrown">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-4">
-                                <div class="w-10 h-10 flex items-center justify-center bg-gradient-to-r from-forestGreen to-green-600 rounded-xl ancient-border font-bold text-white">
+                                <div class="w-10 h-10 flex items-center justify-center bg-gradient-to-r from-gold to-bronze rounded-xl ancient-border font-bold text-darkBrown">
                                     ${index + 1}
                                 </div>
-                                <div class="w-12 h-12 bg-gradient-to-r from-forestGreen to-green-600 rounded-2xl flex items-center justify-center ancient-border text-white">
-                                    <i class="fas fa-${student.profileIcon || 'tree'}"></i>
+                                <div class="w-12 h-12 bg-gradient-to-r from-gold to-bronze rounded-2xl flex items-center justify-center ancient-border text-darkBrown">
+                                    <i class="fas fa-${student.profileIcon || 'book-reader'}"></i>
                                 </div>
                                 <div>
                                     <div class="font-semibold text-dark text-lg">${student.name}</div>
@@ -1372,7 +1111,7 @@
                                 </div>
                             </div>
                             <div class="text-right">
-                                <div class="font-bold text-forestGreen text-xl">${student.points} XP</div>
+                                <div class="font-bold text-gold text-xl">${student.points} XP</div>
                                 <div class="text-dark font-medieval text-sm">${student.isOnline ? '🟢 Online' : '🔴 Offline'}</div>
                             </div>
                         </div>
@@ -1406,8 +1145,8 @@
                 link.click();
                 URL.revokeObjectURL(url);
 
-                this.logActivity('export_data', 'Exported progress data');
-                this.showNotification('Data successfully exported!', 'success');
+                this.logActivity('export_data', 'Mengekspor data progress');
+                this.showNotification('Data berhasil diekspor!', 'success');
             }
 
             getGlobalRank() {
@@ -1417,59 +1156,44 @@
 
             // NEW FEATURE: Activity Logging
             logActivity(type, description) {
-                if (!this.currentStudent) return;
+                try {
+                    const logs = JSON.parse(localStorage.getItem('activity_logs') || '[]');
+                    logs.push({
+                        studentId: this.currentStudent?.id,
+                        studentName: this.currentStudent?.name,
+                        type: type,
+                        description: description,
+                        timestamp: new Date().toISOString(),
+                        ip: 'local' // In real app, this would be actual IP
+                    });
 
-                const activity = {
-                    id: 'ACT_' + Date.now(),
-                    studentId: this.currentStudent.id,
-                    studentName: this.currentStudent.name,
-                    type: type,
-                    description: description,
-                    timestamp: new Date().toISOString()
-                };
-
-                // Save to localStorage first
-                let activities = JSON.parse(localStorage.getItem('activity_logs') || '[]');
-                activities.push(activity);
-                localStorage.setItem('activity_logs', JSON.stringify(activities));
-            }
-
-            startAutoSync() {
-                // Real-time sync every 3 seconds
-                setInterval(() => {
-                    if (this.currentStudent) {
-                        this.loadStudents();
-                        this.syncWithMainData();
+                    // Keep only last 1000 logs
+                    if (logs.length > 1000) {
+                        logs.splice(0, logs.length - 1000);
                     }
-                }, 3000);
-            }
 
-            syncWithMainData() {
-                if (!this.currentStudent) return;
-
-                const latestStudentData = this.students.find(s => s.id === this.currentStudent.id);
-                
-                if (latestStudentData && latestStudentData.points !== this.currentStudent.points) {
-                    console.log('🔄 Sync: Points updated', this.currentStudent.points, '->', latestStudentData.points);
-                    this.currentStudent.points = latestStudentData.points;
-                    this.currentStudent.level = this.getLevelFromPoints(latestStudentData.points);
-                    this.updateDisplay();
-                    this.saveCurrentStudent();
-                    
-                    // Show sync notification
-                    if (latestStudentData.points > this.currentStudent.points) {
-                        this.showNotification(`🔄 +${latestStudentData.points - this.currentStudent.points} XP from admin!`, 'info');
-                    }
+                    localStorage.setItem('activity_logs', JSON.stringify(logs));
+                } catch (error) {
+                    console.error('Error logging activity:', error);
                 }
             }
 
-            saveCurrentStudent() {
-                if (this.currentStudent) {
-                    try {
-                        localStorage.setItem('current_student', JSON.stringify(this.currentStudent));
-                    } catch (error) {
-                        console.error('Error saving current student:', error);
-                    }
+            // NEW FEATURE: Auto Backup
+            createBackup() {
+                try {
+                    const settings = JSON.parse(localStorage.getItem('admin_settings') || '{}');
+                    if (!settings.autoBackup) return;
+
+                    const backup = {
+                        students: this.students,
+                        timestamp: new Date().toISOString(),
+                        version: '1.0'
+                    };
+
+                    localStorage.setItem('backup_' + new Date().toISOString(), JSON.stringify(backup));
+                    console.log('Backup created successfully');
+                } catch (error) {
+                    console.error('Error creating backup:', error);
                 }
             }
 
@@ -1482,21 +1206,51 @@
                 notification.textContent = message;
 
                 document.body.appendChild(notification);
+
                 setTimeout(() => notification.style.transform = 'translateX(0)', 100);
+
                 setTimeout(() => {
                     notification.style.transform = 'translateX(100%)';
                     setTimeout(() => notification.remove(), 300);
                 }, 3000);
             }
+
+            saveToStorage() {
+                try {
+                    localStorage.setItem('perpustakaan_abadi_students', JSON.stringify(this.students));
+                    console.log('✅ Data tersimpan:', this.students);
+                } catch (error) {
+                    console.error('Error saving to storage:', error);
+                }
+            }
+
+            saveCurrentStudent() {
+                if (this.currentStudent) {
+                    try {
+                        localStorage.setItem('current_student', JSON.stringify(this.currentStudent));
+                        
+                        // Update student di array utama
+                        const studentIndex = this.students.findIndex(s => s.id === this.currentStudent.id);
+                        if (studentIndex !== -1) {
+                            this.students[studentIndex] = { ...this.currentStudent };
+                            this.saveToStorage();
+                        }
+                    } catch (error) {
+                        console.error('Error saving current student:', error);
+                    }
+                }
+            }
         }
 
         // Global functions
         function switchAuthTab(tab) {
+            // Update tabs
             document.querySelectorAll('.auth-tab').forEach(tabElement => {
                 tabElement.classList.remove('active');
             });
             document.querySelector(`[onclick="switchAuthTab('${tab}')"]`).classList.add('active');
 
+            // Update forms
             document.querySelectorAll('.auth-form').forEach(form => {
                 form.classList.remove('active');
             });
@@ -1537,23 +1291,23 @@
                 studentSystem.updateDisplay();
                 studentSystem.saveCurrentStudent();
                 document.getElementById('completion-screen').classList.add('hidden');
-                studentSystem.showNotification('New adventure begins!', 'success');
+                studentSystem.showNotification('Petualangan baru dimulai!', 'success');
             }
         }
 
         function shareAchievement() {
             const student = studentSystem.currentStudent;
             if (student) {
-                const shareText = `I have become ${studentSystem.getRankName(studentSystem.getLevelFromPoints(student.points))} in the Forest! 🏆\nTotal XP: ${student.points}`;
+                const shareText = `Aku telah menjadi ${studentSystem.getRankName(studentSystem.getLevelFromPoints(student.points))} di Perpustakaan Abadi! 🏆\nTotal XP: ${student.points}`;
                 
                 if (navigator.share) {
                     navigator.share({
-                        title: 'Forest Achievement',
+                        title: 'Pencapaian Perpustakaan Abadi',
                         text: shareText
                     });
                 } else {
                     navigator.clipboard.writeText(shareText);
-                    studentSystem.showNotification('Legend copied to clipboard!', 'success');
+                    studentSystem.showNotification('Legenda disalin ke clipboard!', 'success');
                 }
             }
         }
